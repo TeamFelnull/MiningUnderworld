@@ -1,11 +1,11 @@
 package dev.felnull.miningunderworld;
 
+import dev.felnull.miningunderworld.item.MUItems;
+
 public class MiningUnderworld {
     public static final String MODID = "miningunderworld";
 
-
-
     public static void init() {
-        System.out.println("ｳｧｧ!!ｵﾚﾓｲｯﾁｬｳｩｩｩ!!!ｳｳｳｳｳｳｳｳｳｩｩｩｩｩｩｩｩｳｳｳｳｳｳｳｳ!ｲｨｨｲｨｨｨｲｲｲｨｲｲｲｲ");
+        MUItems.init();
     }
 }

@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "dev.felnull.miningunderworld.fabric.MiningUnderworldFabric"
+    ],
+    "fabric-datagen": [
+      "dev.felnull.miningunderworld.fabric.data.MiningUnderworldDataGeneratorFabric"
     ]
   },
   "mixins": [

@@ -16,6 +16,16 @@ loom {
 
         mixinConfig "miningunderworld-common.mixins.json"
         mixinConfig "miningunderworld.mixins.json"
+
+        dataGen {
+            mod 'miningunderworld'
+        }
+    }
+
+    launches {
+        data {
+            arg "--existing", file("src/main/resources").absolutePath, "--existing", file("../common/src/main/resources").absolutePath
+        }
     }
 }
 
