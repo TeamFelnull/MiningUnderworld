@@ -5,6 +5,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.function.Supplier;
 
