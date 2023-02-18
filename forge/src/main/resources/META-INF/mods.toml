@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "[44,)"
+#issueTrackerURL = ""
+license = "GNU LGPLv3"
+
+[[mods]]
+modId = "miningunderworld"
+version = "${version}"
+displayName = "Mining Underworld"
+authors = "MORIMORI0317, nin8995"
+credits = "FelNull developers"
+description = '''
+The ikisugi mining dimension mod...
+'''
+#logoFile = ""
+
+[[dependencies.miningunderworld]]
+modId = "forge"
+mandatory = true
+versionRange = "[44,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.miningunderworld]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.3,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.miningunderworld]]
+modId = "architectury"
+mandatory = true
+versionRange = "[7.1.70,)"
+ordering = "AFTER"
+side = "BOTH"
