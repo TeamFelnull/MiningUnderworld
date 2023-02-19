@@ -19,7 +19,8 @@ public class MUItems {
     public static final RegistrySupplier<Item> COPPER_AXE = register("copper_axe", () -> new OxidizingAxeItem(MUTiers.COPPER, 6.0F, -3.1F, new Item.Properties().arch$tab(MUCreativeModeTab.MOD_TAB)));
     public static final RegistrySupplier<Item> COPPER_SHOVEL = register("copper_shovel", () -> new OxidizingShovelItem(MUTiers.COPPER, 1.5F, -3.0F, new Item.Properties().arch$tab(MUCreativeModeTab.MOD_TAB)));
 
-    public static final RegistrySupplier<Item> COPPER_HELMET = register("copper_helmet", () -> new ArmorItem())
+   // public static final RegistrySupplier<Item> COPPER_HELMET = register("copper_helmet", () -> new ArmorItem())
+
     private static RegistrySupplier<Item> register(String name) {
         return register(name, () -> new Item(new Item.Properties().arch$tab(MUCreativeModeTab.MOD_TAB)));
     }
