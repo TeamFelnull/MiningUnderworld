@@ -7,5 +7,6 @@ public class MiningUnderworldDataGenerator {
         access.addProviderWrapper(MUItemModelProviderWrapper::new);
         access.addProviderWrapper(MUBlockStateAndModelProviderWrapper::new);
         access.addProviderWrapper(MURecipeProviderWrapper::new);
+        access.addProviderWrapper(MURegistriesDatapackProviderWrapper::new);
     }
 }

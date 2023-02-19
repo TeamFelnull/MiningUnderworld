@@ -13,5 +13,6 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
     @Override
     public void generateStatesAndModels(BlockStateAndModelProviderAccess providerAccess) {
         providerAccess.genSimpleCubeBlockStateModelAndItemModel(MUBlocks.TEST_BLOCK.get());
+
     }
 }
