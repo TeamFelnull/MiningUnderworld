@@ -13,5 +13,10 @@ public class MUItemModelProviderWrapper extends ItemModelProviderWrapper {
     @Override
     public void generateItemModels(ItemModelProviderAccess providerAccess) {
         providerAccess.basicFlatItem(MUItems.IKISUGI_TEST.get());
+
+        providerAccess.handheldFlatItem(MUItems.COPPER_SWORD.get());
+        providerAccess.handheldFlatItem(MUItems.COPPER_PICKAXE.get());
+        providerAccess.handheldFlatItem(MUItems.COPPER_AXE.get());
+        providerAccess.handheldFlatItem(MUItems.COPPER_SHOVEL.get());
     }
 }

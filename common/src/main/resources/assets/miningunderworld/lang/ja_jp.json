@@ -1,0 +1,10 @@
+{
+  "_comment.i": "Item",
+  "item.miningunderworld.copper_sword": "銅の剣",
+  "item.miningunderworld.copper_pickaxe": "銅のツルハシ",
+  "item.miningunderworld.copper_axe": "銅の斧",
+  "item.miningunderworld.copper_shovel": "銅のシャベル",
+  "_comment.cr": "CreativeModeTab",
+  "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
+  "_comment.la": "Last"
+}

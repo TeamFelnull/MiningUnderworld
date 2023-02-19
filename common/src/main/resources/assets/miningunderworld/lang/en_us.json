@@ -1,3 +1,10 @@
 {
-  "item.examplemod.example_item": "Example Item"
+  "_comment.i": "Item",
+  "item.miningunderworld.copper_sword": "Copper Sword",
+  "item.miningunderworld.copper_pickaxe": "Copper Pickaxe",
+  "item.miningunderworld.copper_axe": "Copper Axe",
+  "item.miningunderworld.copper_shovel": "Copper Shovel",
+  "_comment.cr": "CreativeModeTab",
+  "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
+  "_comment.la": "Last"
 }

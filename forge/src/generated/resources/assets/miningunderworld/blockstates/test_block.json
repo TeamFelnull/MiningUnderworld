@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "miningunderworld:block/test_block"
+    }
+  }
+}
