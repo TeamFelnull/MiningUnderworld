@@ -1,6 +1,6 @@
 package dev.felnull.miningunderworld.dimension;
 
-import net.minecraft.data.worldgen.SurfaceRuleData;
+import dev.felnull.miningunderworld.block.MUBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
@@ -16,8 +16,18 @@ public class MUSurfaceRule {
         var ifRule = SurfaceRules.ifTrue(condition, stateRule);//yが81以上は常に石
         var rules = SurfaceRules.sequence(//ルールを順次に適用するルール
                 ifRule, //yが81以上なら石
-                SurfaceRules.ifTrue(ijou(36), stateRule(Blocks.DEEPSLATE)),//そうでなくyが36以上なら安山岩
-                stateRule(Blocks.STONECUTTER));//そうでもないならストーンカッター
+                SurfaceRules.ifTrue(ijou(36),
+                        stateRule(Blocks.DEEPSLATE)),//そうでなくyが36以上なら安山岩
+                stateRule(MUBlocks.TEST_BLOCK.get()));//そうでもないならTEST_BLOCK
+
+        var BEDROCK = stateRule(Blocks.BEDROCK);
+        rules = SurfaceRules.sequence(
+                SurfaceRules.ifTrue(jojoniNakunaru("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)),
+                        BEDROCK),
+                SurfaceRules.ifTrue(jojoniHueru("bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top()),
+                        BEDROCK),
+                rules);//上下５マスに徐々岩盤追加
+
         return rules;
     }
 
