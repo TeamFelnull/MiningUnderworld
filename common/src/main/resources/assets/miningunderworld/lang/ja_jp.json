@@ -9,5 +9,10 @@
   "item.miningunderworld.copper_shovel": "銅のシャベル",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
-  "_comment.la": "Last"
+  "_comment.la": "Last",
+  "item.miningunderworld.emerald_sword": "エメラルドの剣",
+  "item.miningunderworld.emerald_pickaxe": "エメラルドのツルハシ",
+  "item.miningunderworld.emerald_axe": "エメラルドの斧",
+  "item.miningunderworld.emerald_shovel": "エメラルドのシャベル",
+  "item.miningunderworld.emerald_hoe": "エメラルドのクワ"
 }

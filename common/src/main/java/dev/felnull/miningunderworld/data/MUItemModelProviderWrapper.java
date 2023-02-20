@@ -27,6 +27,12 @@ public class MUItemModelProviderWrapper extends ItemModelProviderWrapper {
     public void generateItemModels(ItemModelProviderAccess providerAccess) {
         providerAccess.basicFlatItem(MUItems.IKISUGI_TEST.get());
 
+        providerAccess.basicFlatItem(MUItems.EMERALD_SWORD.get());
+        providerAccess.basicFlatItem(MUItems.EMERALD_PICKAXE.get());
+        providerAccess.basicFlatItem(MUItems.EMERALD_AXE.get());
+        providerAccess.basicFlatItem(MUItems.EMERALD_SHOVEL.get());
+        providerAccess.basicFlatItem(MUItems.EMERALD_HOE.get());
+
         handheldWeatheringItem(providerAccess, MUItems.COPPER_SWORD.get());
         handheldWeatheringItem(providerAccess, MUItems.COPPER_PICKAXE.get());
         handheldWeatheringItem(providerAccess, MUItems.COPPER_AXE.get());

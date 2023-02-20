@@ -9,5 +9,10 @@
   "item.miningunderworld.copper_shovel": "Copper Shovel",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
-  "_comment.la": "Last"
+  "_comment.la": "Last",
+  "item.miningunderworld.emerald_sword": "Emerald Sword",
+  "item.miningunderworld.emerald_pickaxe": "Emerald Pickaxe",
+  "item.miningunderworld.emerald_axe": "Emerald Axe",
+  "item.miningunderworld.emerald_shovel": "Emerald Shovel",
+  "item.miningunderworld.emerald_hoe": "Emerald Hoe"
 }
