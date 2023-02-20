@@ -3,6 +3,7 @@ package dev.felnull.miningunderworld;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.dimension.MUBiomeSource;
 import dev.felnull.miningunderworld.dimension.MiningUnderworldDimension;
+import dev.felnull.miningunderworld.handler.CommonHandler;
 import dev.felnull.miningunderworld.item.MUItems;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +16,7 @@ public class MiningUnderworld {
         MUItems.init();
         MUBlocks.init();
         MiningUnderworldDimension.init();
+        CommonHandler.init();
     }
 
     public static ResourceLocation resourceLocation(String name){

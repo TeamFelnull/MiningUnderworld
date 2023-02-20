@@ -1,5 +1,8 @@
 {
   "_comment.i": "Item",
+  "item.wrap.miningunderworld.exposed": "風化した%s",
+  "item.wrap.miningunderworld.weathered": "錆びた%s",
+  "item.wrap.miningunderworld.oxidized": "酸化した%s",
   "item.miningunderworld.copper_sword": "銅の剣",
   "item.miningunderworld.copper_pickaxe": "銅のツルハシ",
   "item.miningunderworld.copper_axe": "銅の斧",

@@ -1,5 +1,8 @@
 {
   "_comment.i": "Item",
+  "item.wrap.miningunderworld.exposed": "Exposed %s",
+  "item.wrap.miningunderworld.weathered": "Weathered %s",
+  "item.wrap.miningunderworld.oxidized": "Oxidized %s",
   "item.miningunderworld.copper_sword": "Copper Sword",
   "item.miningunderworld.copper_pickaxe": "Copper Pickaxe",
   "item.miningunderworld.copper_axe": "Copper Axe",

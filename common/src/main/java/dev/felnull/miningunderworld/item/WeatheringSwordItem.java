@@ -1,5 +1,6 @@
 package dev.felnull.miningunderworld.item;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -15,5 +16,10 @@ public class WeatheringSwordItem extends SwordItem implements WeatheringItem {
     @Override
     public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int slotId, boolean selected) {
         weatheringInventoryTick(itemStack, level, entity);
+    }
+
+    @Override
+    public Component getName(ItemStack itemStack) {
+        return getWeatheringName(itemStack, super.getName(itemStack));
     }
 }

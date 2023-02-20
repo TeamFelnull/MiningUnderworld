@@ -1,7 +1,9 @@
 package dev.felnull.miningunderworld.item;
 
 import com.google.common.base.Preconditions;
+import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.otyacraftengine.util.OENbtUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
@@ -36,10 +38,18 @@ public interface WeatheringItem {
             return;
 
         //10分に1回の確率 12000f
-        if (level.getRandom().nextFloat() > 1f / 120f)
+        if (level.getRandom().nextFloat() > 1f / 12000f)
             return;
 
         nextStep(stack);
+    }
+
+    default Component getWeatheringName(ItemStack stack, Component original) {
+        var state = getWeatheringState(stack);
+        if (state == WeatheringState.NONE)
+            return original;
+
+        return Component.translatable("item.wrap." + MiningUnderworld.MODID + "." + state.getSerializedName(), original);
     }
 
     default void nextStep(ItemStack stack) {
