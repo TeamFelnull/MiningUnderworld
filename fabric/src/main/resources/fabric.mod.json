@@ -21,6 +21,9 @@
     "main": [
       "dev.felnull.miningunderworld.fabric.MiningUnderworldFabric"
     ],
+    "client": [
+      "dev.felnull.miningunderworld.fabric.client.MiningUnderworldClientFabric"
+    ],
     "fabric-datagen": [
       "dev.felnull.miningunderworld.fabric.data.MiningUnderworldDataGeneratorFabric"
     ]
