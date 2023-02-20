@@ -1,5 +1,8 @@
 package dev.felnull.miningunderworld.dimension;
 
+import com.mojang.serialization.Codec;
+import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import net.minecraft.core.RegistrySetBuilder;
@@ -8,7 +11,8 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -20,6 +24,7 @@ import net.minecraft.world.level.levelgen.NoiseSettings;
 import java.util.List;
 import java.util.OptionalLong;
 
+//参考：https://github1s.com/TeamTwilight/twilightforest/blob/1.19.x/src/main/java/twilightforest/init/TFDimensionSettings.java
 public class MiningUnderworldDimension {
     public static final ResourceKey<DimensionType> MU_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, MiningUnderworld.resourceLocation("mu_type"));
     public static final ResourceKey<NoiseGeneratorSettings> MU_GENERATOR = ResourceKey.create(Registries.NOISE_SETTINGS, MiningUnderworld.resourceLocation("mu_generator"));
@@ -32,9 +37,18 @@ public class MiningUnderworldDimension {
                 .add(Registries.LEVEL_STEM, c -> c.register(MINING_UNDERWORLD, miningUnderworld(c)));//ディメンション本体
     }
 
+    public static final DeferredRegister<Codec<? extends BiomeSource>> BIOME_SOURCES = DeferredRegister.create(MiningUnderworld.MODID, Registries.BIOME_SOURCE);
+    public static final RegistrySupplier<Codec<? extends BiomeSource>> MU_BIOME = BIOME_SOURCES.register("mu_biome", () -> MUBiomeSource.MU_CODEC);
+
+    public static void init() {
+        BIOME_SOURCES.register();//バイオーム生成方法
+    }
+
+    public static final int minY = -64;
+    public static final int maxY = 320;
+    public static final int height = maxY - minY;
+
     private static DimensionType muType() {
-        //各引数の意味は以下参照
-        //https://minecraftjapan.miraheze.org/wiki/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%91%E3%83%83%E3%82%AF/%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA
         return new DimensionType(OptionalLong.empty(),
                 true,
                 false,
@@ -43,18 +57,18 @@ public class MiningUnderworldDimension {
                 3f,
                 false,
                 false,
-                -64,
-                320,
-                320,
+                minY,
+                height,
+                height,
                 BlockTags.INFINIBURN_OVERWORLD,
-                BuiltinDimensionTypes.OVERWORLD_EFFECTS,
+                BuiltinDimensionTypes.OVERWORLD_EFFECTS,//ディメンション固有のレンダー（？）
                 1.0F,
                 new DimensionType.MonsterSettings(false, true, UniformInt.of(0, 7), 0));
     }
 
     private static NoiseGeneratorSettings muGenerator(BootstapContext<NoiseGeneratorSettings> context) {
         return new NoiseGeneratorSettings(
-                NoiseSettings.create(0, 128, 1, 2),
+                NoiseSettings.create(minY, height, 1, 1),
                 MUBlocks.TEST_BLOCK.get().defaultBlockState(),
                 Blocks.WATER.defaultBlockState(),
                 MUNoiseRouter.create(context),
@@ -73,7 +87,7 @@ public class MiningUnderworldDimension {
         var noiseSettings = context.lookup(Registries.NOISE_SETTINGS);
         return new LevelStem(dimTypes.getOrThrow(MU_TYPE),
                 new NoiseBasedChunkGenerator(
-                        MultiNoiseBiomeSource.Preset.OVERWORLD.biomeSource(biomes),
+                        MUBiomeSource.create(biomes),
                         noiseSettings.getOrThrow(MU_GENERATOR)));
     }
 }
