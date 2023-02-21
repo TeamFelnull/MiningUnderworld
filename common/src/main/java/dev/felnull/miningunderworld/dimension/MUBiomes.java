@@ -1,17 +1,15 @@
 package dev.felnull.miningunderworld.dimension;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
 import dev.felnull.miningunderworld.MiningUnderworld;
-import net.minecraft.core.Holder;
+import dev.felnull.miningunderworld.feature.MUPlacedFeatures;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
+import net.minecraft.world.level.levelgen.GenerationStep;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +24,7 @@ public class MUBiomes {
     public static final ResourceKey<Biome> CRYSTAL_CAVE = biomeKey("crystal_cave");
 
     public static ResourceKey<Biome> biomeKey(String name){
-        var key = ResourceKey.create(Registries.BIOME, MiningUnderworld.resourceLocation(name));
+        var key = ResourceKey.create(Registries.BIOME, MiningUnderworld.modLoc(name));
         MU_BIOMES.add(key);
         return key;
     }
@@ -102,6 +100,7 @@ public class MUBiomes {
     public static BiomeGenerationSettings.Builder defaultGeneration(Supplier<BiomeGenerationSettings.Builder> genSup){
         var generation = genSup.get();
         BiomeDefaultFeatures.addDefaultUndergroundVariety(generation);//デフォルトで色々石とかヒカリゴケとか生成
+        generation.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TEST_FEATURE);//独自生成物追加
         return generation;
     }
 }
