@@ -12,7 +12,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -26,9 +25,9 @@ import java.util.OptionalLong;
 
 //参考：https://github1s.com/TeamTwilight/twilightforest/blob/1.19.x/src/main/java/twilightforest/init/TFDimensionSettings.java
 public class MiningUnderworldDimension {
-    public static final ResourceKey<DimensionType> MU_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, MiningUnderworld.resourceLocation("mu_type"));
-    public static final ResourceKey<NoiseGeneratorSettings> MU_GENERATOR = ResourceKey.create(Registries.NOISE_SETTINGS, MiningUnderworld.resourceLocation("mu_generator"));
-    public static final ResourceKey<LevelStem> MINING_UNDERWORLD = ResourceKey.create(Registries.LEVEL_STEM, MiningUnderworld.resourceLocation("mining_underworld"));
+    public static final ResourceKey<DimensionType> MU_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, MiningUnderworld.modLoc("mu_type"));
+    public static final ResourceKey<NoiseGeneratorSettings> MU_GENERATOR = ResourceKey.create(Registries.NOISE_SETTINGS, MiningUnderworld.modLoc("mu_generator"));
+    public static final ResourceKey<LevelStem> MINING_UNDERWORLD = ResourceKey.create(Registries.LEVEL_STEM, MiningUnderworld.modLoc("mining_underworld"));
 
     public static RegistrySetBuilder addToBuilder(RegistrySetBuilder builder){//データパック自動生成に登録
         return builder
