@@ -13,6 +13,7 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
 
+//銅ツールのように時間経過で錆びるアイテム
 public interface WeatheringItem {
     List<Item> OXIDIZING_ITEMS = new ArrayList<>();
 
