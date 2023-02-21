@@ -1,14 +1,14 @@
 package dev.felnull.miningunderworld.data;
 
 import dev.felnull.miningunderworld.item.MUItems;
+import dev.felnull.miningunderworld.recipe.MURecipeSerializers;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.provider.RecipeProviderWrapper;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.world.item.Items;
 
 import java.util.function.Consumer;
@@ -20,6 +20,11 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
 
     @Override
     public void generateRecipe(Consumer<FinishedRecipe> exporter, RecipeProviderAccess providerAccess) {
+
+        //錆止めレシピ
+        SpecialRecipeBuilder.special(MURecipeSerializers.WAXED_WEATHERING_ITEM.get())
+                .save(exporter, modLoc("waxed_weathering_item").toString());
+
         //cppper
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.COPPER_PICKAXE.get())
                 .define('C', Items.COPPER_INGOT)
@@ -155,8 +160,8 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .define('A', MUItems.AMETHYST_INGOT.get())
                 .define('S', Items.STICK)
                 .pattern("AA")
-                .pattern("AS ")
-                .pattern(" S ")
+                .pattern("AS")
+                .pattern(" S")
                 .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
                 .save(exporter);
 

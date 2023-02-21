@@ -33,11 +33,20 @@ public interface WeatheringItem {
         OENbtUtils.writeEnum(tag, "WeatheringState", state);
     }
 
+    static boolean isWaxed(ItemStack stack) {
+        var tag = stack.getTag();
+        return tag != null && tag.getBoolean("Waxed");
+    }
+
+    static void setWaxed(ItemStack stack, boolean waxed) {
+        stack.getOrCreateTag().putBoolean("Waxed", waxed);
+    }
+
     default void weatheringInventoryTick(ItemStack stack, Level level, Entity entity) {
         if (level.isClientSide())
             return;
 
-        //10分に1回の確率 12000f
+        //10分に1回の確率
         if (level.getRandom().nextFloat() > 1f / 12000f)
             return;
 
@@ -45,14 +54,25 @@ public interface WeatheringItem {
     }
 
     default Component getWeatheringName(ItemStack stack, Component original) {
-        var state = getWeatheringState(stack);
-        if (state == WeatheringState.NONE)
-            return original;
+        Component wcomp;
 
-        return Component.translatable("item.wrap." + MiningUnderworld.MODID + "." + state.getSerializedName(), original);
+        var state = getWeatheringState(stack);
+        if (state == WeatheringState.NONE) {
+            wcomp = original;
+        } else {
+            wcomp = Component.translatable("item.wrap." + MiningUnderworld.MODID + "." + state.getSerializedName(), original);
+        }
+
+        if (isWaxed(stack))
+            wcomp = Component.translatable("item.wrap." + MiningUnderworld.MODID + ".waxed", wcomp);
+
+        return wcomp;
     }
 
     default void nextStep(ItemStack stack) {
+        if (isWaxed(stack))
+            return;
+
         var ox = getWeatheringState(stack);
         if (ox.ordinal() >= WeatheringState.values().length - 1)
             return;

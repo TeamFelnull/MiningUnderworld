@@ -17,7 +17,7 @@ public class CommonHandler {
         //雷のダメージを受けたときに装備してる銅ツールの錆がはがれるように
         if (source == DamageSource.LIGHTNING_BOLT) {
             for (ItemStack stack : entity.getAllSlots()) {
-                if (stack.getItem() instanceof WeatheringItem)
+                if (stack.getItem() instanceof WeatheringItem && !WeatheringItem.isWaxed(stack))
                     WeatheringItem.setWeatheringState(stack, WeatheringItem.WeatheringState.NONE);
             }
         }

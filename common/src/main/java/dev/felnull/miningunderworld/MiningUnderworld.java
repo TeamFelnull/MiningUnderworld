@@ -5,6 +5,7 @@ import dev.felnull.miningunderworld.dimension.MiningUnderworldDimension;
 import dev.felnull.miningunderworld.feature.MUFeatures;
 import dev.felnull.miningunderworld.handler.CommonHandler;
 import dev.felnull.miningunderworld.item.MUItems;
+import dev.felnull.miningunderworld.recipe.MURecipeSerializers;
 import net.minecraft.resources.ResourceLocation;
 
 public class MiningUnderworld {
@@ -16,9 +17,10 @@ public class MiningUnderworld {
         MiningUnderworldDimension.init();
         CommonHandler.init();
         MUFeatures.init();
+        MURecipeSerializers.init();
     }
 
-    public static ResourceLocation modLoc(String name){
+    public static ResourceLocation modLoc(String name) {
         return new ResourceLocation(MiningUnderworld.MODID, name);
     }
 }
