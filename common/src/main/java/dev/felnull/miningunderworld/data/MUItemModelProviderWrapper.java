@@ -27,11 +27,27 @@ public class MUItemModelProviderWrapper extends ItemModelProviderWrapper {
     public void generateItemModels(ItemModelProviderAccess providerAccess) {
         providerAccess.basicFlatItem(MUItems.IKISUGI_TEST.get());
 
-        providerAccess.basicFlatItem(MUItems.EMERALD_SWORD.get());
-        providerAccess.basicFlatItem(MUItems.EMERALD_PICKAXE.get());
-        providerAccess.basicFlatItem(MUItems.EMERALD_AXE.get());
-        providerAccess.basicFlatItem(MUItems.EMERALD_SHOVEL.get());
-        providerAccess.basicFlatItem(MUItems.EMERALD_HOE.get());
+        handheldWeatheringItem(providerAccess, MUItems.AMETHYST_SWORD.get());
+        handheldWeatheringItem(providerAccess, MUItems.AMETHYST_PICKAXE.get());
+        handheldWeatheringItem(providerAccess, MUItems.AMETHYST_AXE.get());
+        handheldWeatheringItem(providerAccess, MUItems.AMETHYST_SHOVEL.get());
+        handheldWeatheringItem(providerAccess, MUItems.AMETHYST_HOE.get());
+        providerAccess.basicFlatItem(MUItems.AMETHYST_INGOT.get());
+        providerAccess.basicFlatItem(MUItems.AMETHYST_HELMET.get());
+        providerAccess.basicFlatItem(MUItems.AMETHYST_CHESTPLATE.get());
+        providerAccess.basicFlatItem(MUItems.AMETHYST_LEGGINGS.get());
+        providerAccess.basicFlatItem(MUItems.AMETHYST_BOOTS.get());
+
+
+        handheldWeatheringItem(providerAccess, MUItems.EMERALD_SWORD.get());
+        handheldWeatheringItem(providerAccess, MUItems.EMERALD_PICKAXE.get());
+        handheldWeatheringItem(providerAccess, MUItems.EMERALD_AXE.get());
+        handheldWeatheringItem(providerAccess, MUItems.EMERALD_SHOVEL.get());
+        handheldWeatheringItem(providerAccess, MUItems.EMERALD_HOE.get());
+        providerAccess.basicFlatItem(MUItems.EMERALD_HELMET.get());
+        providerAccess.basicFlatItem(MUItems.EMERALD_CHESTPLATE.get());
+        providerAccess.basicFlatItem(MUItems.EMERALD_LEGGINGS.get());
+        providerAccess.basicFlatItem(MUItems.EMERALD_BOOTS.get());
 
         handheldWeatheringItem(providerAccess, MUItems.COPPER_SWORD.get());
         handheldWeatheringItem(providerAccess, MUItems.COPPER_PICKAXE.get());

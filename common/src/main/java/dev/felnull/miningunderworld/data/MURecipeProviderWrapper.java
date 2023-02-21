@@ -20,12 +20,7 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
 
     @Override
     public void generateRecipe(Consumer<FinishedRecipe> exporter, RecipeProviderAccess providerAccess) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.DIAMOND)
-                .requires(Items.DIRT)
-                .requires(ItemTags.BOATS)
-                .unlockedBy(providerAccess.getHasName(Items.DIRT), providerAccess.has(Items.DIRT))
-                .save(exporter);
-
+        //cppper
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.COPPER_PICKAXE.get())
                 .define('C', Items.COPPER_INGOT)
                 .define('S', Items.STICK)
@@ -53,6 +48,7 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .unlockedBy(providerAccess.getHasName(Items.COPPER_INGOT), providerAccess.has(Items.COPPER_INGOT))
                 .save(exporter);
 
+        //emerald
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.EMERALD_SHOVEL.get())
                 .define('E', Items.EMERALD)
                 .define('S', Items.STICK)
@@ -96,6 +92,120 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .pattern(" S ")
                 .pattern(" S ")
                 .unlockedBy(providerAccess.getHasName(Items.EMERALD), providerAccess.has(Items.EMERALD))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.EMERALD_HELMET.get())
+                .define('E', Items.EMERALD)
+                .pattern("EEE")
+                .pattern("E E")
+                .unlockedBy(providerAccess.getHasName(Items.EMERALD), providerAccess.has(Items.EMERALD))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.EMERALD_CHESTPLATE.get())
+                .define('E', Items.EMERALD)
+                .pattern("E E")
+                .pattern("EEE")
+                .pattern("EEE")
+                .unlockedBy(providerAccess.getHasName(Items.EMERALD), providerAccess.has(Items.EMERALD))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.EMERALD_LEGGINGS.get())
+                .define('E', Items.EMERALD)
+                .pattern("EEE")
+                .pattern("E E")
+                .pattern("E E")
+                .unlockedBy(providerAccess.getHasName(Items.EMERALD), providerAccess.has(Items.EMERALD))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.EMERALD_BOOTS.get())
+                .define('E', Items.EMERALD)
+                .pattern("E E")
+                .pattern("E E")
+                .unlockedBy(providerAccess.getHasName(Items.EMERALD), providerAccess.has(Items.EMERALD))
+                .save(exporter);
+
+        //amethyst
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_INGOT.get())
+                .define('A', Items.AMETHYST_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_SWORD.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern(" A ")
+                .pattern(" A ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_PICKAXE.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("AAA")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_AXE.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("AA")
+                .pattern("AS ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_SHOVEL.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern(" A ")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_HOE.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("AA ")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_HELMET.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .pattern("AAA")
+                .pattern("A A")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_CHESTPLATE.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .pattern("A A")
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_LEGGINGS.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .pattern("AAA")
+                .pattern("A A")
+                .pattern("A A")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_BOOTS.get())
+                .define('A', MUItems.AMETHYST_INGOT.get())
+                .pattern("A A")
+                .pattern("A A")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
                 .save(exporter);
     }
 }
