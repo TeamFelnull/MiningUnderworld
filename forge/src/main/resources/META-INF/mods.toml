@@ -7,7 +7,7 @@ license = "GNU LGPLv3"
 modId = "miningunderworld"
 version = "${version}"
 displayName = "Mining Underworld"
-authors = "MORIMORI0317, nin8995"
+authors = "MORIMORI0317, nin8995, Raindazo"
 credits = "FelNull developers"
 description = '''
 The ikisugi mining dimension mod...

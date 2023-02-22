@@ -7,6 +7,7 @@ import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.mixin.ItemAccessor;
 import dev.felnull.otyacraftengine.util.OENbtUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -61,7 +62,14 @@ public interface WeatheringItem {
         if (level.isClientSide())
             return;
 
-        if (level.getRandom().nextFloat() > 1f / (120f))
+        if (level.getRandom().nextFloat() > 1f / (12000f * 3f))
+            return;
+
+        nextStep(stack);
+    }
+
+    default void weatheringHurt(ItemStack stack, RandomSource randomSource) {
+        if (randomSource.nextFloat() > 1f / 256f)
             return;
 
         nextStep(stack);
