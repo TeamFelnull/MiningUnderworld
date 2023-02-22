@@ -11,27 +11,58 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum MUArmorMaterials implements ArmorMaterial {
-    COPPER_MATERIALS("copper_materials", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> {
-        return Ingredient.of(Items.COPPER_INGOT);
-    }),
+    COPPER_MATERIALS("copper_materials",
+            15,
+            new int[]{2, 5, 6, 2},
+            9,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            0.0F,
+            0.0F,
+            () -> Ingredient.of(Items.COPPER_INGOT)),
 
-    EXPOSED_COPPER("exposed_copper", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> {
-        return Ingredient.of(Items.COPPER_INGOT);
-    }),
+    EXPOSED_COPPER("exposed_copper",
+            15,
+            new int[]{2, 5, 6, 2},
+            9,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            0.0F,
+            0.0F,
+            () -> Ingredient.of(Items.COPPER_INGOT)),
 
-    WEATHERED_COPPER("weathered_copper", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> {
-        return Ingredient.of(Items.COPPER_INGOT);
-    }),
+    WEATHERED_COPPER("weathered_copper",
+            15,
+            new int[]{2, 5, 6, 2},
+            9,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            0.0F,
+            0.0F,
+            () -> Ingredient.of(Items.COPPER_INGOT)),
 
-    OXIDIZED_COPPER("oxidized_copper", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> {
-        return Ingredient.of(Items.COPPER_INGOT);
-    }),
-    EMERALD("emerald", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> {
-        return Ingredient.of(Items.EMERALD);
-    }),
-    AMETHYST("amethyst", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> {
-        return Ingredient.of(Items.AMETHYST_BLOCK);
-    });
+    OXIDIZED_COPPER("oxidized_copper",
+            15,
+            new int[]{2, 5, 6, 2},
+            9,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            0.0F,
+            0.0F,
+            () -> Ingredient.of(Items.COPPER_INGOT)),
+
+    EMERALD("emerald",
+            15,
+            new int[]{2, 5, 6, 2},
+            9,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            0.0F,
+            0.0F,
+            () -> Ingredient.of(Items.EMERALD)),
+
+    AMETHYST("amethyst",
+            15,
+            new int[]{2, 5, 6, 2},
+            9,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            0.0F,
+            0.0F, () -> Ingredient.of(Items.AMETHYST_BLOCK));
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
     private final String name;
