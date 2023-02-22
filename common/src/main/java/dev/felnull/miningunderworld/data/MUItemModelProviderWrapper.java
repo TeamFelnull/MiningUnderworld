@@ -33,7 +33,7 @@ public class MUItemModelProviderWrapper extends ItemModelProviderWrapper {
         // providerAccess.basicFlatItem(); <-通常の平たいアイテムモデルを生成
         // providerAccess.handheldFlatItem(); <-剣などのツールのような持ち方をするアイテムモデルを生成
 
-        /*providerAccess.basicFlatItem(MUItems.IKISUGI_TEST.get());
+       /* providerAccess.basicFlatItem(MUItems.IKISUGI_TEST.get());
 
         providerAccess.handheldFlatItem(MUItems.AMETHYST_SWORD.get());
         providerAccess.handheldFlatItem(MUItems.AMETHYST_PICKAXE.get());
