@@ -61,7 +61,7 @@ public interface WeatheringItem {
         if (level.isClientSide())
             return;
 
-        if (level.getRandom().nextFloat() > 1f / (12000f * 3f))
+        if (level.getRandom().nextFloat() > 1f / (120f))
             return;
 
         nextStep(stack);
