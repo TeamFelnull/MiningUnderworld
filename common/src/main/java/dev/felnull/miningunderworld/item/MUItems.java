@@ -14,14 +14,14 @@ public class MUItems {
 
     public static final RegistrySupplier<Item> IKISUGI_TEST = register("ikisugi_test");
 
-    public static final RegistrySupplier<Item> COPPER_SWORD = register("copper_sword", (p) -> new WeatheringSwordItem(MUTiers.COPPER, 3, -2.4F, p));
-    public static final RegistrySupplier<Item> COPPER_PICKAXE = register("copper_pickaxe", (p) -> new WeatheringPickaxeItem(MUTiers.COPPER, 1, -2.8F, p));
-    public static final RegistrySupplier<Item> COPPER_AXE = register("copper_axe", (p) -> new WeatheringAxeItem(MUTiers.COPPER, 6.0F, -3.1F, p));
-    public static final RegistrySupplier<Item> COPPER_SHOVEL = register("copper_shovel", (p) -> new WeatheringShovelItem(MUTiers.COPPER, 1.5F, -3.0F, p));
-    public static final RegistrySupplier<Item> COPPER_HELMET = register("copper_helmet", (p) -> new WeatheringArmorItem(MUArmorMaterials.COPPER, EquipmentSlot.HEAD, p));
-    public static final RegistrySupplier<Item> COPPER_CHESTPLATE = register("copper_chestplate", (p) -> new WeatheringArmorItem(MUArmorMaterials.COPPER, EquipmentSlot.CHEST, p));
-    public static final RegistrySupplier<Item> COPPER_LEGGINGS = register("copper_leggings", (p) -> new WeatheringArmorItem(MUArmorMaterials.COPPER, EquipmentSlot.LEGS, p));
-    public static final RegistrySupplier<Item> COPPER_BOOTS = register("copper_boots", (p) -> new WeatheringArmorItem(MUArmorMaterials.COPPER, EquipmentSlot.FEET, p));
+    public static final RegistrySupplier<Item> COPPER_SWORD = register("copper_sword", p -> new WeatheringSwordItem(MUTiers.COPPER, 3, -2.4F, p));
+    public static final RegistrySupplier<Item> COPPER_PICKAXE = register("copper_pickaxe", p -> new WeatheringPickaxeItem(MUTiers.COPPER, 1, -2.8F, p));
+    public static final RegistrySupplier<Item> COPPER_AXE = register("copper_axe", p -> new WeatheringAxeItem(MUTiers.COPPER, 6.0F, -3.1F, p));
+    public static final RegistrySupplier<Item> COPPER_SHOVEL = register("copper_shovel", p -> new WeatheringShovelItem(MUTiers.COPPER, 1.5F, -3.0F, p));
+    public static final RegistrySupplier<Item> COPPER_HELMET = register("copper_helmet", p -> new WeatheringArmorItem(MUArmorMaterials.COPPER, EquipmentSlot.HEAD, p));
+    public static final RegistrySupplier<Item> COPPER_CHESTPLATE = register("copper_chestplate", p -> new WeatheringArmorItem(MUArmorMaterials.COPPER, EquipmentSlot.CHEST, p));
+    public static final RegistrySupplier<Item> COPPER_LEGGINGS = register("copper_leggings", p -> new WeatheringArmorItem(MUArmorMaterials.COPPER, EquipmentSlot.LEGS, p));
+    public static final RegistrySupplier<Item> COPPER_BOOTS = register("copper_boots", p -> new WeatheringArmorItem(MUArmorMaterials.COPPER, EquipmentSlot.FEET, p));
 
     public static final RegistrySupplier<Item> EMERALD_SWORD = register("emerald_sword", p -> new SwordItem(MUTiers.EMERALD, 4, -1.0F, p));
     public static final RegistrySupplier<Item> EMERALD_PICKAXE = register("emerald_pickaxe", p -> new PickaxeItem(MUTiers.EMERALD, 1, -2.8F, p));
