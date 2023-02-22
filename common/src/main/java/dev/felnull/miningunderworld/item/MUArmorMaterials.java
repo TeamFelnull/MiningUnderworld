@@ -1,5 +1,6 @@
 package dev.felnull.miningunderworld.item;
 
+import dev.felnull.otyacraftengine.tag.PlatformItemTags;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;
@@ -11,42 +12,14 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum MUArmorMaterials implements ArmorMaterial {
-    COPPER_MATERIALS("copper_materials",
-            15,
-            new int[]{2, 5, 6, 2},
-            9,
-            SoundEvents.ARMOR_EQUIP_IRON,
+    COPPER("copper",
+            13,
+            new int[]{3, 5, 6, 2},
+            10,
+            SoundEvents.COPPER_PLACE,
             0.0F,
             0.0F,
-            () -> Ingredient.of(Items.COPPER_INGOT)),
-
-    EXPOSED_COPPER("exposed_copper",
-            15,
-            new int[]{2, 5, 6, 2},
-            9,
-            SoundEvents.ARMOR_EQUIP_IRON,
-            0.0F,
-            0.0F,
-            () -> Ingredient.of(Items.COPPER_INGOT)),
-
-    WEATHERED_COPPER("weathered_copper",
-            15,
-            new int[]{2, 5, 6, 2},
-            9,
-            SoundEvents.ARMOR_EQUIP_IRON,
-            0.0F,
-            0.0F,
-            () -> Ingredient.of(Items.COPPER_INGOT)),
-
-    OXIDIZED_COPPER("oxidized_copper",
-            15,
-            new int[]{2, 5, 6, 2},
-            9,
-            SoundEvents.ARMOR_EQUIP_IRON,
-            0.0F,
-            0.0F,
-            () -> Ingredient.of(Items.COPPER_INGOT)),
-
+            () -> Ingredient.of(PlatformItemTags.copperIngots())),
     EMERALD("emerald",
             15,
             new int[]{2, 5, 6, 2},
@@ -112,7 +85,7 @@ public enum MUArmorMaterials implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return this.name;
+        return /*MiningUnderworld.MODID + ":" +*/ this.name;
     }
 
     @Override

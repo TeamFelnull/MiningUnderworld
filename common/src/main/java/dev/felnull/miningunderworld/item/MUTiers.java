@@ -9,7 +9,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum MUTiers implements Tier {
-    COPPER(2, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(PlatformItemTags.copperIngots())),
+    COPPER(2, 232, 6.5F, 2.0F, 15, () -> Ingredient.of(PlatformItemTags.copperIngots())),
     EMERALD(2, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.EMERALD)),
     AMETHYST(2, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(Items.AMETHYST_BLOCK));
     private final int level;

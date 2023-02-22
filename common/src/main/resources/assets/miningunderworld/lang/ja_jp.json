@@ -8,6 +8,10 @@
   "item.miningunderworld.copper_pickaxe": "銅のツルハシ",
   "item.miningunderworld.copper_axe": "銅の斧",
   "item.miningunderworld.copper_shovel": "銅のシャベル",
+  "item.miningunderworld.copper_helmet": "銅のヘルメット",
+  "item.miningunderworld.copper_chestplate": "銅のチェストプレート",
+  "item.miningunderworld.copper_leggings": "銅のレギンス",
+  "item.miningunderworld.copper_boots": "銅のブーツ",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last",
@@ -30,5 +34,4 @@
   "item.miningunderworld.amethyst_chestplate": "アメジストのチェストプレート",
   "item.miningunderworld.amethyst_leggings": "アメジストのレギンス",
   "item.miningunderworld.amethyst_boots": "アメジストのブーツ"
-
 }

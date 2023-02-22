@@ -6,6 +6,8 @@
     "HumanoidArmorLayerMixin"
   ],
   "mixins": [
+    "ItemAccessor",
+    "ItemStackMixin"
   ],
   "injectors": {
     "defaultRequire": 1
