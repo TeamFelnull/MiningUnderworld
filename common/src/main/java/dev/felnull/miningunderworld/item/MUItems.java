@@ -1,10 +1,11 @@
 package dev.felnull.miningunderworld.item;
 
+import dev.architectury.core.item.ArchitecturyBucketItem;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
+import dev.felnull.miningunderworld.fluid.MUFluids;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -14,7 +15,7 @@ import java.util.function.Function;
 public class MUItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(MiningUnderworld.MODID, Registries.ITEM);
 
-    public static final RegistrySupplier<Item> IKISUGI_TEST = register("ikisugi_test",p->new TestItem(p.fireResistant()));
+    public static final RegistrySupplier<Item> IKISUGI_TEST = register("ikisugi_test", p -> new TestItem(p.fireResistant()));
     //銅ツール
     public static final RegistrySupplier<Item> COPPER_SWORD = register("copper_sword", p -> new WeatheringSwordItem(MUTiers.COPPER, 3, -2.4F, p));
     public static final RegistrySupplier<Item> COPPER_PICKAXE = register("copper_pickaxe", p -> new WeatheringPickaxeItem(MUTiers.COPPER, 1, -2.8F, p));
@@ -46,8 +47,11 @@ public class MUItems {
     public static final RegistrySupplier<Item> AMETHYST_SHOVEL = register("amethyst_shovel", p -> new ShovelItem(MUTiers.AMETHYST, 1.5F, -3.0F, p));
     public static final RegistrySupplier<Item> AMETHYST_HOE = register("amethyst_hoe", p -> new HoeItem(MUTiers.AMETHYST, 1, -3.0F, p));
     //アクセサリー
-    public static final RegistrySupplier<Item> TEST_ACCESSORY = register("test_accessory", p -> new AccessoryItem(MobEffects.POISON,p));
-    public static final RegistrySupplier<Item> TEST_ACCESSORY2 = register("test_accessory2", p -> new AccessoryItem(MobEffects.MOVEMENT_SPEED,p));
+    public static final RegistrySupplier<Item> TEST_ACCESSORY = register("test_accessory", p -> new AccessoryItem(MobEffects.POISON, p));
+    public static final RegistrySupplier<Item> TEST_ACCESSORY2 = register("test_accessory2", p -> new AccessoryItem(MobEffects.MOVEMENT_SPEED, p));
+
+    //液体入りバケツ
+    public static final RegistrySupplier<Item> TEST_FLUID_BUCKET = register("test_fluid_bucket", p -> new ArchitecturyBucketItem(MUFluids.TEST_FLUID, p));
 
     private static RegistrySupplier<Item> register(String name) {
         return register(name, Item::new);

@@ -3,6 +3,7 @@ package dev.felnull.miningunderworld;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.dimension.MiningUnderworldDimension;
 import dev.felnull.miningunderworld.feature.MUFeatures;
+import dev.felnull.miningunderworld.fluid.MUFluids;
 import dev.felnull.miningunderworld.handler.CommonHandler;
 import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.recipe.MURecipeSerializers;
@@ -12,6 +13,7 @@ public class MiningUnderworld {
     public static final String MODID = "miningunderworld";
 
     public static void init() {
+        MUFluids.init();
         MUItems.init();
         MUBlocks.init();
         MiningUnderworldDimension.init();
