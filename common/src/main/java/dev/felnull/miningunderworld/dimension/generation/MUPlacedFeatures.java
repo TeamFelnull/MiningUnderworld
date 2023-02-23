@@ -1,8 +1,7 @@
-package dev.felnull.miningunderworld.feature;
+package dev.felnull.miningunderworld.dimension.generation;
 
 import com.mojang.datafixers.util.Pair;
 import dev.felnull.miningunderworld.MiningUnderworld;
-import dev.felnull.miningunderworld.block.MUBlocks;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -10,9 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.AlwaysTrueTest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +25,6 @@ public class MUPlacedFeatures {
             MUFeatures.TEST_FEATURE,//生成物の型
             new TestFeature.Config(19),//型に入れる情報
             commonOrePlacement(19, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT));//生成物の配置方
-
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<PlacedFeature> register(String name, F feature, FC config, List<PlacementModifier> placement) {
         var placedFeature = ResourceKey.create(Registries.PLACED_FEATURE, MiningUnderworld.modLoc(name));

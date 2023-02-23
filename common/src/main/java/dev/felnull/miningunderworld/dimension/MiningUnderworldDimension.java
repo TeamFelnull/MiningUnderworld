@@ -5,6 +5,9 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.block.MUBlocks;
+import dev.felnull.miningunderworld.dimension.generation.MUCarvers;
+import dev.felnull.miningunderworld.dimension.generation.MUFeatures;
+import dev.felnull.miningunderworld.dimension.generation.MUPlacedFeatures;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -29,18 +32,17 @@ public class MiningUnderworldDimension {
     public static final ResourceKey<NoiseGeneratorSettings> MU_GENERATOR = ResourceKey.create(Registries.NOISE_SETTINGS, MiningUnderworld.modLoc("mu_generator"));
     public static final ResourceKey<LevelStem> MINING_UNDERWORLD = ResourceKey.create(Registries.LEVEL_STEM, MiningUnderworld.modLoc("mining_underworld"));
 
-    public static RegistrySetBuilder addToBuilder(RegistrySetBuilder builder){//データパック自動生成に登録
-        return builder
+    public static RegistrySetBuilder addToBuilder(RegistrySetBuilder builder) {//データパック自動生成に登録
+        return MUCarvers.addToBuilder(MUPlacedFeatures.addToBuilder(MUBiomes.addToBuilder(builder
                 .add(Registries.DIMENSION_TYPE, c -> c.register(MU_TYPE, muType()))//基本情報
                 .add(Registries.NOISE_SETTINGS, c -> c.register(MU_GENERATOR, muGenerator(c)))//地形生成
-                .add(Registries.LEVEL_STEM, c -> c.register(MINING_UNDERWORLD, miningUnderworld(c)));//ディメンション本体
+                .add(Registries.LEVEL_STEM, c -> c.register(MINING_UNDERWORLD, miningUnderworld(c))))));//ディメンション本体
     }
 
-    public static final DeferredRegister<Codec<? extends BiomeSource>> BIOME_SOURCES = DeferredRegister.create(MiningUnderworld.MODID, Registries.BIOME_SOURCE);
-    public static final RegistrySupplier<Codec<? extends BiomeSource>> MU_BIOME = BIOME_SOURCES.register("mu_biome", () -> MUBiomeSource.MU_CODEC);
 
     public static void init() {
-        BIOME_SOURCES.register();//バイオーム生成方法
+        MUBiomeSource.init();//バイオーム生成方法
+        MUFeatures.init();//独自生成物
     }
 
     public static final int minY = -64;

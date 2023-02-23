@@ -22,14 +22,16 @@ public class MUNoiseRouter {
         //https://misode.github.io/worldgen/noise/?version=1.19.3
         var noises = context.lookup(Registries.NOISE);
         //DensityFunctionとSurfaceRule両方に使えるけど、それぞれどちらか一方に使うものとして作られている模様
-        var cave_cheese = DensityFunctions.noise(noises.getOrThrow(Noises.CAVE_CHEESE), 0.5);//地形生成用のノイズ
+        var cave_cheese = DensityFunctions.noise(noises.getOrThrow(Noises.CAVE_CHEESE));//地形生成用のノイズ
         var nether_wart = DensityFunctions.noise(noises.getOrThrow(Noises.NETHER_WART));//地形色付け用のノイズ
         var cave = DensityFunctions
-                .min(//より小さい値で上書き→noodleの空気追加
-                        noodle,
+                .min(//より小さい値で上書き→空洞合体！
+                        DensityFunctions.add(//ヌードルの空気部分増やす
+                                noodle,
+                                DensityFunctions.constant(-.2)),
                         DensityFunctions.add(
                                 cave_cheese,
-                                DensityFunctions.constant(0.2)));//チーズの空気部分減らす
+                                DensityFunctions.constant(.3)));//チーズの空気部分減らす
 
         //各引数の動作は謎だらけ
         return new NoiseRouter(
@@ -42,19 +44,15 @@ public class MUNoiseRouter {
                         getDensity(densities, "shift_z"),
                         0.25D,
                         noises.getOrThrow(Noises.TEMPERATURE)),//オーバーワールドの温度分布、バイオーム生成に使用
-                DensityFunctions.shiftedNoise2d(
-                        getDensity(densities, "shift_x"),
-                        getDensity(densities, "shift_z"),
-                        0.25D,
-                        noises.getOrThrow(Noises.VEGETATION)),//植生、多分木とか出すのに使う
-                DensityFunctions.constant(114514),//大陸度合い、continentsは海バイオームと陸バイオーム並みの凄いノイズだから使いたくない
-                getDensity(densities, NoiseRouterData.EROSION),
-                getDensity(densities, NoiseRouterData.DEPTH),//上３つはバイオーム生成に使う
+                DensityFunctions.zero(),//植生、多分木とか出すのに使う
+                DensityFunctions.zero(),//下３つはバイオーム生成に使えるノイズ
+                DensityFunctions.zero(),//
+                DensityFunctions.zero(),//
                 DensityFunctions.zero(),
                 DensityFunctions.zero(),
                 cave,//ブロックがある場所を決める
                 DensityFunctions.constant(1),//鉱石生成可能な場所
-                DensityFunctions.zero(),
+                DensityFunctions.zero(),//鉱脈生成可能な場所
                 DensityFunctions.zero());
     }
 

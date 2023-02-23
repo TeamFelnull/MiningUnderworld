@@ -1,31 +1,35 @@
 package dev.felnull.miningunderworld.dimension;
 
 import dev.felnull.miningunderworld.MiningUnderworld;
-import dev.felnull.miningunderworld.feature.MUPlacedFeatures;
+import dev.felnull.miningunderworld.dimension.generation.MUCarvers;
+import dev.felnull.miningunderworld.dimension.generation.MUPlacedFeatures;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Supplier;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
+//Biomeの要素をBiomeGenerationSettingsから細かく指定する
+//BiomeSpecialEffects：バイオームにいるときの感覚的効果。水や草や葉っぱの色、霧やパーティクル、音。
+//MobSpawnSettings:モブスポーン設定
+//BiomeGenerationSettings:バイオーム特有の地形生成。穴開けたり(Carver)生成物(Feature)追加
 public class MUBiomes {
+    public static final Map<ResourceKey<Biome>, Function<BiomeGenerationSettings.Builder,Biome>> MU_BIOMES = new HashMap<>();
+    public static final ResourceKey<Biome> DIRTY_CAVE = register("dirty_cave", MUBiomes::dirtyCave);
+    public static final ResourceKey<Biome> COLLAPSING_CAVE = register("collapsing_cave", MUBiomes::collapsingCave);
+    public static final ResourceKey<Biome> CRYSTAL_CAVE = register("crystal_cave", MUBiomes::crystalCave);
 
-
-    public static final Set<ResourceKey<Biome>> MU_BIOMES = new HashSet<>();
-    public static final ResourceKey<Biome> DIRTY_CAVE = biomeKey("dirty_cave");
-    public static final ResourceKey<Biome> COLLAPSING_CAVE = biomeKey("collapsing_cave");
-    public static final ResourceKey<Biome> CRYSTAL_CAVE = biomeKey("crystal_cave");
-
-    public static ResourceKey<Biome> biomeKey(String name){
+    public static ResourceKey<Biome> register(String name, Function<BiomeGenerationSettings.Builder,Biome> f) {
         var key = ResourceKey.create(Registries.BIOME, MiningUnderworld.modLoc(name));
-        MU_BIOMES.add(key);
+        MU_BIOMES.put(key, f);
         return key;
     }
 
@@ -33,42 +37,56 @@ public class MUBiomes {
         return builder.add(Registries.BIOME, c -> {
             var placedFeatures = c.lookup(Registries.PLACED_FEATURE);
             var configuredCarvers = c.lookup(Registries.CONFIGURED_CARVER);
-            Supplier<BiomeGenerationSettings.Builder> genSup = () -> new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
-
-            c.register(DIRTY_CAVE, dirtyCave(genSup));
-            c.register(COLLAPSING_CAVE, collapsingCave(genSup));
-            c.register(CRYSTAL_CAVE, crystalCave(genSup));
+            MU_BIOMES.forEach((k, f) -> c.register(k, f.apply(new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers))));
         });
     }
 
-    public static Biome dirtyCave(Supplier<BiomeGenerationSettings.Builder> genSup) {
-        var gen = defaultGeneration(genSup);
+    public static Biome dirtyCave(BiomeGenerationSettings.Builder gen) {
+        var amb = defaultAmbient();
+        //ハエエフェクト
+
+        var spawn = defaultSpawn();
+        //糞コウモリ
+
         //BiomeDefaultFeaturesにBiomeGenerationSettings.Builderの使い道いろいろある
-        BiomeDefaultFeatures.addSwampVegetation(gen);//沼地の追加
+        //きたない液体池
+        //汚い液体シート
+        //固めた糞尿鉱石
 
-        return defaultBiome(genSup)
+        return defaultBiome(gen)
                 .generationSettings(gen.build())
-                .temperature(0.114514F)
+                .temperature(0.5F)
                 .build();
     }
 
-    public static Biome collapsingCave(Supplier<BiomeGenerationSettings.Builder> genSup) {
-        return defaultBiome(genSup)
-                .temperature(0.1919F)
+    public static Biome collapsingCave(BiomeGenerationSettings.Builder gen) {
+        //天上は砂利多め
+        gen.addCarver(GenerationStep.Carving.AIR, MUCarvers.COLLAPSING_CANYON);//崖多め
+        //複数種類のモロ感足場
+
+
+        //破壊すると確率で周りのブロック崩落、確率で連鎖
+
+        return defaultBiome(gen)
+                .temperature(-0.5F)
                 .build();
     }
 
-    public static Biome crystalCave(Supplier<BiomeGenerationSettings.Builder> genSup) {
-        return defaultBiome(genSup)
-                .temperature(0.810F)
+    public static Biome crystalCave(BiomeGenerationSettings.Builder gen) {
+        //地下の土みたいにクリスタル大量
+        //全宝石のクリスタル柱フィーチャー
+        //砂漠感
+
+        return defaultBiome(gen)
+                .temperature(1)
                 .build();
     }
 
-    public static Biome.BiomeBuilder defaultBiome(Supplier<BiomeGenerationSettings.Builder> genSup) {
-        return defaultBiome(defaultAmbient(), defaultMobSpawning(), defaultGeneration(genSup), genSup);
+    public static Biome.BiomeBuilder defaultBiome(BiomeGenerationSettings.Builder gen) {
+        return defaultBiome(defaultAmbient(), defaultSpawn(), defaultGeneration(gen));
     }
 
-    public static Biome.BiomeBuilder defaultBiome(BiomeSpecialEffects.Builder ambient, MobSpawnSettings.Builder spawn, BiomeGenerationSettings.Builder gen, Supplier<BiomeGenerationSettings.Builder> genSup) {
+    public static Biome.BiomeBuilder defaultBiome(BiomeSpecialEffects.Builder ambient, MobSpawnSettings.Builder spawn, BiomeGenerationSettings.Builder gen) {
         return new Biome.BiomeBuilder()
                 .specialEffects(ambient.build())
                 .mobSpawnSettings(spawn.build())
@@ -90,22 +108,23 @@ public class MUBiomes {
                 /*.backgroundMusic(TFConfiguredFeatures.TFMUSICTYPE)*/;
     }
 
-    public static MobSpawnSettings.Builder defaultMobSpawning() {
-        MobSpawnSettings.Builder spawnInfo = new MobSpawnSettings.Builder();
+    public static MobSpawnSettings.Builder defaultSpawn() {
+        MobSpawnSettings.Builder spawn = new MobSpawnSettings.Builder();
 
         //ウーパールーパーがデフォルト湧き
-        spawnInfo.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.AXOLOTL, 12, 4, 4));
+        spawn.addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(EntityType.AXOLOTL, 12, 4, 4));
         //ゾンビとかスケルトンとか一般モブ追加
-        BiomeDefaultFeatures.commonSpawns(spawnInfo);
+        BiomeDefaultFeatures.commonSpawns(spawn);
 
-        return spawnInfo;
+        return spawn;
     }
 
-    public static BiomeGenerationSettings.Builder defaultGeneration(Supplier<BiomeGenerationSettings.Builder> genSup){
-        var gen = genSup.get();
+    public static BiomeGenerationSettings.Builder defaultGeneration(BiomeGenerationSettings.Builder gen) {
         BiomeDefaultFeatures.addDefaultOres(gen);//鉱石追加
         BiomeDefaultFeatures.addExtraEmeralds(gen);//エメラルドも追加
-        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TEST_FEATURE);//独自生成物追加
-        return gen;
+        return gen
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TEST_FEATURE)//独自生成物追加
+                .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)//洞窟
+                .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);//洞窟２;;
     }
 }
