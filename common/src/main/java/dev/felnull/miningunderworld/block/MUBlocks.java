@@ -26,6 +26,7 @@ public class MUBlocks {
     public static final RegistrySupplier<Block> TEST_BLOCK = register("test_block", () -> new Block(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
 
     public static final RegistrySupplier<LiquidBlock> TEST_FLUID = registerBlockOnly("test_fluid", () -> new ArchitecturyLiquidBlock(MUFluids.TEST_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER).noCollission().strength(100.0F).noLootTable()));
+    public static final RegistrySupplier<LiquidBlock> TAR = registerBlockOnly("tar", () -> new ArchitecturyLiquidBlock(MUFluids.TAR, BlockBehaviour.Properties.copy(Blocks.WATER).noCollission().strength(100.0F).noLootTable()));
 
     private static <B extends Block> RegistrySupplier<B> registerBlockOnly(String name, Supplier<B> block) {
         return BLOCKS.register(name, block);
