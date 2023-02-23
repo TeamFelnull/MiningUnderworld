@@ -9,6 +9,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 
 import java.util.function.Function;
 
@@ -47,8 +49,8 @@ public class MUItems {
     public static final RegistrySupplier<Item> AMETHYST_SHOVEL = register("amethyst_shovel", p -> new ShovelItem(MUTiers.AMETHYST, 1.5F, -3.0F, p));
     public static final RegistrySupplier<Item> AMETHYST_HOE = register("amethyst_hoe", p -> new HoeItem(MUTiers.AMETHYST, 1, -3.0F, p));
     //アクセサリー
-    public static final RegistrySupplier<Item> TEST_ACCESSORY = register("test_accessory", p -> new AccessoryItem(MobEffects.POISON, p));
-    public static final RegistrySupplier<Item> TEST_ACCESSORY2 = register("test_accessory2", p -> new AccessoryItem(MobEffects.MOVEMENT_SPEED, p));
+    public static final RegistrySupplier<Item> DIAMOND_RING = register("diamond_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, p, "diamond_ring", "dig_speed"));
+    public static final RegistrySupplier<Item> DIAMOND_SOUL = register("diamond_soul", p -> new AccessoryItem(MobEffects.JUMP, MobEffects.FIRE_RESISTANCE, p, "diamond_soul", "fire_resistance"));
 
     //液体入りバケツ
     public static final RegistrySupplier<Item> TEST_FLUID_BUCKET = register("test_fluid_bucket", p -> new ArchitecturyBucketItem(MUFluids.TEST_FLUID, p));

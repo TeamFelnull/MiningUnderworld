@@ -30,37 +30,6 @@ public class MUItemModelProviderWrapper extends ItemModelProviderWrapper {
 
     @Override
     public void generateItemModels(ItemModelProviderAccess providerAccess) {
-        // providerAccess.basicFlatItem(); <-通常の平たいアイテムモデルを生成
-        // providerAccess.handheldFlatItem(); <-剣などのツールのような持ち方をするアイテムモデルを生成
-
-       /* providerAccess.basicFlatItem(MUItems.IKISUGI_TEST.get());
-
-        providerAccess.handheldFlatItem(MUItems.AMETHYST_SWORD.get());
-        providerAccess.handheldFlatItem(MUItems.AMETHYST_PICKAXE.get());
-        providerAccess.handheldFlatItem(MUItems.AMETHYST_AXE.get());
-        providerAccess.handheldFlatItem(MUItems.AMETHYST_SHOVEL.get());
-        providerAccess.handheldFlatItem(MUItems.AMETHYST_HOE.get());
-        providerAccess.basicFlatItem(MUItems.AMETHYST_INGOT.get());
-        providerAccess.basicFlatItem(MUItems.AMETHYST_HELMET.get());
-        providerAccess.basicFlatItem(MUItems.AMETHYST_CHESTPLATE.get());
-        providerAccess.basicFlatItem(MUItems.AMETHYST_LEGGINGS.get());
-        providerAccess.basicFlatItem(MUItems.AMETHYST_BOOTS.get());
-
-        providerAccess.handheldFlatItem(MUItems.EMERALD_SWORD.get());
-        providerAccess.handheldFlatItem(MUItems.EMERALD_PICKAXE.get());
-        providerAccess.handheldFlatItem(MUItems.EMERALD_AXE.get());
-        providerAccess.handheldFlatItem(MUItems.EMERALD_SHOVEL.get());
-        providerAccess.handheldFlatItem(MUItems.EMERALD_HOE.get());
-        providerAccess.basicFlatItem(MUItems.EMERALD_HELMET.get());
-        providerAccess.basicFlatItem(MUItems.EMERALD_CHESTPLATE.get());
-        providerAccess.basicFlatItem(MUItems.EMERALD_LEGGINGS.get());
-        providerAccess.basicFlatItem(MUItems.EMERALD_BOOTS.get());
-
-        handheldWeatheringItem(providerAccess, MUItems.COPPER_SWORD.get());
-        handheldWeatheringItem(providerAccess, MUItems.COPPER_PICKAXE.get());
-        handheldWeatheringItem(providerAccess, MUItems.COPPER_AXE.get());
-        handheldWeatheringItem(providerAccess, MUItems.COPPER_SHOVEL.get());*/
-
         StreamSupport.stream(MUItems.ITEMS.spliterator(), false).map(Supplier::get).forEach(item -> {
             if (item instanceof WeatheringItem)//錆び
                 if (item instanceof TieredItem)//ツール

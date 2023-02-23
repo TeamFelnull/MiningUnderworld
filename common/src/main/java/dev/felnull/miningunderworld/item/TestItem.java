@@ -46,3 +46,11 @@ public class TestItem extends Item {
 
 
 }
+
+//生きているエンティティにエフェクトを与える
+//            livingEntity.addEffect(new MobEffectInstance(this.effect, 20, 3));
+
+//スニークしたら
+//        if(livingEntity.isCrouching())
+//            level.explode(entity,entity.getX(),entity.getY(),entity.getZ(),10f, Level.ExplosionInteraction.MOB);
+
