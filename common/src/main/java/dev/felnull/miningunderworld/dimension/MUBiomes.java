@@ -42,12 +42,12 @@ public class MUBiomes {
     }
 
     public static Biome dirtyCave(Supplier<BiomeGenerationSettings.Builder> genSup) {
-        var generation = defaultGeneration(genSup);
+        var gen = defaultGeneration(genSup);
         //BiomeDefaultFeaturesにBiomeGenerationSettings.Builderの使い道いろいろある
-        BiomeDefaultFeatures.addSwampVegetation(generation);//沼地の追加
+        BiomeDefaultFeatures.addSwampVegetation(gen);//沼地の追加
 
         return defaultBiome(genSup)
-                .generationSettings(generation.build())
+                .generationSettings(gen.build())
                 .temperature(0.114514F)
                 .build();
     }
@@ -65,10 +65,14 @@ public class MUBiomes {
     }
 
     public static Biome.BiomeBuilder defaultBiome(Supplier<BiomeGenerationSettings.Builder> genSup) {
+        return defaultBiome(defaultAmbient(), defaultMobSpawning(), defaultGeneration(genSup), genSup);
+    }
+
+    public static Biome.BiomeBuilder defaultBiome(BiomeSpecialEffects.Builder ambient, MobSpawnSettings.Builder spawn, BiomeGenerationSettings.Builder gen, Supplier<BiomeGenerationSettings.Builder> genSup) {
         return new Biome.BiomeBuilder()
-                .specialEffects(defaultAmbient().build())
-                .mobSpawnSettings(defaultMobSpawning().build())
-                .generationSettings(defaultGeneration(genSup).build())
+                .specialEffects(ambient.build())
+                .mobSpawnSettings(spawn.build())
+                .generationSettings(gen.build())
                 .precipitation(Biome.Precipitation.NONE)//何も降らない
                 .downfall(0)//降水確率0
                 .temperatureAdjustment(Biome.TemperatureModifier.NONE)//ナニコレ
@@ -98,9 +102,10 @@ public class MUBiomes {
     }
 
     public static BiomeGenerationSettings.Builder defaultGeneration(Supplier<BiomeGenerationSettings.Builder> genSup){
-        var generation = genSup.get();
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(generation);//デフォルトで色々石とかヒカリゴケとか生成
-        generation.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TEST_FEATURE);//独自生成物追加
-        return generation;
+        var gen = genSup.get();
+        BiomeDefaultFeatures.addDefaultOres(gen);//鉱石追加
+        BiomeDefaultFeatures.addExtraEmeralds(gen);//エメラルドも追加
+        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TEST_FEATURE);//独自生成物追加
+        return gen;
     }
 }

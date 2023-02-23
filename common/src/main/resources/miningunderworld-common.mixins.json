@@ -6,6 +6,7 @@
     "HumanoidArmorLayerMixin"
   ],
   "mixins": [
+    "DenseOres",
     "ItemAccessor",
     "ItemStackMixin"
   ],

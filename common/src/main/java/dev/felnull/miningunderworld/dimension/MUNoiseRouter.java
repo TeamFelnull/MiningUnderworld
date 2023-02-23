@@ -53,7 +53,7 @@ public class MUNoiseRouter {
                 DensityFunctions.zero(),
                 DensityFunctions.zero(),
                 cave,//ブロックがある場所を決める
-                DensityFunctions.zero(),
+                DensityFunctions.constant(1),//鉱石生成可能な場所
                 DensityFunctions.zero(),
                 DensityFunctions.zero());
     }
