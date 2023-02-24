@@ -212,5 +212,15 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .pattern("A A")
                 .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
                 .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.JEWELRYS_STAR.get())
+                .define('N', Items.NETHER_STAR)
+                .define('D', Items.DIAMOND_BLOCK)
+                .define('E', Items.EMERALD_BLOCK)
+                .pattern("DDD")
+                .pattern("DNE")
+                .pattern("EEE")
+                .unlockedBy(providerAccess.getHasName(Items.NETHER_STAR), providerAccess.has(Items.NETHER_STAR))
+                .save(exporter);
     }
 }
