@@ -9,6 +9,7 @@ import dev.felnull.miningunderworld.item.MUCreativeModeTab;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -24,6 +25,8 @@ public class MUBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(MiningUnderworld.MODID, Registries.BLOCK);
     private static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(MiningUnderworld.MODID, Registries.ITEM);
     public static final RegistrySupplier<Block> TEST_BLOCK = register("test_block", () -> new Block(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final RegistrySupplier<Block> LOOT_POT = register("loot_pot", () -> new LootPotBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).strength(0.5F).sound(SoundType.GLASS), false));
+    public static final RegistrySupplier<Block> GOLDEN_LOOT_POT = register("golden_loot_pot", () -> new LootPotBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.GOLD).strength(0.5F).sound(SoundType.METAL), true), it -> new BlockItem(it, new Item.Properties().rarity(Rarity.RARE).arch$tab(MUCreativeModeTab.MOD_TAB)));
     //  public static final RegistrySupplier<Block> TAR_STAINS = register("tar_stains", () -> new Block(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
 
     //液体ブロック
@@ -35,7 +38,7 @@ public class MUBlocks {
     }
 
     private static RegistrySupplier<Block> register(String name, Supplier<Block> block) {
-        return register(name, block, n -> new BlockItem(n, new Item.Properties().arch$tab(MUCreativeModeTab.MOD_TAB)));
+        return register(name, block, it -> new BlockItem(it, new Item.Properties().arch$tab(MUCreativeModeTab.MOD_TAB)));
     }
 
     private static RegistrySupplier<Block> register(String name, Supplier<Block> block, Function<Block, Item> blockItem) {

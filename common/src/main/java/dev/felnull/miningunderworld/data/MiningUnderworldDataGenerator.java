@@ -12,6 +12,8 @@ public class MiningUnderworldDataGenerator {
 
         var blockTagProviderWrapper = access.addProviderWrapper(MUBlockTagProviderWrapper::new);
         access.addProviderWrapper((DataProviderWrapper.LookupGeneratorAccessedFactory<DataProviderWrapper<?>>) (packOutput, lookup, generatorAccess) -> new MUItemTagProviderWrapper(packOutput, lookup, generatorAccess, blockTagProviderWrapper));
+
         access.addProviderWrapper(MUFluidTagProviderWrapper::new);
+        access.addProviderWrapper(MUBlockLootTableProviderWrapper::new);
     }
 }

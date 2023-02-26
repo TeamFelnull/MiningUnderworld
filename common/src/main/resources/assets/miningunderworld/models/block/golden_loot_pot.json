@@ -1,0 +1,7 @@
+{
+  "parent": "miningunderworld:block/loot_pot",
+  "textures": {
+    "0": "miningunderworld:block/golden_loot_pot",
+    "particle": "miningunderworld:block/golden_loot_pot"
+  }
+}

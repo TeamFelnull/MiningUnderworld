@@ -16,8 +16,17 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
     public void generateStatesAndModels(BlockStateAndModelProviderAccess providerAccess) {
         providerAccess.genSimpleCubeBlockStateModelAndItemModel(MUBlocks.TEST_BLOCK.get());
 
+        existingModelAndState(providerAccess, MUBlocks.LOOT_POT.get(), modLoc("block/loot_pot"));
+        existingModelAndState(providerAccess, MUBlocks.GOLDEN_LOOT_POT.get(), modLoc("block/golden_loot_pot"));
+
         fluidModelAndState(providerAccess, MUBlocks.TEST_FLUID.get(), modLoc("block/test_block"));
         fluidModelAndState(providerAccess, MUBlocks.TAR.get(), modLoc("block/tar_still"));
+    }
+
+    private void existingModelAndState(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation existingModelLoc) {
+        var exModel = providerAccess.getExistingModel(existingModelLoc);
+        providerAccess.genSimpleBlockState(block, exModel);
+        providerAccess.genSimpleBlockItemModel(block, exModel);
     }
 
     private void fluidModelAndState(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation particle) {
