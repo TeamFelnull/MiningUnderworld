@@ -1,5 +1,6 @@
 {
   "_comment.i": "Item",
+  "item.miningunderworld.tar_bucket": "Tar Bucket",
   "item.wrap.miningunderworld.exposed": "Exposed %s",
   "item.wrap.miningunderworld.weathered": "Weathered %s",
   "item.wrap.miningunderworld.oxidized": "Oxidized %s",
@@ -12,6 +13,8 @@
   "item.miningunderworld.copper_chestplate": "Copper Chestplate",
   "item.miningunderworld.copper_leggings": "Copper Leggings",
   "item.miningunderworld.copper_boots": "Copper Boots",
+  "_comment.b": "Block",
+  "block.miningunderworld.tar": "Tar",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last",

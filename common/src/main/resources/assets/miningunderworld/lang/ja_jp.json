@@ -1,5 +1,6 @@
 {
   "_comment.i": "Item",
+  "item.miningunderworld.tar_bucket": "タール入りバケツ",
   "item.wrap.miningunderworld.exposed": "風化した%s",
   "item.wrap.miningunderworld.weathered": "錆びた%s",
   "item.wrap.miningunderworld.oxidized": "酸化した%s",
@@ -12,6 +13,8 @@
   "item.miningunderworld.copper_chestplate": "銅のチェストプレート",
   "item.miningunderworld.copper_leggings": "銅のレギンス",
   "item.miningunderworld.copper_boots": "銅のブーツ",
+  "_comment.b": "Block",
+  "block.miningunderworld.tar": "タール",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last",

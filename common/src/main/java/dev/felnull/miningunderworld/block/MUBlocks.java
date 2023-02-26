@@ -24,7 +24,9 @@ public class MUBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(MiningUnderworld.MODID, Registries.BLOCK);
     private static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(MiningUnderworld.MODID, Registries.ITEM);
     public static final RegistrySupplier<Block> TEST_BLOCK = register("test_block", () -> new Block(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
+    //  public static final RegistrySupplier<Block> TAR_STAINS = register("tar_stains", () -> new Block(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
 
+    //液体ブロック
     public static final RegistrySupplier<LiquidBlock> TEST_FLUID = registerBlockOnly("test_fluid", () -> new ArchitecturyLiquidBlock(MUFluids.TEST_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER).noCollission().strength(100.0F).noLootTable()));
     public static final RegistrySupplier<LiquidBlock> TAR = registerBlockOnly("tar", () -> new ArchitecturyLiquidBlock(MUFluids.TAR, BlockBehaviour.Properties.copy(Blocks.WATER).noCollission().strength(100.0F).noLootTable()));
 
@@ -45,5 +47,6 @@ public class MUBlocks {
     public static void init() {
         BLOCKS.register();
         BLOCK_ITEMS.register();
+
     }
 }

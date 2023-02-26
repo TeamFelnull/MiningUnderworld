@@ -7,8 +7,10 @@
   ],
   "mixins": [
     "DenseOres",
+    "EntityAccessor",
     "ItemAccessor",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

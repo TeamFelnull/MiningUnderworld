@@ -1,8 +1,10 @@
 {
   "required": true,
-  "package": "dev.felnull.miningunderworld.mixin.forge",
+  "package": "dev.felnull.miningunderworld.forge.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "FluidTypeMixin",
+    "LivingEntityMixin"
   ],
   "mixins": [
   ],
