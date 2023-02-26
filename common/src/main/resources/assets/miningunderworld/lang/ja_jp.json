@@ -36,5 +36,16 @@
   "item.miningunderworld.amethyst_boots": "アメジストのブーツ",
   "item.miningunderworld.diamond_ring": "ダイヤモンドの指輪",
   "item.miningunderworld.diamond_soul": "ダイヤモンドの魂",
-  "item.miningunderworld.jewelry_star": "ジュエリースター"
+  "item.miningunderworld.jewelrys_star": "ジュエリースター",
+  "item.miningunderworld.ring": "指輪",
+  "item.miningunderworld.redstone_ingot": "レッドストーンインゴット",
+  "item.miningunderworld.redstone_sword": "レッドストーンの剣",
+  "item.miningunderworld.redstone_pickaxe": "レッドストーンのツルハシ",
+  "item.miningunderworld.redstone_axe": "レッドストーンの斧",
+  "item.miningunderworld.redstone_shovel": "レッドストーンのシャベル",
+  "item.miningunderworld.redstone_hoe": "レッドストーンのクワ",
+  "item.miningunderworld.redstone_helmet": "レッドストーンのヘルメット",
+  "item.miningunderworld.redstone_chestplate": "レッドストーンのチェストプレート",
+  "item.miningunderworld.redstone_leggings": "レッドストーンのレギンス",
+  "item.miningunderworld.redstone_boots": "レッドストーンのブーツ"
 }

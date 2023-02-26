@@ -25,7 +25,7 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
         SpecialRecipeBuilder.special(MURecipeSerializers.WAXED_WEATHERING_ITEM.get())
                 .save(exporter, modLoc("waxed_weathering_item").toString());
 
-        //cppper
+        //銅
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.COPPER_PICKAXE.get())
                 .define('C', Items.COPPER_INGOT)
                 .define('S', Items.STICK)
@@ -53,7 +53,7 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .unlockedBy(providerAccess.getHasName(Items.COPPER_INGOT), providerAccess.has(Items.COPPER_INGOT))
                 .save(exporter);
 
-        //emerald
+        //エメラルド
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.EMERALD_SHOVEL.get())
                 .define('E', Items.EMERALD)
                 .define('S', Items.STICK)
@@ -129,15 +129,7 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .unlockedBy(providerAccess.getHasName(Items.EMERALD), providerAccess.has(Items.EMERALD))
                 .save(exporter);
 
-        //amethyst
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_INGOT.get())
-                .define('A', Items.AMETHYST_BLOCK)
-                .pattern("AAA")
-                .pattern("AAA")
-                .pattern("AAA")
-                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
-                .save(exporter);
-
+        //アメジスト
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_SWORD.get())
                 .define('A', MUItems.AMETHYST_INGOT.get())
                 .define('S', Items.STICK)
@@ -213,6 +205,91 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
                 .save(exporter);
 
+        //レッドストーン
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_SWORD.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern(" R ")
+                .pattern(" R ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_PICKAXE.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("RRR")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_AXE.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("RR")
+                .pattern("RS")
+                .pattern(" S")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_SHOVEL.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern(" R ")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_HOE.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("RR ")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_HELMET.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .pattern("RRR")
+                .pattern("R R")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_CHESTPLATE.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .pattern("R R")
+                .pattern("RRR")
+                .pattern("RRR")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_LEGGINGS.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .pattern("RRR")
+                .pattern("R R")
+                .pattern("R R")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_BOOTS.get())
+                .define('R', MUItems.REDSTONE_INGOT.get())
+                .pattern("R R")
+                .pattern("R R")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        //中間素材
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.RING.get())
+                .define('G', Items.GOLD_INGOT)
+                .pattern("GGG")
+                .pattern("G G")
+                .pattern("GGG")
+                .unlockedBy(providerAccess.getHasName(Items.GOLD_INGOT), providerAccess.has(Items.GOLD_INGOT))
+                .save(exporter);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.JEWELRYS_STAR.get())
                 .define('N', Items.NETHER_STAR)
                 .define('D', Items.DIAMOND_BLOCK)
@@ -221,6 +298,22 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .pattern("DNE")
                 .pattern("EEE")
                 .unlockedBy(providerAccess.getHasName(Items.NETHER_STAR), providerAccess.has(Items.NETHER_STAR))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.REDSTONE_INGOT.get())
+                .define('R', Items.REDSTONE_BLOCK)
+                .pattern("RRR")
+                .pattern("RRR")
+                .pattern("RRR")
+                .unlockedBy(providerAccess.getHasName(Items.REDSTONE_BLOCK), providerAccess.has(Items.REDSTONE_BLOCK))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.AMETHYST_INGOT.get())
+                .define('A', Items.AMETHYST_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
                 .save(exporter);
     }
 }

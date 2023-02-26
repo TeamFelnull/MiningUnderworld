@@ -1,23 +1,20 @@
 package dev.felnull.miningunderworld.item;
 
+import com.mojang.blaze3d.shaders.Effect;
+import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.world.Clearable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class AccessoryItem extends Item {
@@ -26,15 +23,13 @@ public class AccessoryItem extends Item {
     private final String AccessoryName;
     private final String specialEffectName;
 
-    public AccessoryItem(MobEffect alwaysAffect, MobEffect specialEffect, Properties properties, String AccessoryName, String specialEffectName) {
+    public AccessoryItem(MobEffect alwaysAffect, MobEffect specialEffect, Properties properties, String AccessoryName, String specialEffectName, Properties stacksTo, Properties rarity) {
         super(properties);
         this.alwaysAffect = alwaysAffect;
         this.specialEffect = specialEffect;
         this.AccessoryName = AccessoryName;
         this.specialEffectName = specialEffectName;
-
     }
-
     @Override//アイテム選択
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         switch (this.AccessoryName) {

@@ -5,6 +5,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.fluid.MUFluids;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -46,11 +47,24 @@ public class MUItems {
     public static final RegistrySupplier<Item> AMETHYST_AXE = register("amethyst_axe", p -> new AxeItem(MUTiers.AMETHYST, 6.0F, -3.1F, p));
     public static final RegistrySupplier<Item> AMETHYST_SHOVEL = register("amethyst_shovel", p -> new ShovelItem(MUTiers.AMETHYST, 1.5F, -3.0F, p));
     public static final RegistrySupplier<Item> AMETHYST_HOE = register("amethyst_hoe", p -> new HoeItem(MUTiers.AMETHYST, 1, -3.0F, p));
+    //レッドストーン
+    public static final RegistrySupplier<Item> REDSTONE_INGOT = register("redstone_ingot");
+    public static final RegistrySupplier<Item> REDSTONE_HELMET = register("redstone_helmet", p -> new ArmorItem(MUArmorMaterials.AMETHYST, EquipmentSlot.HEAD, p));
+    public static final RegistrySupplier<Item> REDSTONE_CHESTPLATE = register("redstone_chestplate", p -> new ArmorItem(MUArmorMaterials.AMETHYST, EquipmentSlot.CHEST, p));
+    public static final RegistrySupplier<Item> REDSTONE_LEGGINGS = register("redstone_leggings", p -> new ArmorItem(MUArmorMaterials.AMETHYST, EquipmentSlot.LEGS, p));
+    public static final RegistrySupplier<Item> REDSTONE_BOOTS = register("redstone_boots", p -> new ArmorItem(MUArmorMaterials.AMETHYST, EquipmentSlot.FEET, p));
+    public static final RegistrySupplier<Item> REDSTONE_SWORD = register("redstone_sword", p -> new SwordItem(MUTiers.AMETHYST, 4, -1.0F, p));
+    public static final RegistrySupplier<Item> REDSTONE_PICKAXE = register("redstone_pickaxe", p -> new PickaxeItem(MUTiers.AMETHYST, 1, -2.8F, p));
+    public static final RegistrySupplier<Item> REDSTONE_AXE = register("redstone_axe", p -> new AxeItem(MUTiers.AMETHYST, 6.0F, -3.1F, p));
+    public static final RegistrySupplier<Item> REDSTONE_SHOVEL = register("redstone_shovel", p -> new ShovelItem(MUTiers.AMETHYST, 1.5F, -3.0F, p));
+    public static final RegistrySupplier<Item> REDSTONE_HOE = register("redstone_hoe", p -> new HoeItem(MUTiers.AMETHYST, 1, -3.0F, p));
     //アクセサリー
-    public static final RegistrySupplier<Item> DIAMOND_RING = register("diamond_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, p, "diamond_ring", "dig_speed"));
-    public static final RegistrySupplier<Item> DIAMOND_SOUL = register("diamond_soul", p -> new AccessoryItem(MobEffects.JUMP, MobEffects.FIRE_RESISTANCE, p, "diamond_soul", "fire_resistance"));
+    public static final RegistrySupplier<Item> DIAMOND_RING = register("diamond_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, p, "diamond_ring", "dig_speed",p.stacksTo(1),p.rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> DIAMOND_SOUL = register("diamond_soul", p -> new AccessoryItem(MobEffects.JUMP, MobEffects.FIRE_RESISTANCE, p, "diamond_soul", "fire_resistance",p.stacksTo(1),p.rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> EMERALD_SOUL = register("emerald_soul", p -> new AccessoryItem(MobEffects.NIGHT_VISION, MobEffects.ABSORPTION, p, "diamond_soul", "fire_resistance",p.stacksTo(1),p.rarity(Rarity.RARE)));
     //中間素材
-    public static final RegistrySupplier<Item> JEWELRYS_STAR = register("jewelrys_star");
+    public static final RegistrySupplier<Item> RING = register("ring");
+    public static final RegistrySupplier<Item> JEWELRYS_STAR = register("jewelrys_star",p -> new Item(p.rarity(Rarity.RARE)));
     //液体入りバケツ
     public static final RegistrySupplier<Item> TEST_FLUID_BUCKET = register("test_fluid_bucket", p -> new ArchitecturyBucketItem(MUFluids.TEST_FLUID, p.craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistrySupplier<Item> TAR_BUCKET = register("tar_bucket", p -> new ArchitecturyBucketItem(MUFluids.TAR, p.craftRemainder(Items.BUCKET).stacksTo(1)));
