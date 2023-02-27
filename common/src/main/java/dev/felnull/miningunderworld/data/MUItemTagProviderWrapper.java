@@ -19,15 +19,15 @@ public class MUItemTagProviderWrapper extends ItemTagProviderWrapper {
     @Override
     public void generateTag(ItemTagProviderAccess providerAccess) {
         providerAccess.tag(PlatformItemTags.swords())
-                .add(MUItems.COPPER_SWORD.get(), MUItems.EMERALD_SWORD.get(), MUItems.AMETHYST_SWORD.get());
+                .add(MUItems.COPPER_SWORD.get(), MUItems.EMERALD_SWORD.get(), MUItems.AMETHYST_SWORD.get(),MUItems.REDSTONE_SWORD.get(),MUItems.LAPIS_LAZULI_SWORD.get());
 
         providerAccess.tag(PlatformItemTags.pickaxes())
-                .add(MUItems.COPPER_PICKAXE.get(), MUItems.EMERALD_PICKAXE.get(), MUItems.AMETHYST_PICKAXE.get());
+                .add(MUItems.COPPER_PICKAXE.get(), MUItems.EMERALD_PICKAXE.get(), MUItems.AMETHYST_PICKAXE.get(),MUItems.REDSTONE_PICKAXE.get(),MUItems.LAPIS_LAZULI_PICKAXE.get());
 
         providerAccess.tag(PlatformItemTags.axes())
-                .add(MUItems.COPPER_AXE.get(), MUItems.EMERALD_AXE.get(), MUItems.AMETHYST_AXE.get());
+                .add(MUItems.COPPER_AXE.get(), MUItems.EMERALD_AXE.get(), MUItems.AMETHYST_AXE.get(),MUItems.REDSTONE_AXE.get(),MUItems.LAPIS_LAZULI_AXE.get());
 
         providerAccess.tag(PlatformItemTags.shovels())
-                .add(MUItems.COPPER_SHOVEL.get(), MUItems.EMERALD_SHOVEL.get(), MUItems.AMETHYST_SHOVEL.get());
+                .add(MUItems.COPPER_SHOVEL.get(), MUItems.EMERALD_SHOVEL.get(), MUItems.AMETHYST_SHOVEL.get(),MUItems.REDSTONE_SHOVEL.get(),MUItems.LAPIS_LAZULI_SHOVEL.get());
     }
 }

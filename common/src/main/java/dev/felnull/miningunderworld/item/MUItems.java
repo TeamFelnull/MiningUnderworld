@@ -58,10 +58,21 @@ public class MUItems {
     public static final RegistrySupplier<Item> REDSTONE_AXE = register("redstone_axe", p -> new AxeItem(MUTiers.AMETHYST, 6.0F, -3.1F, p));
     public static final RegistrySupplier<Item> REDSTONE_SHOVEL = register("redstone_shovel", p -> new ShovelItem(MUTiers.AMETHYST, 1.5F, -3.0F, p));
     public static final RegistrySupplier<Item> REDSTONE_HOE = register("redstone_hoe", p -> new HoeItem(MUTiers.AMETHYST, 1, -3.0F, p));
+    //ラピスラズリ
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_INGOT = register("lapis_lazuli_ingot");
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_HELMET = register("lapis_lazuli_helmet", p -> new ArmorItem(MUArmorMaterials.AMETHYST, EquipmentSlot.HEAD, p));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_CHESTPLATE = register("lapis_lazuli_chestplate", p -> new ArmorItem(MUArmorMaterials.AMETHYST, EquipmentSlot.CHEST, p));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_LEGGINGS = register("lapis_lazuli_leggings", p -> new ArmorItem(MUArmorMaterials.AMETHYST, EquipmentSlot.LEGS, p));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_BOOTS = register("lapis_lazuli_boots", p -> new ArmorItem(MUArmorMaterials.AMETHYST, EquipmentSlot.FEET, p));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_SWORD = register("lapis_lazuli_sword", p -> new SwordItem(MUTiers.AMETHYST, 4, -1.0F, p));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_PICKAXE = register("lapis_lazuli_pickaxe", p -> new PickaxeItem(MUTiers.AMETHYST, 1, -2.8F, p));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_AXE = register("lapis_lazuli_axe", p -> new AxeItem(MUTiers.AMETHYST, 6.0F, -3.1F, p));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_SHOVEL = register("lapis_lazuli_shovel", p -> new ShovelItem(MUTiers.AMETHYST, 1.5F, -3.0F, p));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_HOE = register("lapis_lazuli_hoe", p -> new HoeItem(MUTiers.AMETHYST, 1, -3.0F, p));
     //アクセサリー
     public static final RegistrySupplier<Item> DIAMOND_RING = register("diamond_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, p, "diamond_ring", "dig_speed",p.stacksTo(1),p.rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> DIAMOND_SOUL = register("diamond_soul", p -> new AccessoryItem(MobEffects.JUMP, MobEffects.FIRE_RESISTANCE, p, "diamond_soul", "fire_resistance",p.stacksTo(1),p.rarity(Rarity.RARE)));
-    public static final RegistrySupplier<Item> EMERALD_SOUL = register("emerald_soul", p -> new AccessoryItem(MobEffects.NIGHT_VISION, MobEffects.ABSORPTION, p, "diamond_soul", "fire_resistance",p.stacksTo(1),p.rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> EMERALD_SOUL = register("emerald_soul", p -> new AccessoryItem(MobEffects.NIGHT_VISION, MobEffects.ABSORPTION, p, "diamond_soul", "absorption",p.stacksTo(1),p.rarity(Rarity.RARE)));
     //中間素材
     public static final RegistrySupplier<Item> RING = register("ring");
     public static final RegistrySupplier<Item> JEWELRYS_STAR = register("jewelrys_star",p -> new Item(p.rarity(Rarity.RARE)));

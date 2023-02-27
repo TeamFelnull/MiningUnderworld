@@ -39,6 +39,7 @@
   "item.miningunderworld.amethyst_leggings": "Amethyst Leggings",
   "item.miningunderworld.diamond_ring": "Diamond Ring",
   "item.miningunderworld.diamond_soul": "Diamond Soul",
+  "item.miningunderworld.emerald_soul": "Emerald Soul",
   "item.miningunderworld.jewelrys_star": "jewelrys Star",
   "item.miningunderworld.ring": "Ring",
   "item.miningunderworld.redstone_ingot": "Redstone Ingot",
@@ -50,5 +51,15 @@
   "item.miningunderworld.redstone_helmet": "Redstone Helmet",
   "item.miningunderworld.redstone_chestplate": "Redstone Chestplate",
   "item.miningunderworld.redstone_leggings": "Redstone Leggings",
-  "item.miningunderworld.redstone_boots": "Redstone Boots"
+  "item.miningunderworld.redstone_boots": "Redstone Boots",
+  "item.miningunderworld.lapis_lazuli_ingot": "Lapis Lazuli Ingot",
+  "item.miningunderworld.lapis_lazuli_sword": "Lapis Lazuli Sword",
+  "item.miningunderworld.lapis_lazuli_pickaxe": "Lapis Lazuli Pickaxe",
+  "item.miningunderworld.lapis_lazuli_axe": "Lapis Lazuli Axe",
+  "item.miningunderworld.lapis_lazuli_shovel": "Lapis Lazuli Shovel",
+  "item.miningunderworld.lapis_lazuli_hoe": "Lapis Lazuli Hoe",
+  "item.miningunderworld.lapis_lazuli_helmet": "Lapis Lazuli Helmet",
+  "item.miningunderworld.lapis_lazuli_chestplate": "Lapis Lazuli Chestplate",
+  "item.miningunderworld.lapis_lazuli_leggings": "Lapis Lazuli Leggings",
+  "item.miningunderworld.lapis_lazuli_boots": "Lapis Lazuli Boots"
 }

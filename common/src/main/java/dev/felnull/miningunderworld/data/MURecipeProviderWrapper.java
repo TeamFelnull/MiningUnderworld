@@ -281,6 +281,82 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
                 .save(exporter);
 
+        //ラピスラズリ
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_SWORD.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern(" L ")
+                .pattern(" L ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.REDSTONE_INGOT.get()), providerAccess.has(MUItems.REDSTONE_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_PICKAXE.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("LLL")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.LAPIS_LAZULI_INGOT.get()), providerAccess.has(MUItems.LAPIS_LAZULI_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_AXE.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("LL")
+                .pattern("LS")
+                .pattern(" S")
+                .unlockedBy(providerAccess.getHasName(MUItems.LAPIS_LAZULI_INGOT.get()), providerAccess.has(MUItems.LAPIS_LAZULI_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_SHOVEL.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern(" L ")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.LAPIS_LAZULI_INGOT.get()), providerAccess.has(MUItems.LAPIS_LAZULI_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_HOE.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .define('S', Items.STICK)
+                .pattern("LL ")
+                .pattern(" S ")
+                .pattern(" S ")
+                .unlockedBy(providerAccess.getHasName(MUItems.LAPIS_LAZULI_INGOT.get()), providerAccess.has(MUItems.LAPIS_LAZULI_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_HELMET.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .pattern("LLL")
+                .pattern("L L")
+                .unlockedBy(providerAccess.getHasName(MUItems.LAPIS_LAZULI_INGOT.get()), providerAccess.has(MUItems.LAPIS_LAZULI_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_CHESTPLATE.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .pattern("L L")
+                .pattern("LLL")
+                .pattern("LLL")
+                .unlockedBy(providerAccess.getHasName(MUItems.LAPIS_LAZULI_INGOT.get()), providerAccess.has(MUItems.LAPIS_LAZULI_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_LEGGINGS.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .pattern("LLL")
+                .pattern("L L")
+                .pattern("L L")
+                .unlockedBy(providerAccess.getHasName(MUItems.LAPIS_LAZULI_INGOT.get()), providerAccess.has(MUItems.LAPIS_LAZULI_INGOT.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_BOOTS.get())
+                .define('L', MUItems.LAPIS_LAZULI_INGOT.get())
+                .pattern("L L")
+                .pattern("L L")
+                .unlockedBy(providerAccess.getHasName(MUItems.LAPIS_LAZULI_INGOT.get()), providerAccess.has(MUItems.LAPIS_LAZULI_INGOT.get()))
+                .save(exporter);
+
         //中間素材
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.RING.get())
                 .define('G', Items.GOLD_INGOT)
@@ -313,7 +389,15 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .pattern("AAA")
                 .pattern("AAA")
                 .pattern("AAA")
-                .unlockedBy(providerAccess.getHasName(MUItems.AMETHYST_INGOT.get()), providerAccess.has(MUItems.AMETHYST_INGOT.get()))
+                .unlockedBy(providerAccess.getHasName(Items.AMETHYST_BLOCK), providerAccess.has(Items.AMETHYST_BLOCK))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MUItems.LAPIS_LAZULI_INGOT.get())
+                .define('L', Items.LAPIS_BLOCK)
+                .pattern("LLL")
+                .pattern("LLL")
+                .pattern("LLL")
+                .unlockedBy(providerAccess.getHasName(Items.LAPIS_BLOCK), providerAccess.has(Items.LAPIS_BLOCK))
                 .save(exporter);
     }
 }
