@@ -19,7 +19,6 @@ public class LivingEntityMixin implements FluidDeceiveLivingEntity {
     private final MitigatedThreadLocal<Boolean> miningunderworld_fluidDeceiveTravel = MitigatedThreadLocal.newMitigatedThreadLocal(() -> false);
     private final MitigatedThreadLocal<Boolean> miningunderworld_fluidDeceiveAiStepJumpingFluidHeight = MitigatedThreadLocal.newMitigatedThreadLocal(() -> false);
     private final MitigatedThreadLocal<Boolean> miningunderworld_fluidDeceiveAiStepJumpingInLava = MitigatedThreadLocal.newMitigatedThreadLocal(() -> false);
-  //  private final MitigatedThreadLocal<Boolean> miningunderworld_fluidDeceiveAiStepJumpingJumpInLiquid = MitigatedThreadLocal.newMitigatedThreadLocal(() -> false);
 
     @Inject(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isInWater()Z", ordinal = 0), locals = LocalCapture.CAPTURE_FAILHARD)
     private void travel(Vec3 vec3, CallbackInfo ci, double d, boolean bl, FluidState fluidState) {
@@ -69,16 +68,5 @@ public class LivingEntityMixin implements FluidDeceiveLivingEntity {
     @Override
     public boolean isFluidDeceiveAiStepJumpingInLava() {
         return miningunderworld_fluidDeceiveAiStepJumpingInLava.get();
-    }/*
-
-    @Inject(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;jumpInLiquid(Lnet/minecraft/tags/TagKey;)V", ordinal = 1))
-    private void aiStep3(CallbackInfo ci) {
-        if (MUUtils.isInTar((Entity) (Object) this))
-            miningunderworld_fluidDeceiveAiStepJumpingJumpInLiquid.set(true);
     }
-
-    @Inject(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;jumpInLiquid(Lnet/minecraft/tags/TagKey;)V", ordinal = 1, shift = At.Shift.AFTER))
-    private void aiStep3After(CallbackInfo ci) {
-        miningunderworld_fluidDeceiveAiStepJumpingJumpInLiquid.set(false);
-    }*/
 }

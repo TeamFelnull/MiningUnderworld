@@ -1,8 +1,7 @@
 package dev.felnull.miningunderworld.util;
 
 import dev.felnull.miningunderworld.MiningUnderworld;
-import dev.felnull.miningunderworld.fluid.MUFluidTags;
-import dev.felnull.miningunderworld.mixin.EntityAccessor;
+import dev.felnull.miningunderworld.explatform.MUExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
@@ -24,7 +23,6 @@ public final class MUUtils {
      * @return 結果
      */
     public static boolean isInTar(Entity entity) {
-        boolean firstTick = ((EntityAccessor) entity).getFirstTick();
-        return !firstTick && entity.getFluidHeight(MUFluidTags.TAR) > 0;
+        return MUExpectPlatform.isInTar(entity);
     }
 }

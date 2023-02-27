@@ -29,7 +29,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "isInWater", at = @At("HEAD"), cancellable = true)
     private void isInWater(CallbackInfoReturnable<Boolean> cir) {
-        if ((Object) this instanceof FluidDeceiveLivingEntity deceiveFluidLivingEntity && deceiveFluidLivingEntity.isFluidDeceiveTravel())
+        if ((Object) this instanceof FluidDeceiveLivingEntity deceiveFluidLivingEntity && (deceiveFluidLivingEntity.isFluidDeceiveTravel()||deceiveFluidLivingEntity.isFluidDeceiveTravel()))
             cir.setReturnValue(true);
     }
 
