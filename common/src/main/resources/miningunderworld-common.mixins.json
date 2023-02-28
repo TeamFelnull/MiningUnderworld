@@ -9,6 +9,7 @@
     "DenseOres",
     "EntityAccessor",
     "FloatGoalMixin",
+    "FlowingFluidMixin",
     "ItemAccessor",
     "ItemStackMixin",
     "LivingEntityMixin"

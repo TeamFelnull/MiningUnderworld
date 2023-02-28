@@ -17,6 +17,8 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
         providerAccess.dropSelf(MUBlocks.TEST_BLOCK.get());
         providerAccess.add(MUBlocks.LOOT_POT.get(), BlockLootSubProvider.noDrop());
         providerAccess.add(MUBlocks.GOLDEN_LOOT_POT.get(), BlockLootSubProvider.noDrop());
+        providerAccess.add(MUBlocks.TAR_STAINS.get(), BlockLootSubProvider.noDrop());
+        providerAccess.add(MUBlocks.SMALL_TAR_STAINS.get(), BlockLootSubProvider.noDrop());
     }
 
     @Override

@@ -17,6 +17,8 @@
   "block.miningunderworld.tar": "Tar",
   "block.miningunderworld.loot_pot": "Loot Pot",
   "block.miningunderworld.golden_loot_pot": "Golden Loot Pot",
+  "block.miningunderworld.tar_stains": "Tar Stains",
+  "block.miningunderworld.small_tar_stains": "Small Tar Stains",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last",

@@ -17,6 +17,8 @@
   "block.miningunderworld.tar": "タール",
   "block.miningunderworld.loot_pot": "戦利品壺",
   "block.miningunderworld.golden_loot_pot": "金の戦利品壺",
+  "block.miningunderworld.tar_stains": "タールの汚れ",
+  "block.miningunderworld.small_tar_stains": "小さなタールの汚れ",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last",
