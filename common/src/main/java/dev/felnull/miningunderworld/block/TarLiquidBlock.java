@@ -4,12 +4,18 @@ import com.google.common.collect.ImmutableList;
 import dev.architectury.core.block.ArchitecturyLiquidBlock;
 import dev.felnull.miningunderworld.fluid.MUFluidTags;
 import dev.felnull.miningunderworld.fluid.MUFluids;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.DyeableLeatherItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipBlockStateContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -31,10 +37,11 @@ public class TarLiquidBlock extends ArchitecturyLiquidBlock {
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         super.randomTick(blockState, serverLevel, blockPos, randomSource);
-        var fluidState = blockState.getFluidState();
 
-        if (randomSource.nextInt(5) >= 1)
+        if (randomSource.nextInt(10) != 0)
             return;
+
+        var fluidState = blockState.getFluidState();
 
         int range = Mth.clamp(5 - (fluidState.isSource() ? 3 : (int) ((float) fluidState.getValue(FlowingFluid.LEVEL) * 0.9f)), 1, 5);
 
@@ -54,7 +61,7 @@ public class TarLiquidBlock extends ArchitecturyLiquidBlock {
     private void dirty(ServerLevel serverLevel, BlockPos origin, BlockPos blockPos, RandomSource randomSource, int range) {
         //  serverLevel.sendParticles(ParticleTypes.END_ROD, c.x(), c.y(), c.z(), 1, 0, 0, 0, 0);
 
-        if (randomSource.nextInt(10) >= 1)
+        if (randomSource.nextInt(10) != 0)
             return;
 
         var state = serverLevel.getBlockState(blockPos);
@@ -109,8 +116,37 @@ public class TarLiquidBlock extends ArchitecturyLiquidBlock {
         if (newState != null) {
             if (!state.isAir())
                 serverLevel.destroyBlock(blockPos, true);
-            
+
             serverLevel.setBlockAndUpdate(blockPos, newState);
+        }
+
+
+    }
+
+    @Override
+    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
+        super.entityInside(blockState, level, blockPos, entity);
+
+        if (level.isClientSide()) return;
+        if (!MUUtils.isInTar(entity)) return;
+        if (level.getRandom().nextFloat() >= 1f / (20f * 30f)) return;
+
+        List<ItemStack> stacks = MUUtils.getAllHaveItem(entity);
+        for (ItemStack stack : stacks) {
+            blackening(stack);
+        }
+    }
+
+    private void blackening(ItemStack stack) {
+        if (stack.getItem() instanceof DyeableLeatherItem dyeableLeatherItem) {
+            int color = dyeableLeatherItem.getColor(stack);
+
+            int r = Math.max(FastColor.ARGB32.red(color) - 0x04, 0);
+            int g = Math.max(FastColor.ARGB32.green(color) - 0x04, 0);
+            int b = Math.max(FastColor.ARGB32.blue(color) - 0x04, 0);
+
+            color = FastColor.ARGB32.color(0, r, g, b);
+            dyeableLeatherItem.setColor(stack, color);
         }
     }
 }
