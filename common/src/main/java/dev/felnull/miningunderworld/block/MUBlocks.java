@@ -29,6 +29,8 @@ public class MUBlocks {
     public static final RegistrySupplier<Block> GOLDEN_LOOT_POT = register("golden_loot_pot", () -> new LootPotBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.GOLD).strength(0.5F).sound(SoundType.METAL), true), it -> new BlockItem(it, new Item.Properties().rarity(Rarity.RARE).arch$tab(MUCreativeModeTab.MOD_TAB)));
     public static final RegistrySupplier<Block> TAR_STAINS = registerBlockOnly("tar_stains", () -> new TarStainsBlock(BlockBehaviour.Properties.of(Material.WATER, MaterialColor.COLOR_BLACK).friction(0.98F).noCollission().strength(0.5F).sound(SoundType.GRAVEL)));
     public static final RegistrySupplier<Block> SMALL_TAR_STAINS = registerBlockOnly("small_tar_stains", () -> new TarStainsBlock(BlockBehaviour.Properties.of(Material.WATER, MaterialColor.COLOR_BLACK).friction(0.98F).noCollission().strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final RegistrySupplier<Block> MOST_LIKELY_COLLAPSING_BLOCK = register("most_likely_collapsing_block", () -> new CollapsingBlock(0.5F, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final RegistrySupplier<Block> LIKELY_COLLAPSING_BLOCK = register("likely_collapsing_block", () -> new CollapsingBlock(0.25F, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
 
     //液体ブロック
     public static final RegistrySupplier<LiquidBlock> TEST_FLUID = registerBlockOnly("test_fluid", () -> new ArchitecturyLiquidBlock(MUFluids.TEST_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER).noCollission().strength(100.0F).noLootTable()));

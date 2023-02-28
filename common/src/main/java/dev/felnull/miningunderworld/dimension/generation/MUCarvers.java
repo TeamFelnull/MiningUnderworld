@@ -9,6 +9,7 @@ import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.TrapezoidFloat;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.CarverDebugSettings;
@@ -26,7 +27,7 @@ public class MUCarvers {
     public static RegistrySetBuilder addToBuilder(RegistrySetBuilder builder) {//データパック自動生成に登録
         return builder.add(Registries.CONFIGURED_CARVER, context -> {
            context.register(COLLAPSING_CANYON, WorldCarver.CANYON.configured(new CanyonCarverConfiguration(
-                    0.1F,//生成確率
+                    0.5F,//生成確率
                     UniformHeight.of(VerticalAnchor.bottom(), VerticalAnchor.top()),//生成範囲きっと
                     ConstantFloat.of(10.0F),//ランダムで決まる大きさの倍率？
                     VerticalAnchor.aboveBottom(8),//溶岩になるとこ

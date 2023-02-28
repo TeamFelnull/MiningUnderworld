@@ -26,7 +26,7 @@ public class MUSurfaceRule {
                         BEDROCK),
                 SurfaceRules.ifTrue(jojoniHueru("bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top()),
                         BEDROCK),
-                rules);//上下５マスに徐々岩盤追加
+                stateRule(Blocks.DEEPSLATE));//上下５マスに徐々岩盤追加
 
         return rules;
     }

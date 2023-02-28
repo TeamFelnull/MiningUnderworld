@@ -8,6 +8,7 @@
   "mixins": [
     "DenseOres",
     "EntityAccessor",
+    "EntityMixin",
     "FloatGoalMixin",
     "FlowingFluidMixin",
     "ItemAccessor",
