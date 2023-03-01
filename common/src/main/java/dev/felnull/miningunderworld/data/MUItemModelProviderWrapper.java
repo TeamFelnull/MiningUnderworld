@@ -5,6 +5,7 @@ import dev.felnull.miningunderworld.client.MUItemProperties;
 import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.item.WeatheringItem;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
+import dev.felnull.otyacraftengine.data.model.ItemModelProviderAccess;
 import dev.felnull.otyacraftengine.data.model.MutableFileModel;
 import dev.felnull.otyacraftengine.data.model.OverridePredicate;
 import dev.felnull.otyacraftengine.data.provider.ItemModelProviderWrapper;
@@ -36,8 +37,7 @@ public class MUItemModelProviderWrapper extends ItemModelProviderWrapper {
                     weatheringItem(item, providerAccess::handheldFlatItem);
                 else//それ以外、アーマー等
                     weatheringItem(item, providerAccess::basicFlatItem);
-            else
-            if (item instanceof TieredItem)//ツール
+            else if (item instanceof TieredItem)//ツール
                 providerAccess.handheldFlatItem(item);
             else //通常
                 providerAccess.basicFlatItem(item);
@@ -50,7 +50,7 @@ public class MUItemModelProviderWrapper extends ItemModelProviderWrapper {
         var subModels = subWeatheringItems(itemLoc.getPath(), modelType);
 
         subModels.forEach((state, subModel) ->//序数の小さい順、条件の広い順に登録する。徐々に狭い条件で上書きしていく。広い条件で上書きしたらそれまでの条件が意味なくなる。
-                model.addOverride(subModel, ImmutableList.of(new OverridePredicate(MUItemProperties.OXIDIZING, (float) state.ordinal() / 10f))));
+                model.override(subModel, ImmutableList.of(new OverridePredicate(MUItemProperties.OXIDIZING, (float) state.ordinal() / 10f))));
 
         return model;
     }

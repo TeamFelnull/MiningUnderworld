@@ -3,6 +3,7 @@ package dev.felnull.miningunderworld.data;
 import com.mojang.datafixers.util.Pair;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
+import dev.felnull.otyacraftengine.data.model.BlockStateAndModelProviderAccess;
 import dev.felnull.otyacraftengine.data.provider.BlockStateAndModelProviderWrapper;
 import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
@@ -24,7 +25,7 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
 
     @Override
     public void generateStatesAndModels(BlockStateAndModelProviderAccess providerAccess) {
-        providerAccess.genSimpleCubeBlockStateModelAndItemModel(MUBlocks.TEST_BLOCK.get());
+        providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.TEST_BLOCK.get());
 
         existingModelAndState(providerAccess, MUBlocks.LOOT_POT.get(), modLoc("block/loot_pot"));
         existingModelAndState(providerAccess, MUBlocks.GOLDEN_LOOT_POT.get(), modLoc("block/golden_loot_pot"));
@@ -32,21 +33,21 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
         fluidModelAndState(providerAccess, MUBlocks.TEST_FLUID.get(), modLoc("block/test_block"));
         fluidModelAndState(providerAccess, MUBlocks.TAR.get(), modLoc("block/tar_still"));
 
-        noItemMultiface(providerAccess, MUBlocks.TAR_STAINS.get());
-        noItemMultiface(providerAccess, MUBlocks.SMALL_TAR_STAINS.get());
+        multiface(providerAccess, MUBlocks.TAR_STAINS.get());
+        multiface(providerAccess, MUBlocks.SMALL_TAR_STAINS.get());
     }
 
     private void existingModelAndState(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation existingModelLoc) {
-        var exModel = providerAccess.getExistingModel(existingModelLoc);
-        providerAccess.genSimpleBlockState(block, exModel);
-        providerAccess.genSimpleBlockItemModel(block, exModel);
+        var exModel = providerAccess.existingModel(existingModelLoc);
+        providerAccess.simpleBlockState(block, exModel);
+        providerAccess.simpleBlockItemModel(block, exModel);
     }
 
     private void fluidModelAndState(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation particle) {
-        providerAccess.genSimpleBlockState(block, providerAccess.genParticleOnlyModel(block, particle));
+        providerAccess.simpleBlockState(block, providerAccess.particleOnlyModel(block, particle));
     }
 
-    private void noItemMultiface(BlockStateAndModelProviderAccess providerAccess, Block block) {
+    private void multiface(BlockStateAndModelProviderAccess providerAccess, Block block) {
         var loc = ModelLocationUtils.getModelLocation(block);
         MultiPartGenerator multiPartGenerator = MultiPartGenerator.multiPart(block);
 

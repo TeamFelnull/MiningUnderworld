@@ -38,48 +38,47 @@ public class TarLiquidBlock extends ArchitecturyLiquidBlock {
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         super.randomTick(blockState, serverLevel, blockPos, randomSource);
 
-        if (randomSource.nextInt(10) != 0)
+        if (randomSource.nextInt(3) != 0)
             return;
 
         var fluidState = blockState.getFluidState();
 
         int range = Mth.clamp(5 - (fluidState.isSource() ? 3 : (int) ((float) fluidState.getValue(FlowingFluid.LEVEL) * 0.9f)), 1, 5);
 
-        for (int x = 0; x < range * 2 + 1; x++) {
-            for (int y = 0; y < range * 2 + 1; y++) {
-                for (int z = 0; z < range * 2 + 1; z++) {
-                    BlockPos pos = blockPos.offset(x - range, y - range, z - range);
-                    if (blockPos.equals(pos))
-                        continue;
+        for (int i = 0; i < range; i++) {
+            int x = randomSource.nextInt(range * 2 + 1) - range;
+            int y = randomSource.nextInt(range * 2 + 1) - range;
+            int z = randomSource.nextInt(range * 2 + 1) - range;
 
-                    dirty(serverLevel, blockPos, pos, randomSource, range);
-                }
-            }
+            BlockPos pos = blockPos.offset(x, y, z);
+            if (!blockPos.equals(pos))
+                dirty(serverLevel, blockPos, pos, randomSource, range);
         }
+
     }
 
     private void dirty(ServerLevel serverLevel, BlockPos origin, BlockPos blockPos, RandomSource randomSource, int range) {
         //  serverLevel.sendParticles(ParticleTypes.END_ROD, c.x(), c.y(), c.z(), 1, 0, 0, 0, 0);
 
-        if (randomSource.nextInt(10) != 0)
+        if (!serverLevel.isLoaded(blockPos))
             return;
 
         var state = serverLevel.getBlockState(blockPos);
 
-        boolean repl = (state.canBeReplaced(MUFluids.TAR.get()) && state.getFluidState().isEmpty() && !(state.getBlock() instanceof TarStainsBlock)) || state.isAir();
+        boolean repl = state.isAir() || ((state.canBeReplaced(MUFluids.TAR.get()) || state.canBeReplaced(MUFluids.FLOWING_TAR.get())) && state.getFluidState().isEmpty() && !(state.getBlock() instanceof TarStainsBlock));
 
         if (!repl && !(state.getBlock() instanceof TarStainsBlock))
+            return;
+
+        RandomSource rnd = RandomSource.create(blockPos.asLong() * origin.asLong());
+        double dis = Math.sqrt(origin.distSqr(blockPos));
+
+        if (range - dis <= 0.5 && rnd.nextFloat() < 0.45f)
             return;
 
         var v = blockPos.getCenter().subtract(origin.getCenter());
         var nDir = Direction.getNearest(v.x, v.y, v.z);
         var ppos = blockPos.relative(nDir);
-
-        RandomSource rnd = RandomSource.create(blockPos.asLong());
-        double dis = Math.sqrt(origin.distSqr(blockPos));
-
-        if (range - dis <= 0.5 && rnd.nextFloat() < 0.45f)
-            return;
 
         var hit = serverLevel.isBlockInLine(new ClipBlockStateContext(origin.getCenter(), ppos.getCenter(), (it) -> !it.canBeReplaced(MUFluids.TAR.get()) && !it.isAir() && !(it.getBlock() instanceof TarStainsBlock) && !it.getFluidState().is(MUFluidTags.TAR)));
 
@@ -114,7 +113,7 @@ public class TarLiquidBlock extends ArchitecturyLiquidBlock {
         }
 
         if (newState != null) {
-            if (!state.isAir())
+            if (!state.isAir() && !(state.getBlock() instanceof TarStainsBlock))
                 serverLevel.destroyBlock(blockPos, true);
 
             serverLevel.setBlockAndUpdate(blockPos, newState);
