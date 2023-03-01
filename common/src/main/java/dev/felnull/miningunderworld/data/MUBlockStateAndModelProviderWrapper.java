@@ -49,6 +49,9 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
 
     private void multiface(BlockStateAndModelProviderAccess providerAccess, Block block) {
         var loc = ModelLocationUtils.getModelLocation(block);
+
+        providerAccess.itemModelProviderAccess().basicFlatItem(block.asItem(), loc);
+
         MultiPartGenerator multiPartGenerator = MultiPartGenerator.multiPart(block);
 
         Condition.TerminalCondition terminalCondition = Util.make(Condition.condition(), (terminalConditionx) -> {
