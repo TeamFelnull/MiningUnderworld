@@ -14,7 +14,9 @@
     "ItemAccessor",
     "ItemStackMixin",
     "LevelMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "ModifyEnchantmentValue",
+    "PlayerArmorSlotsGetter"
   ],
   "injectors": {
     "defaultRequire": 1
