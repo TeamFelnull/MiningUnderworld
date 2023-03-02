@@ -17,6 +17,8 @@ public class MURenderTypes {
 
         RenderTypeRegistry.register(RenderType.cutout(),
                 MUBlocks.TAR_STAINS.get(),
-                MUBlocks.SMALL_TAR_STAINS.get());
+                MUBlocks.SMALL_TAR_STAINS.get(),
+                MUBlocks.SOAKED_TAR_STONE.get(),
+                MUBlocks.SOAKED_TAR_DEEPSLATE.get());
     }
 }

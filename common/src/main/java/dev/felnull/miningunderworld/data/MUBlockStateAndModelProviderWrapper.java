@@ -35,6 +35,19 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
 
         multiface(providerAccess, MUBlocks.TAR_STAINS.get());
         multiface(providerAccess, MUBlocks.SMALL_TAR_STAINS.get());
+
+        soakedBlock(providerAccess, MUBlocks.SOAKED_TAR_STONE.get(), new ResourceLocation("block/stone"), modLoc("block/soaked_tar"));
+        soakedBlock(providerAccess, MUBlocks.SOAKED_TAR_DEEPSLATE.get(), new ResourceLocation("block/deepslate"), modLoc("block/soaked_tar"));
+    }
+
+    private void soakedBlock(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation blockLoc, ResourceLocation soakedLoc) {
+        var model = providerAccess.parentedBlockModel(block, modLoc("block/template_soaked_block"))
+                .texture("0", blockLoc)
+                .texture("1", soakedLoc)
+                .texture("particle", blockLoc);
+
+        providerAccess.simpleBlockItemModel(block, model);
+        providerAccess.simpleBlockState(block, model);
     }
 
     private void existingModelAndState(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation existingModelLoc) {

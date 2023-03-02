@@ -17,7 +17,20 @@ public class MUBlockTagProviderWrapper extends BlockTagProviderWrapper {
 
     @Override
     public void generateTag(IntrinsicTagProviderAccess<Block> providerAccess) {
-        providerAccess.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(MUBlocks.LOOT_POT.get(), MUBlocks.GOLDEN_LOOT_POT.get());
+        providerAccess.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                MUBlocks.LOOT_POT.get(),
+                MUBlocks.GOLDEN_LOOT_POT.get(),
+                MUBlocks.SOAKED_TAR_STONE.get(),
+                MUBlocks.SOAKED_TAR_DEEPSLATE.get());
+
+        providerAccess.tag(BlockTags.STONE_ORE_REPLACEABLES).add(
+                MUBlocks.SOAKED_TAR_STONE.get());
+
+        providerAccess.tag(BlockTags.DEEPSLATE_ORE_REPLACEABLES).add(
+                MUBlocks.SOAKED_TAR_DEEPSLATE.get());
+
+        providerAccess.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(
+                MUBlocks.SOAKED_TAR_STONE.get(),
+                MUBlocks.SOAKED_TAR_DEEPSLATE.get());
     }
 }

@@ -6,6 +6,7 @@ import dev.felnull.otyacraftengine.data.provider.BlockLootTableProviderWrapper;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapper {
     public MUBlockLootTableProviderWrapper(PackOutput packOutput, CrossDataGeneratorAccess crossDataGeneratorAccess) {
@@ -19,6 +20,8 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
         providerAccess.add(MUBlocks.GOLDEN_LOOT_POT.get(), BlockLootSubProvider.noDrop());
         providerAccess.add(MUBlocks.TAR_STAINS.get(), BlockLootSubProvider.noDrop());
         providerAccess.add(MUBlocks.SMALL_TAR_STAINS.get(), BlockLootSubProvider.noDrop());
+        providerAccess.dropOther(MUBlocks.SOAKED_TAR_STONE.get(), Blocks.STONE);
+        providerAccess.dropOther(MUBlocks.SOAKED_TAR_DEEPSLATE.get(), Blocks.DEEPSLATE);
     }
 
     @Override
