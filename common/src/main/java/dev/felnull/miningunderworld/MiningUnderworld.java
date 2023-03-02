@@ -23,8 +23,4 @@ public class MiningUnderworld {
         CommonHandler.init();
         ServerHandler.init();
     }
-
-    public static ResourceLocation modLoc(String name) {
-        return MUUtils.modLoc(name);
-    }
 }

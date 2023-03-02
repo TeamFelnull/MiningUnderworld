@@ -2,6 +2,7 @@ package dev.felnull.miningunderworld.dimension.generation;
 
 import com.mojang.datafixers.util.Pair;
 import dev.felnull.miningunderworld.MiningUnderworld;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -27,9 +28,9 @@ public class MUPlacedFeatures {
             commonOrePlacement(19, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT));//生成物の配置方
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<PlacedFeature> register(String name, F feature, FC config, List<PlacementModifier> placement) {
-        var placedFeature = ResourceKey.create(Registries.PLACED_FEATURE, MiningUnderworld.modLoc(name));
+        var placedFeature = ResourceKey.create(Registries.PLACED_FEATURE, MUUtils.modLoc(name));
         if(true) {//runData時のみの処理にしたいけど分らんからtrue
-            var configuredFeature = ResourceKey.create(Registries.CONFIGURED_FEATURE, MiningUnderworld.modLoc(name));
+            var configuredFeature = ResourceKey.create(Registries.CONFIGURED_FEATURE, MUUtils.modLoc(name));
             DATAPACK_CACHE.put(Pair.of(configuredFeature, new ConfiguredFeature<>(feature, config)), Pair.of(placedFeature, placement));//データパック生成で使う形にしてキャッシュ
         }
         return placedFeature;

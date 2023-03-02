@@ -11,8 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
-
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
@@ -25,13 +23,9 @@ public abstract class EntityMixin {
     @Shadow
     private BlockPos blockPosition;
 
-
-    @Shadow
-    public abstract BlockState getFeetBlockState();
-
     @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V"))
     public void startCollapsing(CallbackInfo ci) {
         if (!level.isClientSide() && onGround && level.getBlockState(blockPosition.below()).getBlock() instanceof CollapsingBlock)
-            CollapsingBlock.collapse((Entity) (Object) this, blockPosition.below());
+            CollapsingBlock.collapsing((Entity) (Object) this, blockPosition.below());
     }
 }

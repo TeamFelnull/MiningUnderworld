@@ -67,5 +67,6 @@
   "item.miningunderworld.lapis_lazuli_helmet": "ラピスラズリのヘルメット",
   "item.miningunderworld.lapis_lazuli_chestplate": "ラピスラズリのチェストプレート",
   "item.miningunderworld.lapis_lazuli_leggings": "ラピスラズリのレギンス",
-  "item.miningunderworld.lapis_lazuli_boots": "ラピスラズリのブーツ"
+  "item.miningunderworld.lapis_lazuli_boots": "ラピスラズリのブーツ",
+  "tooltip.miningunderworld.accessory": "右クリック: %s"
 }

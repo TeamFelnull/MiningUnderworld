@@ -8,6 +8,7 @@ import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.dimension.generation.MUCarvers;
 import dev.felnull.miningunderworld.dimension.generation.MUFeatures;
 import dev.felnull.miningunderworld.dimension.generation.MUPlacedFeatures;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -28,9 +29,9 @@ import java.util.OptionalLong;
 
 //参考：https://github1s.com/TeamTwilight/twilightforest/blob/1.19.x/src/main/java/twilightforest/init/TFDimensionSettings.java
 public class MiningUnderworldDimension {
-    public static final ResourceKey<DimensionType> MU_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, MiningUnderworld.modLoc("mu_type"));
-    public static final ResourceKey<NoiseGeneratorSettings> MU_GENERATOR = ResourceKey.create(Registries.NOISE_SETTINGS, MiningUnderworld.modLoc("mu_generator"));
-    public static final ResourceKey<LevelStem> MINING_UNDERWORLD = ResourceKey.create(Registries.LEVEL_STEM, MiningUnderworld.modLoc("mining_underworld"));
+    public static final ResourceKey<DimensionType> MU_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, MUUtils.modLoc("mu_type"));
+    public static final ResourceKey<NoiseGeneratorSettings> MU_GENERATOR = ResourceKey.create(Registries.NOISE_SETTINGS, MUUtils.modLoc("mu_generator"));
+    public static final ResourceKey<LevelStem> MINING_UNDERWORLD = ResourceKey.create(Registries.LEVEL_STEM, MUUtils.modLoc("mining_underworld"));
 
     public static RegistrySetBuilder addToBuilder(RegistrySetBuilder builder) {//データパック自動生成に登録
         return MUCarvers.addToBuilder(MUPlacedFeatures.addToBuilder(MUBiomes.addToBuilder(builder

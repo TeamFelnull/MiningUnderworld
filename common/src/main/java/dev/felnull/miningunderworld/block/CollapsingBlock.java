@@ -1,19 +1,12 @@
 package dev.felnull.miningunderworld.block;
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CollapsingBlock extends Block {
 
@@ -34,11 +27,11 @@ public class CollapsingBlock extends Block {
         return e.level.random.nextFloat() < collapseProbability;
     }
 
-    public static void collapse(Entity e, BlockPos bp){
+    public static void collapsing(Entity e, BlockPos bp){
         var bs = e.level.getBlockState(bp);
         if(bs.isAir())
             FallingBlockEntity.fall(e.level, bp.above(), e.level.getBlockState(bp.above()));
         else if(shouldCollapse(e, bs))
-            collapse(e, bp.below());
+            collapsing(e, bp.below());
     }
 }

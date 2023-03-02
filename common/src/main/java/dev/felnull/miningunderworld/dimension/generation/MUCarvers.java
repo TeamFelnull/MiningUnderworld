@@ -1,6 +1,7 @@
 package dev.felnull.miningunderworld.dimension.generation;
 
 import dev.felnull.miningunderworld.MiningUnderworld;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -21,7 +22,7 @@ public class MUCarvers {
     public static ResourceKey<ConfiguredWorldCarver<?>> COLLAPSING_CANYON = register("collapsing_canyon");
 
     public static ResourceKey<ConfiguredWorldCarver<?>> register(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_CARVER, MiningUnderworld.modLoc(name));
+        return ResourceKey.create(Registries.CONFIGURED_CARVER, MUUtils.modLoc(name));
     }
 
     public static RegistrySetBuilder addToBuilder(RegistrySetBuilder builder) {//データパック自動生成に登録

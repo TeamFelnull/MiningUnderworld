@@ -3,6 +3,7 @@ package dev.felnull.miningunderworld.dimension;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.dimension.generation.MUCarvers;
 import dev.felnull.miningunderworld.dimension.generation.MUPlacedFeatures;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
@@ -28,7 +29,7 @@ public class MUBiomes {
     public static final ResourceKey<Biome> CRYSTAL_CAVE = register("crystal_cave", MUBiomes::crystalCave);
 
     public static ResourceKey<Biome> register(String name, Function<BiomeGenerationSettings.Builder,Biome> f) {
-        var key = ResourceKey.create(Registries.BIOME, MiningUnderworld.modLoc(name));
+        var key = ResourceKey.create(Registries.BIOME, MUUtils.modLoc(name));
         MU_BIOMES.put(key, f);
         return key;
     }

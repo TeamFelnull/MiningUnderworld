@@ -65,5 +65,6 @@
   "item.miningunderworld.lapis_lazuli_helmet": "Lapis Lazuli Helmet",
   "item.miningunderworld.lapis_lazuli_chestplate": "Lapis Lazuli Chestplate",
   "item.miningunderworld.lapis_lazuli_leggings": "Lapis Lazuli Leggings",
-  "item.miningunderworld.lapis_lazuli_boots": "Lapis Lazuli Boots"
+  "item.miningunderworld.lapis_lazuli_boots": "Lapis Lazuli Boots",
+  "tooltip.miningunderworld.accessory": "Right Click: %s"
 }
