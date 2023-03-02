@@ -9,6 +9,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
@@ -58,5 +60,23 @@ public final class MUUtils {
             return ImmutableList.copyOf(livingEntity.getAllSlots());
 
         return ImmutableList.of();
+    }
+
+    /**
+     * フル装備かどうか
+     *
+     * @param livingEntity  エンティティ
+     * @param armorMaterial 指定のアーマーマテリアル
+     * @return 結果
+     */
+    public static boolean isFullArmor(LivingEntity livingEntity, ArmorMaterial armorMaterial) {
+        var armors = livingEntity.getArmorSlots();
+
+        for (ItemStack stack : armors) {
+            if (!(stack.getItem() instanceof ArmorItem armorItem) || !armorMaterial.equals(armorItem.getMaterial()))
+                return false;
+        }
+
+        return true;
     }
 }

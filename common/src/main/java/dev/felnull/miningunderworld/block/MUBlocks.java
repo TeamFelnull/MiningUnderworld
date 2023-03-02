@@ -39,7 +39,6 @@ public class MUBlocks {
     public static final RegistrySupplier<LiquidBlock> TAR = registerBlockOnly("tar", () -> new TarLiquidBlock(MUFluids.TAR, BlockBehaviour.Properties.copy(Blocks.WATER).randomTicks().noCollission().strength(100.0F).noLootTable()));
 
     private static <B extends Block> RegistrySupplier<B> registerBlockOnly(String name, Supplier<B> block) {
-
         return BLOCKS.register(name, block);
     }
 
@@ -56,6 +55,5 @@ public class MUBlocks {
     public static void init() {
         BLOCKS.register();
         BLOCK_ITEMS.register();
-
     }
 }
