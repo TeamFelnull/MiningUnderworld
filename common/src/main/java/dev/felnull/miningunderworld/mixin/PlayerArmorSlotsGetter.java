@@ -3,28 +3,38 @@ package dev.felnull.miningunderworld.mixin;
 import dev.felnull.miningunderworld.Temp;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.EnchantmentMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
 @Mixin(EnchantmentMenu.class)
-public abstract class PlayerArmorSlotsGetter {
+public abstract class PlayerArmorSlotsGetter extends AbstractContainerMenu {
 
     private List<ItemStack> armorSlots;
 
-    @Inject(method = "<init>", at = @At("TAIL"))//"HEAD"だとエラー吐いた、this()の前に入れるなって
-    private void storeArmorSlots(int i, Inventory inventory, CallbackInfo ci){
+    protected PlayerArmorSlotsGetter(@Nullable MenuType<?> menuType, int i) {
+        super(menuType, i);
+    }
+
+    //より一般的な方のinit
+    @Inject(method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/inventory/ContainerLevelAccess;)V", at = @At("TAIL"))
+    private void storeArmorSlots(int i, Inventory inventory, ContainerLevelAccess containerLevelAccess, CallbackInfo ci){
         this.armorSlots = inventory.armor;
     }
 
-    @Inject(method = "slotsChanged", at = @At("HEAD"))
-    public void provideArmorSlots(Container container, CallbackInfo ci){
-        if(armorSlots != null)//一回のスロット変更でもslotsChangedは謎に何回も呼ばれる。なぜかarmorSlotsがnullのときも来るからnullをはじく
-            Temp.armorSlotsReferringNow = armorSlots;
+    @Inject(method = "getEnchantmentList", at = @At("HEAD"))
+    public void provideArmorSlots(ItemStack itemStack, int i, int j, CallbackInfoReturnable<List<EnchantmentInstance>> cir){
+        Temp.armorSlotsReferringNow.set(armorSlots);//mixin間をつなぐには他クラスのstaticフィールドを使えばいい→ModifyEnchantmentValue
     }
 }
