@@ -3,7 +3,8 @@
   "package": "dev.felnull.miningunderworld.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "HumanoidArmorLayerMixin"
+    "HumanoidArmorLayerMixin",
+    "LocalPlayerMixin"
   ],
   "mixins": [
     "DenseOres",
