@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.util;
 
-import com.google.common.collect.ImmutableList;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.explatform.MUExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 
-import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public final class MUUtils {
     /**
@@ -46,20 +46,20 @@ public final class MUUtils {
      */
     @NotNull
     @Unmodifiable
-    public static List<ItemStack> getAllHaveItem(@NotNull Entity entity) {
+    public static Stream<ItemStack> getAllHaveItem(@NotNull Entity entity) {
         if (entity instanceof ItemEntity itemEntity)
-            return ImmutableList.of(itemEntity.getItem());
+            return Stream.of(itemEntity.getItem());
 
         if (entity instanceof ItemFrame itemFrame)
-            return ImmutableList.of(itemFrame.getItem());
+            return Stream.of(itemFrame.getItem());
 
         if (entity instanceof Player player)
-            return player.inventoryMenu.getItems();
+            return player.inventoryMenu.getItems().stream();
 
         if (entity instanceof LivingEntity livingEntity)
-            return ImmutableList.copyOf(livingEntity.getAllSlots());
+            return StreamSupport.stream(livingEntity.getAllSlots().spliterator(), false);
 
-        return ImmutableList.of();
+        return Stream.of();
     }
 
     /**

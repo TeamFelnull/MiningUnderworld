@@ -9,10 +9,7 @@ import dev.felnull.miningunderworld.world.DynamicSignalLevel;
 import dev.felnull.otyacraftengine.event.MoreEntityEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class CommonHandler {
     public static void init() {
@@ -24,11 +21,9 @@ public class CommonHandler {
 
         //雷のダメージを受けたときに装備してる銅ツールの錆がはがれるように
         if (source == DamageSource.LIGHTNING_BOLT) {
-            List<ItemStack> stacks = MUUtils.getAllHaveItem(entity);
-            for (ItemStack stack : stacks) {
-                if (stack.getItem() instanceof WeatheringItem && !WeatheringItem.isWaxed(stack))
-                    WeatheringItem.setWeatheringState(stack, WeatheringItem.WeatheringState.NONE);
-            }
+            MUUtils.getAllHaveItem(entity)
+                    .filter(stack -> stack.getItem() instanceof WeatheringItem && !WeatheringItem.isWaxed(stack))
+                    .forEach(stack -> WeatheringItem.setWeatheringState(stack, WeatheringItem.WeatheringState.NONE));
         }
 
 

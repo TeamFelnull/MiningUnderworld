@@ -14,7 +14,7 @@ public class ModifyEnchantmentValue {
     @ModifyVariable(method = "selectEnchantment", at = @At("STORE"), ordinal = 0)
     private static int modifyEnchantmentValue(int enchantmentValue) {
         var isFullArmor = Temp.armorSlotsReferringNow.stream().allMatch(item ->
-                item.getItem() instanceof ArmorItem armor && armor.getMaterial() == MUArmorMaterials.AMETHYST);//ラピスがないから一旦アメジスト
+                item.getItem() instanceof ArmorItem armor && armor.getMaterial() == MUArmorMaterials.LAPIS_LAZULI);//ラピスがないから一旦アメジスト
         return isFullArmor ? enchantmentValue + 5 : enchantmentValue;
     }
 }

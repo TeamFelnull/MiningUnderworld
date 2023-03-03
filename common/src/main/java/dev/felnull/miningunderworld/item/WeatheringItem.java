@@ -82,7 +82,7 @@ public interface WeatheringItem {
         if (state == WeatheringState.NONE) {
             wcomp = defaultComponent;
         } else {
-            wcomp = Component.translatable("item.wrap." + MiningUnderworld.MODID + "." + state.getSerializedName(), defaultComponent);
+            wcomp = Component.translatable("item." + MiningUnderworld.MODID + ".weathering.wrap." + state.getSerializedName(), defaultComponent);
         }
 
         if (isWaxed(stack))

@@ -130,10 +130,8 @@ public class TarLiquidBlock extends ArchitecturyLiquidBlock {
         if (!MUUtils.isInTar(entity)) return;
         if (level.getRandom().nextFloat() >= 1f / (20f * 30f)) return;
 
-        List<ItemStack> stacks = MUUtils.getAllHaveItem(entity);
-        for (ItemStack stack : stacks) {
-            blackening(stack);
-        }
+        MUUtils.getAllHaveItem(entity)
+                .forEach(this::blackening);
     }
 
     private void blackening(ItemStack stack) {

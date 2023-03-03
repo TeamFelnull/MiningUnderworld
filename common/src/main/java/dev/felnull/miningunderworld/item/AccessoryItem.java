@@ -43,7 +43,7 @@ public class AccessoryItem extends Item {
     }
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
-        list.add(Component.translatable( "tooltip." + MiningUnderworld.MODID + ".accessory", specialEffect.getDisplayName()));
+        list.add(Component.translatable( "item." + MiningUnderworld.MODID + ".accessory.desc", specialEffect.getDisplayName()));
     }
 
     public enum Type {
