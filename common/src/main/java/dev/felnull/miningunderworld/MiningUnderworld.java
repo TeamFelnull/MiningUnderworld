@@ -2,6 +2,7 @@ package dev.felnull.miningunderworld;
 
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.dimension.MiningUnderworldDimension;
+import dev.felnull.miningunderworld.entity.MUEntityTypes;
 import dev.felnull.miningunderworld.fluid.MUFluids;
 import dev.felnull.miningunderworld.handler.CommonHandler;
 import dev.felnull.miningunderworld.item.MUItems;
@@ -17,6 +18,7 @@ public class MiningUnderworld {
         MUFluids.init();
         MUItems.init();
         MUBlocks.init();
+        MUEntityTypes.init();
         MURecipeSerializers.init();
         MiningUnderworldDimension.init();
 
