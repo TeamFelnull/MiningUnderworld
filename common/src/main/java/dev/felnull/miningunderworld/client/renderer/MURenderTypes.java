@@ -19,6 +19,8 @@ public class MURenderTypes {
                 MUBlocks.TAR_STAINS.get(),
                 MUBlocks.SMALL_TAR_STAINS.get(),
                 MUBlocks.SOAKED_TAR_STONE.get(),
-                MUBlocks.SOAKED_TAR_DEEPSLATE.get());
+                MUBlocks.SOAKED_TAR_DEEPSLATE.get(),
+                MUBlocks.SOAKED_LAVA_STONE.get(),
+                MUBlocks.SOAKED_LAVA_DEEPSLATE.get());
     }
 }

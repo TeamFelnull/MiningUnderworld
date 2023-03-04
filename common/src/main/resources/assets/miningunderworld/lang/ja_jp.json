@@ -66,6 +66,9 @@
   "block.miningunderworld.small_tar_stains": "小さなタールの汚れ",
   "block.miningunderworld.soaked_tar_stone": "タールが染み込んだ石",
   "block.miningunderworld.soaked_tar_deepslate": "タールが染み込んだ深層石",
+  "block.miningunderworld.soaked_lava_stone": "溶岩が染み込んだ石",
+  "block.miningunderworld.soaked_lava_deepslate": "溶岩が染み込んだ深層石",
+  "block.miningunderworld.mining_tnt": "採掘用TNT",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last"

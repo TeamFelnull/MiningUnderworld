@@ -38,6 +38,12 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
 
         soakedBlock(providerAccess, MUBlocks.SOAKED_TAR_STONE.get(), new ResourceLocation("block/stone"), modLoc("block/soaked_tar"));
         soakedBlock(providerAccess, MUBlocks.SOAKED_TAR_DEEPSLATE.get(), new ResourceLocation("block/deepslate"), modLoc("block/soaked_tar"));
+        soakedBlock(providerAccess, MUBlocks.SOAKED_LAVA_STONE.get(), new ResourceLocation("block/stone"), modLoc("block/soaked_lava"));
+        soakedBlock(providerAccess, MUBlocks.SOAKED_LAVA_DEEPSLATE.get(), new ResourceLocation("block/deepslate"), modLoc("block/soaked_lava"));
+
+        var miningTNTModel = providerAccess.cubeBottomTopBlockModel(MUBlocks.MINING_TNT.get(), modLoc("block/mining_tnt_bottom"), modLoc("block/mining_tnt_side"), modLoc("block/mining_tnt_top"));
+        providerAccess.simpleBlockItemModel(MUBlocks.MINING_TNT.get(), miningTNTModel);
+        providerAccess.simpleBlockState(MUBlocks.MINING_TNT.get(), miningTNTModel);
     }
 
     private void soakedBlock(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation blockLoc, ResourceLocation soakedLoc) {

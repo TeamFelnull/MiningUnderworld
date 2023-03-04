@@ -66,6 +66,9 @@
   "block.miningunderworld.small_tar_stains": "Small Tar Stains",
   "block.miningunderworld.soaked_tar_stone": "Soaked Tar Stone",
   "block.miningunderworld.soaked_tar_deepslate": "Soaked Tar Deepslate",
+  "block.miningunderworld.soaked_lava_stone": "Soaked Lava Stone",
+  "block.miningunderworld.soaked_lava_deepslate": "Soaked Lava Deepslate",
+  "block.miningunderworld.mining_tnt": "Mining TNT",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last"

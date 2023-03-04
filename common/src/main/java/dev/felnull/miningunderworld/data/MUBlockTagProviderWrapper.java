@@ -21,16 +21,23 @@ public class MUBlockTagProviderWrapper extends BlockTagProviderWrapper {
                 MUBlocks.LOOT_POT.get(),
                 MUBlocks.GOLDEN_LOOT_POT.get(),
                 MUBlocks.SOAKED_TAR_STONE.get(),
-                MUBlocks.SOAKED_TAR_DEEPSLATE.get());
+                MUBlocks.SOAKED_TAR_DEEPSLATE.get(),
+                MUBlocks.SOAKED_LAVA_STONE.get(),
+                MUBlocks.SOAKED_LAVA_DEEPSLATE.get(),
+                MUBlocks.MINING_TNT.get());
 
         providerAccess.tag(BlockTags.STONE_ORE_REPLACEABLES).add(
-                MUBlocks.SOAKED_TAR_STONE.get());
+                MUBlocks.SOAKED_TAR_STONE.get(),
+                MUBlocks.SOAKED_LAVA_STONE.get());
 
         providerAccess.tag(BlockTags.DEEPSLATE_ORE_REPLACEABLES).add(
-                MUBlocks.SOAKED_TAR_DEEPSLATE.get());
+                MUBlocks.SOAKED_TAR_DEEPSLATE.get(),
+                MUBlocks.SOAKED_LAVA_DEEPSLATE.get());
 
         providerAccess.tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES).add(
                 MUBlocks.SOAKED_TAR_STONE.get(),
-                MUBlocks.SOAKED_TAR_DEEPSLATE.get());
+                MUBlocks.SOAKED_TAR_DEEPSLATE.get(),
+                MUBlocks.SOAKED_LAVA_STONE.get(),
+                MUBlocks.SOAKED_LAVA_DEEPSLATE.get());
     }
 }

@@ -22,6 +22,9 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
         providerAccess.add(MUBlocks.SMALL_TAR_STAINS.get(), BlockLootSubProvider.noDrop());
         providerAccess.dropOther(MUBlocks.SOAKED_TAR_STONE.get(), Blocks.STONE);
         providerAccess.dropOther(MUBlocks.SOAKED_TAR_DEEPSLATE.get(), Blocks.DEEPSLATE);
+        providerAccess.dropOther(MUBlocks.SOAKED_LAVA_STONE.get(), Blocks.STONE);
+        providerAccess.dropOther(MUBlocks.SOAKED_LAVA_DEEPSLATE.get(), Blocks.DEEPSLATE);
+        providerAccess.dropSelf(MUBlocks.MINING_TNT.get());
     }
 
     @Override
