@@ -1,7 +1,6 @@
 package dev.felnull.miningunderworld.mixin;
 
 import dev.felnull.miningunderworld.Temp;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -19,11 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(EnchantmentMenu.class)
-public abstract class PlayerArmorSlotsGetter extends AbstractContainerMenu {
+public abstract class EnchantmentMenuArmorSlotsGetter extends AbstractContainerMenu {
 
     private List<ItemStack> armorSlots;
 
-    protected PlayerArmorSlotsGetter(@Nullable MenuType<?> menuType, int i) {
+    protected EnchantmentMenuArmorSlotsGetter(@Nullable MenuType<?> menuType, int i) {
         super(menuType, i);
     }
 

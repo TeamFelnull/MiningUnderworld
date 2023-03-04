@@ -12,10 +12,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LocalPlayer.class)
-public abstract class LocalPlayerMixin extends LivingEntity {
+public abstract class StartCollapseForPlayer extends LivingEntity {
 
 
-    protected LocalPlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
+    protected StartCollapseForPlayer(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
 

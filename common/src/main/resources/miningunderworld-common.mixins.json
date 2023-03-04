@@ -4,12 +4,13 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "HumanoidArmorLayerMixin",
-    "LocalPlayerMixin"
+    "StartCollapseForPlayer"
   ],
   "mixins": [
     "DenseOres",
     "EntityAccessor",
-    "EntityMixin",
+    "StartCollapseForEntity",
+    "FallingTileEntity",
     "FloatGoalMixin",
     "FlowingFluidMixin",
     "ItemAccessor",
@@ -17,7 +18,8 @@
     "LevelMixin",
     "LivingEntityMixin",
     "ModifyEnchantmentValue",
-    "PlayerArmorSlotsGetter"
+    "EnchantmentMenuArmorSlotsGetter",
+    "PrevFallDistanceGetter"
   ],
   "injectors": {
     "defaultRequire": 1
