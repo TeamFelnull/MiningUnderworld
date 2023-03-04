@@ -6,7 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
 
-public class PlayerMovementPacket extends BasePacket.arg1<Vec3> {//フィールドの数とその型
+public class PlayerMovingOnCollapsingPacket extends BasePacket.arg1<Vec3> {//フィールドの数とその型
     public Vec3 movement;
 
     @Override//フィールドをバイト列に
@@ -25,7 +25,7 @@ public class PlayerMovementPacket extends BasePacket.arg1<Vec3> {//フィール�
     public void handle(NetworkManager.PacketContext c) {
         if(c.getPlayer() instanceof ServerPlayer sp){//なんかServerPlayer以外が想定されてる。何故
             sp.setDeltaMovement(movement);//サーバー側には本来ない情報だけど無理やり入れる
-            CollapsingBlock.collapsing(sp, sp.blockPosition().below());//この状態なら他のEntityと同様に処理できる
+            CollapsingBlock.startCollapse(sp, sp.blockPosition().below());//この状態なら他のEntityと同様に処理できる
         }
     }
 

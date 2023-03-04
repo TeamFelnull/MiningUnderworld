@@ -16,6 +16,8 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
     @Override
     public void generateBlockLootTables(BlockLootSubProvider blockLoot, BlockLootTableProviderAccess providerAccess) {
         providerAccess.dropSelf(MUBlocks.TEST_BLOCK.get());
+        providerAccess.dropSelf(MUBlocks.LIKELY_COLLAPSING_BLOCK.get());
+        providerAccess.dropSelf(MUBlocks.MOST_LIKELY_COLLAPSING_BLOCK.get());
         providerAccess.add(MUBlocks.LOOT_POT.get(), BlockLootSubProvider.noDrop());
         providerAccess.add(MUBlocks.GOLDEN_LOOT_POT.get(), BlockLootSubProvider.noDrop());
         providerAccess.add(MUBlocks.TAR_STAINS.get(), BlockLootSubProvider.noDrop());

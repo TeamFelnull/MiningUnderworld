@@ -22,6 +22,6 @@ public abstract class StartCollapseForPlayer extends LivingEntity {
     @Inject(method = "tick", at = @At("HEAD"))
     public void startCollapsing(CallbackInfo ci) {
         if (CollapsingBlock.canStartCollapse(this))//崩落させ得る状況ならば
-            MUPackets.PLAYER_MOVEMENT.accept(getDeltaMovement());//プレイヤーの動きをサーバーに送る→PLAYER_MOVEMENT
+            MUPackets.PLAYER_MOVING_ON_COLLAPSING.accept(getDeltaMovement());//プレイヤーの動きをサーバーに送る→PLAYER_MOVEMENT
     }
 }

@@ -21,10 +21,10 @@ public class MUPackets {
     public static final Map<ResourceLocation, Supplier<? extends BasePacket>> MU_C2S = new HashMap<>();
     public static final Map<ResourceLocation, Supplier<? extends BasePacket>> MU_S2C = new HashMap<>();
 
-    public static Consumer<Vec3> PLAYER_MOVEMENT =
+    public static Consumer<Vec3> PLAYER_MOVING_ON_COLLAPSING =
             sendToServer1(//パケットを初期化する引数をacceptするだけでサーバーに送れる形
                     registerC2S(//C2Sで登録
-                            PlayerMovementPacket::new));//パケット本体。handleが実際の処理
+                            PlayerMovingOnCollapsingPacket::new));//パケット本体。handleが実際の処理
 
     public static <T extends BasePacket> Supplier<T> registerC2S(Supplier<T> packetSup) {
         return register(packetSup, MU_C2S::put);
@@ -40,7 +40,7 @@ public class MUPackets {
 
     public static <T extends BasePacket> Supplier<T> register(Supplier<T> packetSup, BiConsumer<ResourceLocation, Supplier<T>>... caches) {
         var c = packetSup.get().getClass();
-        var loc = MUUtils.modLoc(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, c.getName()));
+        var loc = MUUtils.modLoc(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, c.getSimpleName()));
         Arrays.stream(caches).forEach(cache -> cache.accept(loc, packetSup));
         PACKET_LOCATIONS.put(c, loc);
         return packetSup;

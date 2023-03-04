@@ -25,7 +25,7 @@ public abstract class StartCollapseForEntity {
         var entity = (Entity) (Object) this;
         if (!level.isClientSide()//ブロックを落下ブロックにする処理はサーバー専用
                 && !(entity instanceof Player)//サーバー側からじゃプレイヤーの動きが分からないので無視、LocalPlayerMixinで処理
-                && CollapsingBlock.canStartCollapse(entity))//崩壊させ得る状況
-            CollapsingBlock.collapsing(entity, blockPosition.below());
+                && CollapsingBlock.canStartCollapse(entity))//崩落させ得る状況
+            CollapsingBlock.startCollapse(entity, blockPosition.below());
     }
 }

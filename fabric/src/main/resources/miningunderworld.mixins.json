@@ -6,7 +6,8 @@
   ],
   "mixins": [
     "EntityMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "ModifyEnchantmentValueFabric"
   ],
   "injectors": {
     "defaultRequire": 1

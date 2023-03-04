@@ -14,14 +14,23 @@ public class PrevFallDistanceGetter implements PrevFallDistanceEntity {
     @Shadow public float fallDistance;
 
     public float prevFallDistance;
+    private boolean postponeStoring;
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void storeFallDistance(CallbackInfo ci){
-        this.prevFallDistance = fallDistance;
+        if(!postponeStoring)
+            this.prevFallDistance = fallDistance;
+        else
+            postponeStoring = false;
     }
 
     @Override
     public float getPrevFallDistance() {
         return prevFallDistance;
+    }
+
+    @Override
+    public void postponeStoring() {
+        this.postponeStoring = true;
     }
 }
