@@ -44,7 +44,11 @@ public class MUNoiseRouter {
                         getDensity(densities, "shift_z"),
                         0.25D,
                         noises.getOrThrow(Noises.TEMPERATURE)),//オーバーワールドの温度分布、バイオーム生成に使用
-                DensityFunctions.zero(),//植生、多分木とか出すのに使う
+                DensityFunctions.zero()/*DensityFunctions.shiftedNoise2d(
+                        getDensity(densities, "shift_x"),
+                        getDensity(densities, "shift_z"),
+                        0.25D,
+                        noises.getOrThrow(Noises.VEGETATION))*/,//植生のある場所
                 DensityFunctions.zero(),//下３つはバイオーム生成に使えるノイズ
                 DensityFunctions.zero(),//
                 DensityFunctions.zero(),//

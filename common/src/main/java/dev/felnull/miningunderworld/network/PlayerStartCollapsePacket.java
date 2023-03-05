@@ -2,7 +2,6 @@ package dev.felnull.miningunderworld.network;
 
 import dev.architectury.networking.NetworkManager;
 import dev.felnull.miningunderworld.block.CollapseStarter;
-import dev.felnull.miningunderworld.entity.PrevFallDistanceEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -26,11 +25,8 @@ public class PlayerStartCollapsePacket extends BasePacket.arg2<Double, Float> {/
 
     @Override//フィールドを介して送られた情報を処理
     public void handle(NetworkManager.PacketContext c) {
-        if (c.getPlayer() instanceof ServerPlayer sp) {//なんかServerPlayer以外が想定されてる。何故
+        if (c.getPlayer() instanceof ServerPlayer sp) //なんかServerPlayer以外が想定されてる。何故
             CollapseStarter.startCollapse(sp, sp.blockPosition().below(), walkDist, prevFallDist);
-            System.out.println("Server received:" + prevFallDist);
-            System.out.println("Server now:" + ((PrevFallDistanceEntity) sp).getPrevFallDistance());
-        }
     }
 
     @Override//初期化。デフォルトコンストラクタが使いたいからメソッドでやってる

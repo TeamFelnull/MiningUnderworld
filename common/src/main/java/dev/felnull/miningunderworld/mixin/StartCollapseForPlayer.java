@@ -25,7 +25,5 @@ public abstract class StartCollapseForPlayer extends LivingEntity {
     public void startCollapse(CallbackInfo ci) {
         if (CollapseStarter.shouldStartCollapse(this))
             MUPackets.PLAYER_START_COLLAPSE.accept(getDeltaMovement().horizontalDistance(), ((PrevFallDistanceEntity) this).getPrevFallDistance());
-
-        System.out.println("Client sent:" + ((PrevFallDistanceEntity) this).getPrevFallDistance());
     }
 }

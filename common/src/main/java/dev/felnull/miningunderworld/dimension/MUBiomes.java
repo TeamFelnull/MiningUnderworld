@@ -7,6 +7,7 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.Carvers;
+import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -55,7 +56,6 @@ public class MUBiomes {
         //固めた糞尿鉱石
 
         return defaultBiome(gen)
-                .generationSettings(gen.build())
                 .temperature(0.5F)
                 .build();
     }
@@ -85,25 +85,32 @@ public class MUBiomes {
 
     public static Biome tarTaintedCave(BiomeGenerationSettings.Builder gen) {
         //TODO タールの汚れの表面を追加
-      //  gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TAR_STAINS);
+        //  gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TAR_STAINS);
 
-        /*
-         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_CEILING_VEGETATION);
+        //DECORATIONはただのタグ？
+        gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_CEILING_VEGETATION);
         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.CAVE_VINES);
         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_CLAY);
         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_VEGETATION);
         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.ROOTED_AZALEA_TREE);
         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.SPORE_BLOSSOM);
         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.CLASSIC_VINES);
-         */
 
         return defaultBiome(gen)
-                .temperature(1)
+                .temperature(-1F)//今のとこ温度だけでバイオーム分布決めてるから温度被ると生成されなくなる可能性が出てくる、biomeごとにambient決めるならそれにも依存できて温度被っても問題なくなる
                 .build();
     }
 
     public static Biome.BiomeBuilder defaultBiome(BiomeGenerationSettings.Builder gen) {
         return defaultBiome(defaultAmbient(), defaultSpawn(), defaultGeneration(gen));
+    }
+
+    public static Biome.BiomeBuilder defaultBiome(BiomeSpecialEffects.Builder ambient, BiomeGenerationSettings.Builder gen) {
+        return defaultBiome(ambient, defaultSpawn(), defaultGeneration(gen));
+    }
+
+    public static Biome.BiomeBuilder defaultBiome(MobSpawnSettings.Builder spawn, BiomeGenerationSettings.Builder gen) {
+        return defaultBiome(defaultAmbient(), spawn, defaultGeneration(gen));
     }
 
     public static Biome.BiomeBuilder defaultBiome(BiomeSpecialEffects.Builder ambient, MobSpawnSettings.Builder spawn, BiomeGenerationSettings.Builder gen) {
