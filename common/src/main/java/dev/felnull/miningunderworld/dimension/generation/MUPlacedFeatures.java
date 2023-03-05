@@ -1,12 +1,12 @@
 package dev.felnull.miningunderworld.dimension.generation;
 
 import com.mojang.datafixers.util.Pair;
-import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -22,10 +22,14 @@ import java.util.Map;
 public class MUPlacedFeatures {
     public static final Map<Pair<ResourceKey<ConfiguredFeature<?, ?>>, ConfiguredFeature<?, ?>>, Pair<ResourceKey<PlacedFeature>, List<PlacementModifier>>> DATAPACK_CACHE = new HashMap<>();
 
-    public static final ResourceKey<PlacedFeature> TEST_FEATURE = register("test_feature",
+    public static final ResourceKey<PlacedFeature> TEST_FEATURE = register("test",
             MUFeatures.TEST_FEATURE,//生成物の型
             new TestFeature.Config(19),//型に入れる情報
             commonOrePlacement(19, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT));//生成物の配置方
+    public static final ResourceKey<PlacedFeature> AMETHYST_CRYSTAL = register("amethyst_crystal",
+            MUFeatures.CRYSTAL_FEATURE,
+            new CrystalFeature.Config(Blocks.AMETHYST_BLOCK.defaultBlockState()),
+            commonOrePlacement(19, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT));
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<PlacedFeature> register(String name, F feature, FC config, List<PlacementModifier> placement) {
         var placedFeature = ResourceKey.create(Registries.PLACED_FEATURE, MUUtils.modLoc(name));

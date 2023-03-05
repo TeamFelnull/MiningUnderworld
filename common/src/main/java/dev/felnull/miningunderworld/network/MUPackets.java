@@ -40,7 +40,7 @@ public class MUPackets {
 
     public static <T extends BasePacket> Supplier<T> register(Supplier<T> packetSup, BiConsumer<ResourceLocation, Supplier<T>>... caches) {
         var c = packetSup.get().getClass();
-        var loc = MUUtils.modLoc(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, c.getSimpleName()));
+        var loc = MUUtils.modLoc(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, c.getSimpleName().replaceAll("Packet", "")));
         Arrays.stream(caches).forEach(cache -> cache.accept(loc, packetSup));
         PACKET_LOCATIONS.put(c, loc);
         return packetSup;

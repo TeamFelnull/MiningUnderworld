@@ -22,20 +22,15 @@ public class TestFeature extends Feature<TestFeature.Config> {
         var config = context.config();
 
         IntStream.rangeClosed(1, config.length).forEach(i ->
-            level.setBlock(pos.above(i), MUBlocks.TEST_BLOCK.get().defaultBlockState(), 3));
+                level.setBlock(pos.above(i), MUBlocks.TEST_BLOCK.get().defaultBlockState(), 3));
 
         return true;
     }
 
-    public record Config(int length) implements FeatureConfiguration{
+    public record Config(int length) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create((instance) ->
-                instance.group(
-                        Codec.intRange(1, 32).fieldOf("length").forGetter(Config::length))
+                instance.group(Codec.intRange(1, 32).fieldOf("length").forGetter((c) -> c.length))
                         .apply(instance, Config::new));
-
-        public int length(){
-            return length;
-        }
     }
 }
 

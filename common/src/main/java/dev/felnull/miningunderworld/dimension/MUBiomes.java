@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.dimension;
 
-import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.dimension.generation.MUCarvers;
 import dev.felnull.miningunderworld.dimension.generation.MUPlacedFeatures;
 import dev.felnull.miningunderworld.util.MUUtils;
@@ -75,7 +74,7 @@ public class MUBiomes {
 
     public static Biome crystalCave(BiomeGenerationSettings.Builder gen) {
         //地下の土みたいにクリスタル大量
-        //全宝石のクリスタル柱フィーチャー
+        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.AMETHYST_CRYSTAL);//全宝石のクリスタル柱フィーチャー
         //砂漠感
 
         return defaultBiome(gen)
