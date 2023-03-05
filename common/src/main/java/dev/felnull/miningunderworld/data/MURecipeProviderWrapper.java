@@ -1,15 +1,18 @@
 package dev.felnull.miningunderworld.data;
 
+import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.recipe.MURecipeSerializers;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.provider.RecipeProviderWrapper;
+import dev.felnull.otyacraftengine.tag.PlatformItemTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.Consumer;
 
@@ -398,6 +401,16 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .pattern("LLL")
                 .pattern("LLL")
                 .unlockedBy(providerAccess.getHasName(Items.LAPIS_BLOCK), providerAccess.has(Items.LAPIS_BLOCK))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, MUBlocks.MINING_TNT.get(), 4)
+                .define('T', Blocks.TNT)
+                .define('P', Items.IRON_PICKAXE)
+                .define('S', PlatformItemTags.stone().getKey())
+                .pattern("TST")
+                .pattern("SPS")
+                .pattern("TST")
+                .unlockedBy(providerAccess.getHasName(Items.IRON_PICKAXE), providerAccess.has(Items.IRON_PICKAXE))
                 .save(exporter);
     }
 }

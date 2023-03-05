@@ -11,6 +11,10 @@ import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * 採掘用のTNT
+ * 液体を破壊可能であり、石系は壊れやすくなり、アイテムが爆風で消滅しない
+ */
 public class MiningTntBlock extends TntBlock {
     public MiningTntBlock(Properties properties) {
         super(properties);

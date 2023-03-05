@@ -2,13 +2,23 @@ package dev.felnull.miningunderworld.entity;
 
 import dev.felnull.miningunderworld.entity.damagesource.MUDamageSources;
 import dev.felnull.miningunderworld.mixin.PrimedTntAccessor;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class PrimedMiningTnt extends PrimedTnt {
     public PrimedMiningTnt(EntityType<? extends PrimedMiningTnt> entityType, Level level) {
@@ -56,6 +66,29 @@ public class PrimedMiningTnt extends PrimedTnt {
 
     private void miningExplode() {
         this.level.explode(this, MUDamageSources.miningExplosion(this, this.getOwner()),
-                null, this.getX(), this.getY(0.0625), this.getZ(), 4.0F, false, Level.ExplosionInteraction.TNT);
+                new ExplosionDamageCalculator() {
+                    @Override
+                    public Optional<Float> getBlockExplosionResistance(Explosion explosion, BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, FluidState fluidState) {
+                        if (!fluidState.isEmpty())
+                            return Optional.of(0f);
+
+                        return super.getBlockExplosionResistance(explosion, blockGetter, blockPos, blockState, fluidState)
+                                .map(it -> canMining(blockState) ? Math.max(it * 0.1f, 0.5f) : it);
+                    }
+                }, this.getX(), this.getY(0.0625), this.getZ(), 4.0F, false, Level.ExplosionInteraction.TNT);
+    }
+
+
+    private boolean canMining(BlockState blockState) {
+        //ピッケルが最適ツールではない場合は除外
+        if (!blockState.is(BlockTags.MINEABLE_WITH_PICKAXE)) return false;
+
+        //採掘にダイヤモンド以上が必要な場合は除外
+        if (blockState.is(BlockTags.NEEDS_DIAMOND_TOOL)) return false;
+
+        //破壊不可のものを除外
+        if (blockState.getBlock().defaultDestroyTime() < 0) return false;
+
+        return blockState.getMaterial() == Material.STONE || blockState.is(BlockTags.BASE_STONE_OVERWORLD) || blockState.is(BlockTags.BASE_STONE_NETHER);
     }
 }
