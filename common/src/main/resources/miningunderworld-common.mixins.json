@@ -8,17 +8,20 @@
   ],
   "mixins": [
     "DenseOres",
+    "EnchantmentMenuArmorSlotsGetter",
     "EntityAccessor",
-    "StartCollapseForEntity",
     "FallingTileEntity",
     "FloatGoalMixin",
     "FlowingFluidMixin",
     "ItemAccessor",
+    "ItemEntityMixin",
     "ItemStackMixin",
     "LevelMixin",
     "LivingEntityMixin",
-    "EnchantmentMenuArmorSlotsGetter",
-    "PrevFallDistanceGetter"
+    "PrevFallDistanceGetter",
+    "PrimedTntAccessor",
+    "StartCollapseForEntity",
+    "TntBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

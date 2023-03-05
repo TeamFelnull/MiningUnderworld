@@ -50,9 +50,11 @@ public class DynamicSignal {
         nextSignals.clear();
         nextSignals.trim();
 
-        Streams.concat(Sets.difference(signals, preSignals).stream(), Sets.difference(preSignals, signals).stream())
-                .map(BlockPos::of)
-                .forEach(pos -> level.updateNeighborsAt(pos, level.getBlockState(pos).getBlock()));
+        if (!level.isClientSide()) {
+            Streams.concat(Sets.difference(signals, preSignals).stream(), Sets.difference(preSignals, signals).stream())
+                    .map(BlockPos::of)
+                    .forEach(pos -> level.updateNeighborsAt(pos, level.getBlockState(pos).getBlock()));
+        }
 
         preSignals.clear();
         preSignals.trim();

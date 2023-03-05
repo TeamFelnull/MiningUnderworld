@@ -69,6 +69,12 @@
   "block.miningunderworld.soaked_lava_stone": "Soaked Lava Stone",
   "block.miningunderworld.soaked_lava_deepslate": "Soaked Lava Deepslate",
   "block.miningunderworld.mining_tnt": "Mining TNT",
+  "_comment.e": "Entity",
+  "entity.miningunderworld.mining_tnt": "Primed Mining TNT",
+  "_comment.d": "DamageSource",
+  "death.attack.mining_explosion": "%1$s was blasted",
+  "death.attack.mining_explosion.player": "%1$s was blasted by %2$s",
+  "death.attack.mining_explosion.player.item": "%1$s was blasted by %2$s using %3$s",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last"

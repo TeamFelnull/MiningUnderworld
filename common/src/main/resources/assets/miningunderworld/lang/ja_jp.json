@@ -69,6 +69,12 @@
   "block.miningunderworld.soaked_lava_stone": "溶岩が染み込んだ石",
   "block.miningunderworld.soaked_lava_deepslate": "溶岩が染み込んだ深層石",
   "block.miningunderworld.mining_tnt": "採掘用TNT",
+  "_comment.e": "Entity",
+  "entity.miningunderworld.mining_tnt": "着火された採掘用TNT",
+  "_comment.d": "DamageSource",
+  "death.attack.mining_explosion": "%1$sは発破に巻き込まれた",
+  "death.attack.mining_explosion.player": "%1$sは%2$sに発破された",
+  "death.attack.mining_explosion.player.item": "%1$sは%2$sの%3$sで発破された",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
   "_comment.la": "Last"
