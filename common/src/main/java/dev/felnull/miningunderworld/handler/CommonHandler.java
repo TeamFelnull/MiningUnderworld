@@ -9,6 +9,7 @@ import dev.felnull.miningunderworld.world.DynamicSignalLevel;
 import dev.felnull.otyacraftengine.event.MoreEntityEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.LevelEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class CommonHandler {

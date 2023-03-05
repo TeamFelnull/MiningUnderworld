@@ -34,8 +34,8 @@ public class MUBlocks {
     public static final RegistrySupplier<Block> SOAKED_TAR_DEEPSLATE = register("soaked_tar_deepslate", () -> new LiquidSoakedBlock(MUFluids.TAR, BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
     public static final RegistrySupplier<Block> SOAKED_LAVA_STONE = register("soaked_lava_stone", () -> new LiquidSoakedBlock(() -> Fluids.LAVA, BlockBehaviour.Properties.copy(Blocks.STONE)));
     public static final RegistrySupplier<Block> SOAKED_LAVA_DEEPSLATE = register("soaked_lava_deepslate", () -> new LiquidSoakedBlock(() -> Fluids.LAVA, BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
-    public static final RegistrySupplier<Block> LIKELY_COLLAPSING_BLOCK = register("likely_collapsing_block", () -> new CollapsingBlock(1 / 2F, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
-    public static final RegistrySupplier<Block> MOST_LIKELY_COLLAPSING_BLOCK = register("most_likely_collapsing_block", () -> new CollapsingBlock(1F, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final RegistrySupplier<Block> LIKELY_COLLAPSING_BLOCK = register("likely_collapsing_block", () -> new CollapsingBlock(1 / 2F, 1, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final RegistrySupplier<Block> MOST_LIKELY_COLLAPSING_BLOCK = register("most_likely_collapsing_block", () -> new CollapsingBlock(1F, 2, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
     public static final RegistrySupplier<Block> MINING_TNT = register("mining_tnt", () -> new MiningTntBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.STONE).strength(0.1F).sound(SoundType.STONE)));
 
     //液体ブロック

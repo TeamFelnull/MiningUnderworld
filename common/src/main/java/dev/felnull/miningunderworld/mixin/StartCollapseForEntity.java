@@ -1,6 +1,6 @@
 package dev.felnull.miningunderworld.mixin;
 
-import dev.felnull.miningunderworld.block.CollapsingBlock;
+import dev.felnull.miningunderworld.block.CollapseStarter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -21,11 +21,11 @@ public abstract class StartCollapseForEntity {
     private BlockPos blockPosition;
 
     @Inject(method = "tick", at = @At("HEAD"))
-    public void startCollapsing(CallbackInfo ci) {
+    public void startCollapse(CallbackInfo ci) {
         var entity = (Entity) (Object) this;
         if (!level.isClientSide()//ブロックを落下ブロックにする処理はサーバー専用
-                && !(entity instanceof Player)//サーバー側からじゃプレイヤーの動きが分からないので無視、LocalPlayerMixinで処理
-                && CollapsingBlock.canStartCollapse(entity))//崩落させ得る状況
-            CollapsingBlock.startCollapse(entity, blockPosition.below());
+                && !(entity instanceof Player)//でもサーバー側からじゃプレイヤーの動きが分からないので無視、LocalPlayerMixinで処理
+                && CollapseStarter.shouldStartCollapse(entity))//崩落開始するべきなら
+            CollapseStarter.startCollapse(entity, blockPosition.below());
     }
 }

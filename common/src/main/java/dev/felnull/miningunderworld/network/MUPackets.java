@@ -8,7 +8,6 @@ import com.mojang.datafixers.util.Function6;
 import dev.architectury.networking.NetworkManager;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,10 +20,10 @@ public class MUPackets {
     public static final Map<ResourceLocation, Supplier<? extends BasePacket>> MU_C2S = new HashMap<>();
     public static final Map<ResourceLocation, Supplier<? extends BasePacket>> MU_S2C = new HashMap<>();
 
-    public static Consumer<Vec3> PLAYER_MOVING_ON_COLLAPSING =
-            sendToServer1(//パケットを初期化する引数をacceptするだけでサーバーに送れる形
+    public static BiConsumer<Double, Float> PLAYER_START_COLLAPSE =
+            sendToServer2(//パケットを初期化する引数をacceptするだけでサーバーに送れる形
                     registerC2S(//C2Sで登録
-                            PlayerMovingOnCollapsingPacket::new));//パケット本体。handleが実際の処理
+                            PlayerStartCollapsePacket::new));//パケット本体。handleが実際の処理
 
     public static <T extends BasePacket> Supplier<T> registerC2S(Supplier<T> packetSup) {
         return register(packetSup, MU_C2S::put);

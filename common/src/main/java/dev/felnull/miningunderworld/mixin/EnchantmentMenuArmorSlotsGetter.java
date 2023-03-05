@@ -34,6 +34,6 @@ public abstract class EnchantmentMenuArmorSlotsGetter extends AbstractContainerM
 
     @Inject(method = "getEnchantmentList", at = @At("HEAD"))
     public void provideArmorSlots(ItemStack itemStack, int i, int j, CallbackInfoReturnable<List<EnchantmentInstance>> cir){
-        Temp.armorSlotsReferringNow.set(armorSlots);//mixin間をつなぐには他クラスのstaticフィールドを使えばいい→ModifyEnchantmentValue
+        Temp.armorSlotsNow.set(armorSlots);//mixin間をつなぐには他クラスのstaticフィールドを使えばいい→ModifyEnchantmentValue
     }
 }

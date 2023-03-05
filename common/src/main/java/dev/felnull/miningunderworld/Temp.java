@@ -11,15 +11,15 @@ import java.util.List;
 public class Temp {
 
     //mixin内にpublic staticを置けないから、mixinのためにpublic static使うには外部クラスが必要
-    public static ThreadLocal<List<ItemStack>> armorSlotsReferringNow = new ThreadLocal<>();//一応複数スレッドで同時にエンチャ選択されたとき用にスレッドごとのstatic変数を提供
+    public static ThreadLocal<List<ItemStack>> armorSlotsNow = new ThreadLocal<>();//一応複数スレッドで同時にエンチャ選択されたとき用にスレッドごとのstatic変数を提供
 
     //forgeとfabricでRedirect先が違ったから共通部分をここに移動
     public static int modifyEnchantmentValue(int enchantmentValue){
-        if(Temp.armorSlotsReferringNow.get() == null)//null→アーマーが取得されなかった→エンチャ台以外からselectEnchantmentが呼ばれた
+        if(Temp.armorSlotsNow.get() == null)//null→アーマーが取得されなかった→エンチャ台以外からselectEnchantmentが呼ばれた
             return enchantmentValue;
-        var isFullArmor = Temp.armorSlotsReferringNow.get().stream().allMatch(item ->
+        var isFullArmor = Temp.armorSlotsNow.get().stream().allMatch(item ->
                 item.getItem() instanceof ArmorItem armor && armor.getMaterial() == MUArmorMaterials.LAPIS_LAZULI);
-        Temp.armorSlotsReferringNow.set(null);//エンチャ台で呼んだら毎回nullに戻して、アーマーが取得されたかどうか<=>nullじゃないかどうか、とする
+        Temp.armorSlotsNow.set(null);//エンチャ台で呼んだら毎回nullに戻して、アーマーが取得されたかどうか<=>nullじゃないかどうか、とする
         return isFullArmor ? enchantmentValue + 20 : enchantmentValue;
     }
 }
