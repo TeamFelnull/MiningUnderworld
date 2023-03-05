@@ -33,7 +33,7 @@ public class MUPlacedFeatures {
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<PlacedFeature> register(String name, F feature, FC config, List<PlacementModifier> placement) {
         var placedFeature = ResourceKey.create(Registries.PLACED_FEATURE, MUUtils.modLoc(name));
-        if(true) {//runData時のみの処理にしたいけど分らんからtrue
+        if(true) {//runData時のみの処理にしたいけど分らんからtrue                    <- OEDataGenUtils#isDataGenerating()でデータジェネレータで動かしてるか確認可能
             var configuredFeature = ResourceKey.create(Registries.CONFIGURED_FEATURE, MUUtils.modLoc(name));
             DATAPACK_CACHE.put(Pair.of(configuredFeature, new ConfiguredFeature<>(feature, config)), Pair.of(placedFeature, placement));//データパック生成で使う形にしてキャッシュ
         }

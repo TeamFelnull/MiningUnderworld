@@ -22,12 +22,13 @@ import java.util.function.Function;
 //MobSpawnSettings:モブスポーン設定
 //BiomeGenerationSettings:バイオーム特有の地形生成。穴開けたり(Carver)生成物(Feature)追加
 public class MUBiomes {
-    public static final Map<ResourceKey<Biome>, Function<BiomeGenerationSettings.Builder,Biome>> MU_BIOMES = new HashMap<>();
+    public static final Map<ResourceKey<Biome>, Function<BiomeGenerationSettings.Builder, Biome>> MU_BIOMES = new HashMap<>();
     public static final ResourceKey<Biome> DIRTY_CAVE = register("dirty_cave", MUBiomes::dirtyCave);
     public static final ResourceKey<Biome> COLLAPSING_CAVE = register("collapsing_cave", MUBiomes::collapsingCave);
     public static final ResourceKey<Biome> CRYSTAL_CAVE = register("crystal_cave", MUBiomes::crystalCave);
+    public static final ResourceKey<Biome> TAR_TAINTED_CAVE = register("tar_tainted_cave", MUBiomes::tarTaintedCave);
 
-    public static ResourceKey<Biome> register(String name, Function<BiomeGenerationSettings.Builder,Biome> f) {
+    public static ResourceKey<Biome> register(String name, Function<BiomeGenerationSettings.Builder, Biome> f) {
         var key = ResourceKey.create(Registries.BIOME, MUUtils.modLoc(name));
         MU_BIOMES.put(key, f);
         return key;
@@ -76,6 +77,25 @@ public class MUBiomes {
         //地下の土みたいにクリスタル大量
         gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.AMETHYST_CRYSTAL);//全宝石のクリスタル柱フィーチャー
         //砂漠感
+
+        return defaultBiome(gen)
+                .temperature(1)
+                .build();
+    }
+
+    public static Biome tarTaintedCave(BiomeGenerationSettings.Builder gen) {
+        //TODO タールの汚れの表面を追加
+      //  gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TAR_STAINS);
+
+        /*
+         gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_CEILING_VEGETATION);
+        gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.CAVE_VINES);
+        gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_CLAY);
+        gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_VEGETATION);
+        gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.ROOTED_AZALEA_TREE);
+        gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.SPORE_BLOSSOM);
+        gen.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.CLASSIC_VINES);
+         */
 
         return defaultBiome(gen)
                 .temperature(1)

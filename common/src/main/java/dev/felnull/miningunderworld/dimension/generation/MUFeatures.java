@@ -11,7 +11,7 @@ public class MUFeatures {
     public static final Feature<TestFeature.Config> TEST_FEATURE = register("test", new TestFeature());
     public static final Feature<CrystalFeature.Config> CRYSTAL_FEATURE = register("crystal", new CrystalFeature());
 
-    public static <T extends FeatureConfiguration> Feature<T>  register(String name, Feature<T> feature) {
+    public static <T extends FeatureConfiguration> Feature<T> register(String name, Feature<T> feature) {
         FEATURES.register(name, () -> feature);
         return feature;
     }
