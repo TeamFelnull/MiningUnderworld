@@ -38,7 +38,8 @@ public class MUFluids {
             .overlayTexture(MUUtils.modLoc("block/tar_still"))
             .temperature(302)
             .dropOff(2)
-            .tickDelay(7);
+            .tickDelay(7)
+            .color(0xffffffff);
 
     public static final RegistrySupplier<FlowingFluid> TEST_FLUID = register("test_fluid", () -> new ArchitecturyFlowingFluid.Source(TEST_FLUID_ATTRIBUTES));
     public static final RegistrySupplier<FlowingFluid> TEST_FLUID_FLOWING = register("test_fluid_flowing", () -> new ArchitecturyFlowingFluid.Flowing(TEST_FLUID_ATTRIBUTES));
