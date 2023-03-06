@@ -8,4 +8,9 @@ public class MiningUnderworldFabric implements ModInitializer {
     public void onInitialize() {
         MiningUnderworld.init();
     }
+    /*
+    Trinkets関係
+    https://www.curseforge.com/minecraft/mc-mods/trinkets
+    https://github.com/emilyploszaj/trinkets/wiki/Quick-Start-Guide
+     */
 }

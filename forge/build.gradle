@@ -37,6 +37,10 @@ configurations {
     developmentForge.extendsFrom common
 }
 
+repositories {
+    maven {url = "https://maven.theillusivec4.top/"}//Curios
+}
+
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
@@ -44,6 +48,7 @@ dependencies {
 
     modApi "dev.felnull:otyacraftengine-forge:${rootProject.oe_version}"
     modApi "me.shedaniel.cloth:cloth-config-forge:9.0.94"
+    modApi "top.theillusivec4.curios:curios-forge:1.19.3-5.1.4.0"
 
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-forge:10.0.578"
 

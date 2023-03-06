@@ -2,12 +2,15 @@
   "required": true,
   "package": "dev.felnull.miningunderworld.fabric.mixin",
   "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "plugin": "dev.felnull.miningunderworld.fabric.mixin.MUMixinPluginFabric",
   "client": [
   ],
   "mixins": [
     "EntityMixin",
     "LivingEntityMixin",
-    "ModifyEnchantmentValueFabric"
+    "ModifyEnchantmentValueFabric",
+    "integration.trinkets.EquipmentAccessoryItemExtender"
   ],
   "injectors": {
     "defaultRequire": 1

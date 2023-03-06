@@ -16,6 +16,8 @@ public class MUItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(MiningUnderworld.MODID, Registries.ITEM);
 
     public static final RegistrySupplier<Item> IKISUGI_TEST = register("ikisugi_test", p -> new TestItem(p.fireResistant()));
+    public static final RegistrySupplier<Item> TEST_RING = register("test_ring", p -> new TestEquipmentAccessoryItem(p.fireResistant()));
+
     //銅ツール
     public static final RegistrySupplier<Item> COPPER_SWORD = register("copper_sword", p -> new WeatheringSwordItem(MUTiers.COPPER, 3, -2.4F, p));
     public static final RegistrySupplier<Item> COPPER_PICKAXE = register("copper_pickaxe", p -> new WeatheringPickaxeItem(MUTiers.COPPER, 1, -2.8F, p));

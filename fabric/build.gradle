@@ -43,7 +43,8 @@ configurations {
 }
 
 repositories {
-    maven { url "https://maven.terraformersmc.com/releases/" }//modmenu
+    maven { url "https://maven.terraformersmc.com/releases/" }//modmenu, trinkets
+    maven { url "https://ladysnake.jfrog.io/artifactory/mods" }//trinkets
 }
 
 dependencies {
@@ -54,6 +55,7 @@ dependencies {
 
     modApi "dev.felnull:otyacraftengine-fabric:${rootProject.oe_version}"
     modApi "me.shedaniel.cloth:cloth-config-fabric:9.0.94"
+    modApi "dev.emi:trinkets:3.5.1"
 
     modRuntimeOnly "com.terraformersmc:modmenu:5.0.2"
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:10.0.578"

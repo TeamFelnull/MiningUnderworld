@@ -2,11 +2,14 @@
   "required": true,
   "package": "dev.felnull.miningunderworld.forge.mixin",
   "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "plugin": "dev.felnull.miningunderworld.forge.mixin.MUMixinPluginForge",
   "client": [
     "FluidTypeMixin",
     "ModifyEnchantmentValueForge"
   ],
   "mixins": [
+    "integration.curios.EquipmentAccessoryItemExtender"
   ],
   "injectors": {
     "defaultRequire": 1
