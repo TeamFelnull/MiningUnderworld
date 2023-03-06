@@ -77,5 +77,8 @@
   "death.attack.mining_explosion.player.item": "%1$s was blasted by %2$s using %3$s",
   "_comment.cr": "CreativeModeTab",
   "itemGroup.miningunderworld.miningunderworld": "Mining Underworld",
-  "_comment.la": "Last"
+  "_comment.la": "Last",
+  "item.miningunderworld.helmet": "Helmet",
+  "item.miningunderworld.light_helmet": "Light_Helmet",
+  "item.miningunderworld.head_light": "Head Light"
 }

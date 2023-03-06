@@ -72,6 +72,10 @@ public class MUItems {
     public static final RegistrySupplier<Item> DIAMOND_RING = register("diamond_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> DIAMOND_SOUL = register("diamond_soul", p -> new AccessoryItem(MobEffects.JUMP, MobEffects.FIRE_RESISTANCE, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> EMERALD_SOUL = register("emerald_soul", p -> new AccessoryItem(MobEffects.NIGHT_VISION, MobEffects.ABSORPTION, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
+
+    public static final RegistrySupplier<Item> LIGHT_HELMET = register("light_helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));
+    public static final RegistrySupplier<Item> HELMET = register("helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));
+    public static final RegistrySupplier<Item> HEAD_LIGHT = register("head_light");
     //中間素材
     public static final RegistrySupplier<Item> RING = register("ring");
     public static final RegistrySupplier<Item> JEWELRYS_STAR = register("jewelrys_star", p -> new Item(p.rarity(Rarity.RARE)));
