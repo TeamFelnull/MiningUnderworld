@@ -11,6 +11,7 @@ import dev.felnull.miningunderworld.handler.CommonHandler;
 import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.network.MUPackets;
 import dev.felnull.miningunderworld.recipe.MURecipeSerializers;
+import dev.felnull.miningunderworld.server.data.OreGetter;
 import dev.felnull.miningunderworld.server.handler.ServerHandler;
 import dev.felnull.otyacraftengine.util.OEDataGenUtils;
 
@@ -18,6 +19,7 @@ public class MiningUnderworld {
     public static final String MODID = "miningunderworld";
 
     public static void init() {
+        OreGetter.getInstance().init();
         MUPackets.initServer();
         MUFluids.init();
         MUItems.init();
@@ -28,6 +30,7 @@ public class MiningUnderworld {
 
         CommonHandler.init();
         ServerHandler.init();
+
 
         if (!OEDataGenUtils.isDataGenerating())
             EnvExecutor.runInEnv(Env.CLIENT, () -> MiningUnderworldClient::preInit);

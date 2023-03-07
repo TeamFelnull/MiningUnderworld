@@ -1,5 +1,6 @@
 package dev.felnull.miningunderworld.item;
 
+import dev.felnull.miningunderworld.server.data.OreGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Unique;
 
 import java.util.List;
 
@@ -25,7 +25,11 @@ public class TestItem extends Item {
         if (!level.isClientSide()) {
             // var hit = level.isBlockInLine(new ClipBlockStateContext(player.position(), player.position().add(0, -10, 0), (it) -> !it.isAir()));
             // level.setBlockAndUpdate(hit.getBlockPos(), Blocks.DIAMOND_BLOCK.defaultBlockState());
+        } else {
+
+            OreGetter.getInstance().ores.forEach(System.out::println);
         }
+
         return super.use(level, player, interactionHand);
     }
 
