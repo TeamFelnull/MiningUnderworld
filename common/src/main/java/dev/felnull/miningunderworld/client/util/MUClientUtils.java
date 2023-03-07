@@ -23,7 +23,7 @@ public final class MUClientUtils {
      * @param camera カメラ
      * @return 結果
      */
-    public static boolean isTarInCamera(Camera camera) {
+    public static boolean isCameraInTar(Camera camera) {
         Camera.NearPlane nearPlane = camera.getNearPlane();
         List<Vec3> list = Arrays.asList(((CameraNearPlaneAccessor) nearPlane).getForward(), nearPlane.getTopLeft(), nearPlane.getTopRight(), nearPlane.getBottomLeft(), nearPlane.getBottomRight());
 

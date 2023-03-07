@@ -23,7 +23,7 @@ public class ClientHandler {
     }
 
     private static EventResult onRenderFog(Camera camera, FogRenderer.FogMode fogMode, FogType fogType, float startDistance, float endDistance, FogShape fogShape, double delta, ClientCameraEvent.RenderFogSetter setter) {
-        if (MUClientUtils.isTarInCamera(camera)) {
+        if (MUClientUtils.isCameraInTar(camera)) {
             setter.setStartDistance(0.25F);
             setter.setEndDistance(1.0F);
             setter.setFogShape(FogShape.SPHERE);
@@ -33,7 +33,7 @@ public class ClientHandler {
     }
 
     private static EventResult onComputeFogColor(Camera camera, float red, float green, float blue, double delta, ClientCameraEvent.FogColorSetter fogColorSetter) {
-        if (MUClientUtils.isTarInCamera(camera)) {
+        if (MUClientUtils.isCameraInTar(camera)) {
             float gray = 0.1f;
             fogColorSetter.setRed(gray);
             fogColorSetter.setGreen(gray);
