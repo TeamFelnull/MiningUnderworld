@@ -73,10 +73,17 @@ public class MUItems {
     public static final RegistrySupplier<Item> LAPIS_LAZULI_HOE = register("lapis_lazuli_hoe", p -> new HoeItem(MUTiers.LAPIS_LAZULI, 1, -3.0F, p));
     //アクセサリー
     public static final RegistrySupplier<Item> DIAMOND_RING = register("diamond_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> EMERALD_RING = register("emerald_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> REDSTONE_RING = register("redstone_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_RING = register("lapis_lazuli_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> AMETHYST_RING = register("amethyst_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> DIAMOND_SOUL = register("diamond_soul", p -> new AccessoryItem(MobEffects.JUMP, MobEffects.FIRE_RESISTANCE, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> EMERALD_SOUL = register("emerald_soul", p -> new AccessoryItem(MobEffects.NIGHT_VISION, MobEffects.ABSORPTION, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> REDSTONE_SOUL = register("redstone_soul", p -> new AccessoryItem(MobEffects.LUCK, MobEffects.WITHER, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> LAPIS_LAZULI_SOUL = register("lapis_lazuli_soul", p -> new AccessoryItem(MobEffects.HUNGER, MobEffects.LEVITATION, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> AMETHYST_SOUL = register("amethyst_soul", p -> new AccessoryItem(MobEffects.HUNGER, MobEffects.LEVITATION, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> REDSTONE_BELT = register("redstone_belt", p -> new SimpleEquipmentAccessoryItem(AccessoryType.BELT, p.rarity(Rarity.RARE)));
-
+    //特殊アイテム
     public static final RegistrySupplier<Item> LIGHT_HELMET = register("light_helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));
     public static final RegistrySupplier<Item> HELMET = register("helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));
     public static final RegistrySupplier<Item> HEAD_LIGHT = register("head_light");
