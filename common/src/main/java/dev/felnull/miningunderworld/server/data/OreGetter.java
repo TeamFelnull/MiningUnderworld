@@ -86,7 +86,6 @@ public class OreGetter extends PlatformResourceReloadListener<OreGetter.Loader> 
             resourceManager.listPacks().filter(it -> it instanceof VanillaPackResources).forEach(pack ->
                     new Resource(pack, () -> new ByteArrayInputStream(a)));*///動的にレシピ追加しようとしたけどResource追加先がなかった
 
-            resourceManager.
             resourceManager.listResources("worldgen/configured_feature", loc -> loc.getPath().contains("ore_")).forEach(((location, resource) -> {
                 profilerFiller.push(location.toString());
                 try (Reader reader = resource.openAsReader()) {
@@ -115,7 +114,7 @@ public class OreGetter extends PlatformResourceReloadListener<OreGetter.Loader> 
                         .filter(it -> !it.contains("deepslate") && ( it.contains("_ore") || jo.get("type").getAsString().equals("minecraft:scattered_ore")))
                         .map(ResourceLocation::new)
                         .toArray(ResourceLocation[]::new);
-            return null;ResourceManager
+            return null;
         }
     }
 }
