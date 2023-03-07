@@ -14,4 +14,29 @@ public interface EquipmentAccessoryItemExtender extends Trinket {
         var ths = (EquipmentAccessoryItem) this;
         ths.accessoryTick(stack, entity);
     }
+
+    @Override
+    default void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+        var ths = (EquipmentAccessoryItem) this;
+        ths.onAccessoryEquip(stack, entity);
+    }
+
+    @Override
+    default void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+        var ths = (EquipmentAccessoryItem) this;
+        ths.onAccessoryUnequip(stack, entity);
+    }
+
+
+    @Override
+    default boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+        var ths = (EquipmentAccessoryItem) this;
+        return Trinket.super.canEquip(stack, slot, entity) && ths.canAccessoryEquip(stack, entity);
+    }
+
+    @Override
+    default boolean canUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+        var ths = (EquipmentAccessoryItem) this;
+        return Trinket.super.canUnequip(stack, slot, entity) && ths.canAccessoryEquip(stack, entity);
+    }
 }

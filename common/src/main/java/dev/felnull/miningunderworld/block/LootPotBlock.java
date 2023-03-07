@@ -4,9 +4,14 @@ import dev.felnull.otyacraftengine.util.OEVoxelShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -53,6 +58,11 @@ public class LootPotBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public List<ItemStack> getDrops(BlockState blockState, LootContext.Builder builder) {
+
+        ItemStack stack = builder.getOptionalParameter(LootContextParams.TOOL);
+        if (stack != null && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) != 0)
+            return super.getDrops(blockState, builder);
+
         LootContext lootContext = builder.withParameter(LootContextParams.BLOCK_STATE, blockState).create(LootContextParamSets.BLOCK);
         ServerLevel serverLevel = lootContext.getLevel();
         //仮置きルートテーブル
@@ -94,5 +104,35 @@ public class LootPotBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         return canSupportCenter(levelReader, blockPos.below(), Direction.UP);
+    }
+
+    @Override
+    public void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
+        super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
+
+        if (serverLevel.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) == 0)
+            this.spawnMob(serverLevel, blockPos);
+    }
+
+    private void spawnMob(ServerLevel serverLevel, BlockPos blockPos) {
+        EntityType<? extends Mob> type = null;
+
+        if (golden) {
+            if (serverLevel.getRandom().nextInt(100) == 0)
+                type = EntityType.ALLAY;
+        } else {
+            if (serverLevel.getRandom().nextInt(15) == 0)
+                type = serverLevel.getRandom().nextInt(15) == 0 ? EntityType.ENDERMITE : EntityType.SILVERFISH;
+        }
+
+        if (type == null)
+            return;
+
+        Mob mob = type.create(serverLevel);
+        if (mob != null) {
+            mob.moveTo((double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, 0.0F, 0.0F);
+            serverLevel.addFreshEntity(mob);
+            mob.spawnAnim();
+        }
     }
 }

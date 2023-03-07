@@ -1,5 +1,6 @@
 package dev.felnull.miningunderworld.item.accessory;
 
+import com.google.common.collect.ImmutableList;
 import dev.felnull.miningunderworld.integration.EquipmentAccessoryIntegration;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -10,7 +11,8 @@ import java.util.function.Supplier;
 
 public enum AccessoryType {
     NONE(() -> null),
-    RING(EquipmentAccessoryIntegration.INSTANCE::getRingItemTag);
+    RING(EquipmentAccessoryIntegration.INSTANCE::getRingItemTag),
+    BELT(() -> ImmutableList.of(EquipmentAccessoryIntegration.INSTANCE.getBeltItemTag()));
 
     private final Supplier<List<TagKey<Item>>> tagKeys;
 

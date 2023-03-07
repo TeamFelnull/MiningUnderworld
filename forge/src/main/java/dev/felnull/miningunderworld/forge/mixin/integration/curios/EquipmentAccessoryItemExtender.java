@@ -13,4 +13,28 @@ public interface EquipmentAccessoryItemExtender extends ICurioItem {
         var ths = (EquipmentAccessoryItem) this;
         ths.accessoryTick(stack, slotContext.entity());
     }
+
+    @Override
+    default void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+        var ths = (EquipmentAccessoryItem) this;
+        ths.onAccessoryEquip(stack, slotContext.entity());
+    }
+
+    @Override
+    default void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        var ths = (EquipmentAccessoryItem) this;
+        ths.onAccessoryUnequip(stack, slotContext.entity());
+    }
+
+    @Override
+    default boolean canEquip(SlotContext slotContext, ItemStack stack) {
+        var ths = (EquipmentAccessoryItem) this;
+        return ICurioItem.super.canEquip(slotContext, stack) && ths.canAccessoryEquip(stack, slotContext.entity());
+    }
+
+    @Override
+    default boolean canUnequip(SlotContext slotContext, ItemStack stack) {
+        var ths = (EquipmentAccessoryItem) this;
+        return ICurioItem.super.canUnequip(slotContext, stack) && ths.canAccessoryUnequip(stack, slotContext.entity());
+    }
 }

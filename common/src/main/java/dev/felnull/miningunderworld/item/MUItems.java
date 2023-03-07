@@ -5,6 +5,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.fluid.MUFluids;
+import dev.felnull.miningunderworld.item.accessory.AccessoryType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -74,6 +75,7 @@ public class MUItems {
     public static final RegistrySupplier<Item> DIAMOND_RING = register("diamond_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> DIAMOND_SOUL = register("diamond_soul", p -> new AccessoryItem(MobEffects.JUMP, MobEffects.FIRE_RESISTANCE, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistrySupplier<Item> EMERALD_SOUL = register("emerald_soul", p -> new AccessoryItem(MobEffects.NIGHT_VISION, MobEffects.ABSORPTION, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> REDSTONE_BELT = register("redstone_belt", p -> new SimpleEquipmentAccessoryItem(AccessoryType.BELT, p.rarity(Rarity.RARE)));
 
     public static final RegistrySupplier<Item> LIGHT_HELMET = register("light_helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));
     public static final RegistrySupplier<Item> HELMET = register("helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));

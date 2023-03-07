@@ -17,6 +17,9 @@ import org.jetbrains.annotations.Unmodifiable;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+/**
+ * ユーティリティ
+ */
 public final class MUUtils {
     /**
      * MiningUnderworldのリソースロケーション

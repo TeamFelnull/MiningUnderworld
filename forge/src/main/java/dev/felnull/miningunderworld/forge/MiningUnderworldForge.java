@@ -1,9 +1,9 @@
 package dev.felnull.miningunderworld.forge;
 
+import com.google.common.collect.ImmutableList;
 import dev.architectury.platform.forge.EventBuses;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.integration.EquipmentAccessoryIntegration;
-import dev.felnull.miningunderworld.item.accessory.EquipmentAccessoryItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -32,7 +32,9 @@ public class MiningUnderworldForge {
 
         if (EquipmentAccessoryIntegration.INSTANCE.isEnable()) {
             InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                    () -> SlotTypePreset.RING.getMessageBuilder().size(2).build());
+                    () -> ImmutableList.of(
+                            SlotTypePreset.RING.getMessageBuilder().size(2).build(),
+                            SlotTypePreset.BELT.getMessageBuilder().size(1).build()));
         }
     }
 }

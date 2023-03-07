@@ -3,13 +3,14 @@ package dev.felnull.miningunderworld.handler;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
 import dev.felnull.miningunderworld.item.MUArmorMaterials;
+import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.item.WeatheringItem;
+import dev.felnull.miningunderworld.util.MUAccessoryUtils;
 import dev.felnull.miningunderworld.util.MUUtils;
-import dev.felnull.miningunderworld.world.DynamicSignalLevel;
+import dev.felnull.miningunderworld.world.DynamicSignal;
 import dev.felnull.otyacraftengine.event.MoreEntityEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.block.LevelEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class CommonHandler {
@@ -33,8 +34,8 @@ public class CommonHandler {
 
     private static EventResult onLivingEntityTick(@NotNull LivingEntity livingEntity) {
 
-        if (MUUtils.isFullArmor(livingEntity, MUArmorMaterials.REDSTONE))
-            ((DynamicSignalLevel) livingEntity.level).getDynamicSignal().putSignalBox(livingEntity.getBoundingBox());
+        if (MUUtils.isFullArmor(livingEntity, MUArmorMaterials.REDSTONE) || MUAccessoryUtils.isEquipped(livingEntity, MUItems.REDSTONE_BELT.get()))
+            DynamicSignal.signaledLivingTick(livingEntity);
 
         return EventResult.pass();
     }

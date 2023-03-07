@@ -32,5 +32,46 @@ public interface EquipmentAccessoryItem {
      * @param stack        アイテム
      * @param livingEntity エンティティ
      */
-    void accessoryTick(ItemStack stack, LivingEntity livingEntity);
+    default void accessoryTick(ItemStack stack, LivingEntity livingEntity) {
+    }
+
+    /**
+     * 装備時に呼び出し
+     *
+     * @param stack        アイテム
+     * @param livingEntity エンティティ
+     */
+    default void onAccessoryEquip(ItemStack stack, LivingEntity livingEntity) {
+    }
+
+    /**
+     * 装備を外した時に呼び出し
+     *
+     * @param stack        アイテム
+     * @param livingEntity エンティティ
+     */
+    default void onAccessoryUnequip(ItemStack stack, LivingEntity livingEntity) {
+    }
+
+    /**
+     * 装備できるかどうか
+     *
+     * @param stack        アイテム
+     * @param livingEntity エンティティ
+     * @return 可能かどうか
+     */
+    default boolean canAccessoryEquip(ItemStack stack, LivingEntity livingEntity) {
+        return true;
+    }
+
+    /**
+     * 装備を外せるかどうか
+     *
+     * @param stack        アイテム
+     * @param livingEntity エンティティ
+     * @return 外せるかどうか
+     */
+    default boolean canAccessoryUnequip(ItemStack stack, LivingEntity livingEntity) {
+        return true;
+    }
 }
