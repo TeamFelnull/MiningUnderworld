@@ -9,4 +9,8 @@ public class MUExpectPlatformImpl {
         boolean firstTick = ((EntityAccessor) entity).getFirstTick();
         return !firstTick && entity.getFluidHeight(MUFluidTags.TAR) > 0;
     }
+
+    public static boolean isEyeInTar(Entity entity) {
+        return entity.isEyeInFluid(MUFluidTags.TAR);
+    }
 }

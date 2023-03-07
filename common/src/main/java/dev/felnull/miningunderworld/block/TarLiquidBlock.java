@@ -11,15 +11,19 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipBlockStateContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.MultifaceBlock;
+import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -126,12 +130,22 @@ public class TarLiquidBlock extends ArchitecturyLiquidBlock {
     public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
         super.entityInside(blockState, level, blockPos, entity);
 
-        if (level.isClientSide()) return;
-        if (!MUUtils.isInTar(entity)) return;
-        if (level.getRandom().nextFloat() >= 1f / (20f * 30f)) return;
 
-        MUUtils.getAllHaveItem(entity)
-                .forEach(this::blackening);
+        if (!level.isClientSide()) {
+            //タールに触れている間に持ち物の染色可能なアイテムを黒に染める
+            if (MUUtils.isInTar(entity) && level.getRandom().nextFloat() >= 1f / (20f * 30f)) {
+                MUUtils.getAllHaveItem(entity)
+                        .forEach(this::blackening);
+            }
+        }
+
+        //目まで浸ると窒息させる
+        if (MUUtils.isEyeInTar(entity) && entity instanceof LivingEntity) {
+            entity.makeStuckInBlock(blockState, new Vec3(0.8, 0.9, 0.8));
+            if (!level.isClientSide())
+                entity.hurt(DamageSource.IN_WALL, 1);
+        }
+
     }
 
     private void blackening(ItemStack stack) {

@@ -26,7 +26,7 @@ public class MUMixinPluginForge implements IMixinConfigPlugin {
         if (mixinClassName.startsWith("dev.felnull.miningunderworld.forge.mixin.integration.curios"))
             return FMLLoader.getLoadingModList().getModFileById("curios") != null;
 
-        return false;
+        return true;
     }
 
     @Override

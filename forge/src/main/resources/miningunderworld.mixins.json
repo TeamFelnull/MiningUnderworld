@@ -5,10 +5,10 @@
   "minVersion": "0.8",
   "plugin": "dev.felnull.miningunderworld.forge.mixin.MUMixinPluginForge",
   "client": [
-    "FluidTypeMixin",
     "ModifyEnchantmentValueForge"
   ],
   "mixins": [
+    "FluidTypeMixin",
     "integration.curios.EquipmentAccessoryItemExtender"
   ],
   "injectors": {

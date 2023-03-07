@@ -14,7 +14,7 @@ import java.util.stream.StreamSupport;
 /**
  * アクセサリ関係のユーティリティ
  */
-public class MUAccessoryUtils {
+public final class MUAccessoryUtils {
     /**
      * アクセサリを装備してるかどうか
      *

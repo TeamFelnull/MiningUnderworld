@@ -8,4 +8,9 @@ public class MUExpectPlatform {
     public static boolean isInTar(Entity entity) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static boolean isEyeInTar(Entity entity) {
+        throw new AssertionError();
+    }
 }

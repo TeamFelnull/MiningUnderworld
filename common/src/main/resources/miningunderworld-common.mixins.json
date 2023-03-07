@@ -5,7 +5,8 @@
   "minVersion": "0.8",
   "client": [
     "HumanoidArmorLayerMixin",
-    "StartCollapseForPlayer"
+    "StartCollapseForPlayer",
+    "client.CameraNearPlaneAccessor"
   ],
   "mixins": [
     "DenseOres",

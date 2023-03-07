@@ -42,6 +42,16 @@ public final class MUUtils {
     }
 
     /**
+     * 目の高さまでタールに浸ってるかどうか
+     *
+     * @param entity エンティティ
+     * @return 結果
+     */
+    public static boolean isEyeInTar(@NotNull Entity entity) {
+        return MUExpectPlatform.isEyeInTar(entity);
+    }
+
+    /**
      * エンティティが持つ全てのアイテム
      *
      * @param entity エンティティ

@@ -27,7 +27,7 @@ public class MUFluids {
             .blockSupplier(() -> MUBlocks.TEST_FLUID)
             .bucketItemSupplier(() -> MUItems.TEST_FLUID_BUCKET)
             .overlayTexture(new ResourceLocation("block/lava_still"))
-            .color(0xFF0000);
+            .color(0xffff0000);
 
     public static final ArchitecturyFluidAttributes TAR_ATTRIBUTES = SimpleArchitecturyFluidAttributes.ofSupplier(() -> MUFluids.FLOWING_TAR, () -> MUFluids.TAR)
             .convertToSource(true)
