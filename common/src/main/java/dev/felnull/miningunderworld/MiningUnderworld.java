@@ -10,6 +10,7 @@ import dev.felnull.miningunderworld.fluid.MUFluids;
 import dev.felnull.miningunderworld.handler.CommonHandler;
 import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.network.MUPackets;
+import dev.felnull.miningunderworld.particles.MUParticleTypes;
 import dev.felnull.miningunderworld.recipe.MURecipeSerializers;
 import dev.felnull.miningunderworld.server.data.OreGetter;
 import dev.felnull.miningunderworld.server.handler.ServerHandler;
@@ -27,6 +28,7 @@ public class MiningUnderworld {
         MUEntityTypes.init();
         MURecipeSerializers.init();
         MiningUnderworldDimension.init();
+        MUParticleTypes.init();
 
         CommonHandler.init();
         ServerHandler.init();

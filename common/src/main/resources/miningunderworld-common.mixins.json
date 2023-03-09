@@ -15,6 +15,7 @@
     "FallingTileEntity",
     "FloatGoalMixin",
     "FlowingFluidMixin",
+    "FluidMixin",
     "ItemAccessor",
     "ItemEntityMixin",
     "ItemStackMixin",

@@ -1,8 +1,11 @@
 package dev.felnull.miningunderworld.block;
 
+import dev.felnull.miningunderworld.particles.MUParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.MultifaceSpreader;
@@ -34,4 +37,48 @@ public class TarStainsBlock extends MultifaceBlock {
         return ret != defaultBlockState() ? ret : Blocks.AIR.defaultBlockState();
     }
 
+    @Override
+    public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        super.animateTick(blockState, level, blockPos, randomSource);
+        if (this == MUBlocks.SMALL_TAR_STAINS.get()) return;
+
+        for (Direction dir : Direction.values()) {
+            animateFace(dir, blockState, level, blockPos, randomSource);
+        }
+    }
+
+    private void animateFace(Direction direction, BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        if (direction == Direction.DOWN) return;
+        if (!blockState.getValue(getFaceProperty(direction))) return;
+        if (randomSource.nextInt(Direction.values().length) != 0) return;
+
+        double x = blockPos.getX();
+        double y = blockPos.getY();
+        double z = blockPos.getZ();
+
+        double r1 = randomSource.nextDouble() * 0.8;
+        double r2 = randomSource.nextDouble() * 0.8;
+
+        if (direction.getAxis() == Direction.Axis.X) {
+            double step = direction.getStepX();
+
+            x += Math.max(step, 0) - 0.05 * step;
+            y += r1 + 0.1;
+            z += r2 + 0.1;
+        } else if (direction.getAxis() == Direction.Axis.Y) {
+            double step = direction.getStepY();
+
+            x += r1 + 0.1;
+            y += Math.max(step, 0) - 0.05 * step;
+            z += r2 + 0.1;
+        } else if (direction.getAxis() == Direction.Axis.Z) {
+            double step = direction.getStepZ();
+
+            x += r1 + 0.1;
+            y += r2 + 0.1;
+            z += Math.max(step, 0) - 0.05 * step;
+        }
+
+        level.addParticle(MUParticleTypes.DRIPPING_TAR.get(), x, y, z, 0.0, 0.0, 0.0);
+    }
 }

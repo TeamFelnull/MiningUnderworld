@@ -28,8 +28,8 @@ public class MUBlocks {
     public static final RegistrySupplier<Block> TEST_BLOCK = register("test_block", () -> new Block(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
     public static final RegistrySupplier<Block> LOOT_POT = register("loot_pot", () -> new LootPotBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).strength(0.5F).sound(SoundType.GLASS), false));
     public static final RegistrySupplier<Block> GOLDEN_LOOT_POT = register("golden_loot_pot", () -> new LootPotBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.GOLD).strength(0.5F).sound(SoundType.METAL), true), it -> new BlockItem(it, new Item.Properties().rarity(Rarity.RARE).arch$tab(MUCreativeModeTab.MOD_TAB)));
-    public static final RegistrySupplier<Block> TAR_STAINS = register("tar_stains", () -> new TarStainsBlock(BlockBehaviour.Properties.of(Material.WATER, MaterialColor.COLOR_BLACK).friction(0.98F).noCollission().strength(0.5F).sound(SoundType.GRAVEL)));
-    public static final RegistrySupplier<Block> SMALL_TAR_STAINS = register("small_tar_stains", () -> new TarStainsBlock(BlockBehaviour.Properties.of(Material.WATER, MaterialColor.COLOR_BLACK).friction(0.98F).noCollission().strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final RegistrySupplier<Block> TAR_STAINS = register("tar_stains", () -> new TarStainsBlock(BlockBehaviour.Properties.of(Material.WATER, MaterialColor.COLOR_BLACK).friction(0.98F).noCollission().strength(0.5F).sound(SoundType.HONEY_BLOCK)));
+    public static final RegistrySupplier<Block> SMALL_TAR_STAINS = register("small_tar_stains", () -> new TarStainsBlock(BlockBehaviour.Properties.of(Material.WATER, MaterialColor.COLOR_BLACK).friction(0.98F).noCollission().strength(0.5F).sound(SoundType.HONEY_BLOCK)));
     public static final RegistrySupplier<Block> SOAKED_TAR_STONE = register("soaked_tar_stone", () -> new LiquidSoakedBlock(MUFluids.TAR, BlockBehaviour.Properties.copy(Blocks.STONE)));
     public static final RegistrySupplier<Block> SOAKED_TAR_DEEPSLATE = register("soaked_tar_deepslate", () -> new LiquidSoakedBlock(MUFluids.TAR, BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
     public static final RegistrySupplier<Block> SOAKED_LAVA_STONE = register("soaked_lava_stone", () -> new LiquidSoakedBlock(() -> Fluids.LAVA, BlockBehaviour.Properties.copy(Blocks.STONE)));
@@ -47,6 +47,7 @@ public class MUBlocks {
     }
 
     private static RegistrySupplier<Block> register(String name, Supplier<Block> block) {
+
         return register(name, block, it -> new BlockItem(it, new Item.Properties().arch$tab(MUCreativeModeTab.MOD_TAB)));
     }
 
