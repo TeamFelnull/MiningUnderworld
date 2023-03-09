@@ -1,6 +1,7 @@
 {
   "_comment.i": "Item",
   "item.miningunderworld.tar_bucket": "タール入りバケツ",
+  "item.miningunderworld.cave_bat_spawn_egg": "洞窟コウモリのスポーンエッグ",
   "item.miningunderworld.weathering.wrap.exposed": "風化した%s",
   "item.miningunderworld.weathering.wrap.weathered": "錆びた%s",
   "item.miningunderworld.weathering.wrap.oxidized": "酸化した%s",
@@ -80,6 +81,8 @@
   "block.miningunderworld.mining_tnt.desc": "液体を破壊可能で石系は壊れやすくなり、アイテムが爆風で消滅しません。",
   "_comment.e": "Entity",
   "entity.miningunderworld.mining_tnt": "着火された採掘用TNT",
+  "entity.miningunderworld.cave_bat": "洞窟コウモリ",
+  "entity.miningunderworld.excreta": "フン",
   "_comment.d": "DamageSource",
   "death.attack.mining_explosion": "%1$sは発破に巻き込まれた",
   "death.attack.mining_explosion.player": "%1$sは%2$sに発破された",

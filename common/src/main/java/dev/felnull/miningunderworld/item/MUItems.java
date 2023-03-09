@@ -1,9 +1,11 @@
 package dev.felnull.miningunderworld.item;
 
 import dev.architectury.core.item.ArchitecturyBucketItem;
+import dev.architectury.core.item.ArchitecturySpawnEggItem;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
+import dev.felnull.miningunderworld.entity.MUEntityTypes;
 import dev.felnull.miningunderworld.fluid.MUFluids;
 import dev.felnull.miningunderworld.item.accessory.AccessoryType;
 import net.minecraft.core.registries.Registries;
@@ -90,9 +92,12 @@ public class MUItems {
     //中間素材
     public static final RegistrySupplier<Item> RING = register("ring");
     public static final RegistrySupplier<Item> JEWELRYS_STAR = register("jewelrys_star", p -> new Item(p.rarity(Rarity.RARE)));
+
     //液体入りバケツ
     public static final RegistrySupplier<Item> TEST_FLUID_BUCKET = register("test_fluid_bucket", p -> new ArchitecturyBucketItem(MUFluids.TEST_FLUID, p.craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistrySupplier<Item> TAR_BUCKET = register("tar_bucket", p -> new ArchitecturyBucketItem(MUFluids.TAR, p.craftRemainder(Items.BUCKET).stacksTo(1)));
+    //スポーンエッグ
+    public static final RegistrySupplier<Item> CAVE_BAT_SPAWN_EGG = register("cave_bat_spawn_egg", p -> new ArchitecturySpawnEggItem(MUEntityTypes.CAVE_BAT, 0x525252, 0x3c3c3c, p));
 
     private static RegistrySupplier<Item> register(String name) {
         return register(name, Item::new);

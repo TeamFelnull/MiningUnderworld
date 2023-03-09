@@ -13,6 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TieredItem;
 
 import java.util.Arrays;
@@ -39,6 +40,8 @@ public class MUItemModelProviderWrapper extends ItemModelProviderWrapper {
                     weatheringItem(item, providerAccess::basicFlatItem);
             else if (item instanceof TieredItem)//ツール
                 providerAccess.handheldFlatItem(item);
+            else if (item instanceof SpawnEggItem)//スポーンエッグ
+                providerAccess.parentedItem(item, new ResourceLocation("item/template_spawn_egg"));
             else //通常
                 providerAccess.basicFlatItem(item);
         });
