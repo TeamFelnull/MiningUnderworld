@@ -13,7 +13,8 @@ public class MURenderTypes {
                 MUFluids.TEST_FLUID.get(),
                 MUFluids.TEST_FLUID_FLOWING.get());
 
-
+        RenderTypeRegistry.register(RenderType.translucent(),
+                MUBlocks.CRYSTAL.get());
 
         RenderTypeRegistry.register(RenderType.cutout(),
                 MUBlocks.TAR_STAINS.get(),

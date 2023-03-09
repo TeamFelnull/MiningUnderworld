@@ -37,6 +37,7 @@ public class MUBlocks {
     public static final RegistrySupplier<Block> LIKELY_COLLAPSING_BLOCK = register("likely_collapsing_block", () -> new CollapsingBlock(1 / 2F, 1, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
     public static final RegistrySupplier<Block> MOST_LIKELY_COLLAPSING_BLOCK = register("most_likely_collapsing_block", () -> new CollapsingBlock(1F, 2, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
     public static final RegistrySupplier<Block> MINING_TNT = register("mining_tnt", () -> new MiningTntBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.STONE).strength(0.1F).sound(SoundType.STONE)));
+    public static final RegistrySupplier<Block> CRYSTAL = register("crystal", () -> new CrystalBlock(BlockBehaviour.Properties.of(Material.AMETHYST, MaterialColor.NONE).strength(1.5F).sound(SoundType.AMETHYST).noOcclusion().requiresCorrectToolForDrops()));
 
     //液体ブロック
     public static final RegistrySupplier<LiquidBlock> TEST_FLUID = registerBlockOnly("test_fluid", () -> new ArchitecturyLiquidBlock(MUFluids.TEST_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER).noCollission().strength(100.0F).noLootTable()));

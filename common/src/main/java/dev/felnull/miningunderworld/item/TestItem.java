@@ -1,6 +1,6 @@
 package dev.felnull.miningunderworld.item;
 
-import dev.felnull.miningunderworld.server.data.OreGetter;
+import dev.felnull.miningunderworld.data.builtin.OreGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,7 +27,6 @@ public class TestItem extends Item {
             // level.setBlockAndUpdate(hit.getBlockPos(), Blocks.DIAMOND_BLOCK.defaultBlockState());
         } else {
 
-            OreGetter.getInstance().ores.forEach(System.out::println);
         }
 
         return super.use(level, player, interactionHand);

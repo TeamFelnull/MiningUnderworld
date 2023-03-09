@@ -1,31 +1,34 @@
-package dev.felnull.miningunderworld.server.data;
+package dev.felnull.miningunderworld.data.builtin;
 
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.mojang.datafixers.util.Pair;
 import dev.architectury.registry.ReloadListenerRegistry;
 import dev.felnull.miningunderworld.util.MUUtils;
 import dev.felnull.otyacraftengine.resources.PlatformResourceReloadListener;
+import net.minecraft.client.searchtree.SearchTree;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.VanillaPackResources;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.ByteArrayInputStream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class OreGetter extends PlatformResourceReloadListener<OreGetter.Loader> {
 
     private static final OreGetter INSTANCE = new OreGetter();
     private static final ResourceLocation ORE = MUUtils.modLoc("ore");
-    public Set<ResourceLocation> ores = new HashSet<>();
+    public Map<ResourceLocation, ResourceLocation> ores = new HashMap<>();//(key = crystal_3, value = iron)的な
 
     public static OreGetter getInstance() {
         return INSTANCE;
@@ -42,7 +45,7 @@ public class OreGetter extends PlatformResourceReloadListener<OreGetter.Loader> 
 
     @Override
     protected void apply(@NotNull Loader loader, @NotNull ResourceManager resourceManager, @NotNull ProfilerFiller profilerFiller) {
-        ores = loader.ores;
+        IntStream.range(0, loader.ores.size()).forEach(i -> ores.put(MUUtils.modLoc("crystal_" + i), loader.ores.get(i)));
     }
 
     @Override
@@ -53,12 +56,12 @@ public class OreGetter extends PlatformResourceReloadListener<OreGetter.Loader> 
     public static class Loader {
         public static final Logger LOGGER = LogManager.getLogger(Loader.class);
         private static final Gson GSON = new Gson();
-        public Set<ResourceLocation> ores;
+        public List<ResourceLocation> ores;
+        public byte[] crystalTexture;
 
         protected Loader(@NotNull ResourceManager resourceManager, @NotNull ProfilerFiller profilerFiller) {
             profilerFiller.startTick();
-
-            var builder = new ImmutableSet.Builder<ResourceLocation>();
+            var builder = new ImmutableList.Builder<ResourceLocation>();
 
             /*var a = """
                             {
@@ -111,7 +114,7 @@ public class OreGetter extends PlatformResourceReloadListener<OreGetter.Loader> 
                         .map(it -> it.getAsJsonObject()
                                 .get("state").getAsJsonObject()
                                 .get("Name").getAsString())
-                        .filter(it -> !it.contains("deepslate") && ( it.contains("_ore") || jo.get("type").getAsString().equals("minecraft:scattered_ore")))
+                        .filter(it -> !it.contains("deepslate") && (it.contains("_ore") || jo.get("type").getAsString().equals("minecraft:scattered_ore")))
                         .map(ResourceLocation::new)
                         .toArray(ResourceLocation[]::new);
             return null;

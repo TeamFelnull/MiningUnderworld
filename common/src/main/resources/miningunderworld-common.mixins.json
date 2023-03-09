@@ -24,7 +24,8 @@
     "PrevFallDistanceGetter",
     "PrimedTntAccessor",
     "StartCollapseForEntity",
-    "TntBlockMixin"
+    "TntBlockMixin",
+    "client.AddBuiltinPackResource"
   ],
   "injectors": {
     "defaultRequire": 1

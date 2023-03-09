@@ -3,6 +3,8 @@ package dev.felnull.miningunderworld.util;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.explatform.MUExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ItemFrame;
@@ -91,5 +93,26 @@ public final class MUUtils {
         }
 
         return true;
+    }
+
+    /**
+     * 二種のARGBをアルファブレンド
+     *
+     * @param baseARGB   基となるARGB
+     * @param addingARGB 追加するARGB
+     * @return アルファブレンドされたARGB
+     */
+    public static int blend(int baseARGB, int addingARGB) {
+        var alpha = (float) FastColor.ARGB32.alpha(baseARGB) / 0xFF;//追加される方の不透明度
+        var beta = (float) FastColor.ARGB32.alpha(addingARGB) / 0xFF;//追加する方の不透明度
+        var blendedAlpha = 1 - (1 - beta) * (1 - alpha);
+        var baseCoefficient = (1-beta) * alpha / blendedAlpha;
+        var addingCoefficient = beta / blendedAlpha;
+
+        return FastColor.ARGB32.color(
+                (int) Mth.clamp(blendedAlpha * 0xFF, 0, 0xFF),
+                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.red(baseARGB) +addingCoefficient * FastColor.ARGB32.red(addingARGB), 0, 0xFF),
+                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.green(baseARGB) +addingCoefficient * FastColor.ARGB32.green(addingARGB), 0, 0xFF),
+                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.blue(baseARGB) +addingCoefficient * FastColor.ARGB32.blue(addingARGB), 0, 0xFF));
     }
 }

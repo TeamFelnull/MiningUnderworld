@@ -12,7 +12,7 @@ import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.network.MUPackets;
 import dev.felnull.miningunderworld.particles.MUParticleTypes;
 import dev.felnull.miningunderworld.recipe.MURecipeSerializers;
-import dev.felnull.miningunderworld.server.data.OreGetter;
+import dev.felnull.miningunderworld.data.builtin.OreGetter;
 import dev.felnull.miningunderworld.server.handler.ServerHandler;
 import dev.felnull.otyacraftengine.util.OEDataGenUtils;
 
