@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootTable;
 
 public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapper {
     public MUBlockLootTableProviderWrapper(PackOutput packOutput, CrossDataGeneratorAccess crossDataGeneratorAccess) {
@@ -21,6 +22,7 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
 
         providerAccess.dropWhenSilkTouch(MUBlocks.LOOT_POT.get());
         providerAccess.dropWhenSilkTouch(MUBlocks.GOLDEN_LOOT_POT.get());
+        providerAccess.dropOther(MUBlocks.CRYSTAL.get(), Blocks.AIR);//ドロップなし
 
         providerAccess.add(MUBlocks.TAR_STAINS.get(), BlockLootSubProvider.noDrop());
         providerAccess.add(MUBlocks.SMALL_TAR_STAINS.get(), BlockLootSubProvider.noDrop());

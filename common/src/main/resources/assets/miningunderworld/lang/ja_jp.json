@@ -79,6 +79,7 @@
   "block.miningunderworld.soaked_lava_deepslate": "溶岩が染み込んだ深層石",
   "block.miningunderworld.mining_tnt": "採掘用TNT",
   "block.miningunderworld.mining_tnt.desc": "液体を破壊可能で石系は壊れやすくなり、アイテムが爆風で消滅しません。",
+  "block.miningunderworld.crystal": "クリスタル <%s>",
   "_comment.e": "Entity",
   "entity.miningunderworld.mining_tnt": "着火された採掘用TNT",
   "entity.miningunderworld.cave_bat": "洞窟コウモリ",

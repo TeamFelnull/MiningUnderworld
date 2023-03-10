@@ -1,8 +1,8 @@
 package dev.felnull.miningunderworld.data;
 
-import com.google.gson.JsonElement;
 import com.mojang.datafixers.util.Pair;
 import dev.felnull.miningunderworld.block.CrystalBlock;
+import dev.felnull.miningunderworld.block.CrystalItem;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.util.MUUtils;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
@@ -50,14 +50,17 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
         providerAccess.simpleBlockItemModel(MUBlocks.MINING_TNT.get(), miningTNTModel);
         providerAccess.simpleBlockState(MUBlocks.MINING_TNT.get(), miningTNTModel);
 
-        //generate crystal blockstate & model
+        //generate crystal blockstate & block model
         var mpg = MultiPartGenerator.multiPart(MUBlocks.CRYSTAL.get());
-        IntStream.rangeClosed(0, 255).forEach(i -> {
+        IntStream.rangeClosed(0, CrystalBlock.MAX_ID).forEach(i -> {
             var loc = MUUtils.modLoc("block/crystal_" + i);
             providerAccess.cubeAllBlockModel("crystal_" + i, loc);
             mpg.with(Condition.condition().term(CrystalBlock.ORE_ID, i), Variant.variant().with(VariantProperties.MODEL, loc));
-        });
+        });/*TODO:アイテムモデル生成
         providerAccess.addBlockStateGenerator(mpg);
+        IntStream.rangeClosed(0, CrystalBlock.MAX_ID).forEach(i -> providerAccess.itemModelProviderAccess().basicFlatItem(
+                        CrystalItem.withId(i),
+                        MUUtils.modLoc("block/crystal_" + i)));*/
     }
 
     private void soakedBlock(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation blockLoc, ResourceLocation soakedLoc) {

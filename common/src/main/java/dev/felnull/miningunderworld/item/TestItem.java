@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.item;
 
-import dev.felnull.miningunderworld.data.builtin.OreGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

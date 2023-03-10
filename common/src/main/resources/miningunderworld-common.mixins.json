@@ -6,6 +6,8 @@
   "client": [
     "HumanoidArmorLayerMixin",
     "StartCollapseForPlayer",
+    "client.AddClientDynamicPackResource",
+    "client.PreReloadResourceGetter",
     "client.CameraNearPlaneAccessor"
   ],
   "mixins": [
@@ -24,8 +26,7 @@
     "PrevFallDistanceGetter",
     "PrimedTntAccessor",
     "StartCollapseForEntity",
-    "TntBlockMixin",
-    "client.AddBuiltinPackResource"
+    "TntBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

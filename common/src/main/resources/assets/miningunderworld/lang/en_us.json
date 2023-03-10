@@ -79,6 +79,7 @@
   "block.miningunderworld.soaked_lava_deepslate": "Soaked Lava Deepslate",
   "block.miningunderworld.mining_tnt": "Mining TNT",
   "block.miningunderworld.mining_tnt.desc": "Liquids can be destroyed, stone based blocks are easier to destroy and items do not disappear in the blast.",
+  "block.miningunderworld.crystal": "Crystal <%s>",
   "_comment.e": "Entity",
   "entity.miningunderworld.mining_tnt": "Primed Mining TNT",
   "entity.miningunderworld.cave_bat": "Cave Bat",
