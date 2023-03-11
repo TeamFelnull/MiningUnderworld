@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.data.dynamic;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dev.architectury.registry.ReloadListenerRegistry;
 import dev.felnull.miningunderworld.util.MUUtils;
@@ -11,7 +10,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +46,6 @@ public class OreHolder extends PlatformResourceReloadListener<OreHolder.Loader> 
     }
 
     public static class Loader {
-        private static final Gson GSON = new Gson();
 
         public Loader(@NotNull ResourceManager resourceManager, @NotNull ProfilerFiller profilerFiller) {
             this(resourceManager);//profilerなんて必要ねえんだよ
@@ -59,13 +56,9 @@ public class OreHolder extends PlatformResourceReloadListener<OreHolder.Loader> 
             resourceManager
                     .listResources("worldgen/configured_feature", loc -> loc.getPath().contains("ore_"))
                     .forEach(((location, resource) -> {
-                        try (var reader = resource.openAsReader()) {
-                            var ore = parse(GSON.fromJson(reader, JsonObject.class));//jsonから鉱石取得
-                            if (ore != null)//あれば
-                                ores.addAll(List.of(ore));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+                        var ore = parse(MUUtils.getJson(resource));//jsonから鉱石取得
+                        if (ore != null)//あれば
+                            ores.addAll(ore);
                     }));
 
             int i = 0;
@@ -73,7 +66,7 @@ public class OreHolder extends PlatformResourceReloadListener<OreHolder.Loader> 
                 idToOre.put(i++, ore);//クリスタルの番号（辞書順）と鉱石を対応させる
         }
 
-        public static ResourceLocation[] parse(JsonObject jo) {
+        public static List<ResourceLocation> parse(JsonObject jo) {
             if (jo.get("type").getAsString().equals("minecraft:ore") || jo.get("type").getAsString().equals("minecraft:scattered_ore"))//FeatureをOreかScatteredOreに限定
                 return jo.get("config").getAsJsonObject()//Featureが限定さればFeatureConfigurationも限定されるため、ヌルポ気にせず目的のものを取得できる
                         .get("targets").getAsJsonArray()
@@ -83,7 +76,7 @@ public class OreHolder extends PlatformResourceReloadListener<OreHolder.Loader> 
                                 .get("Name").getAsString())
                         .filter(it -> !it.contains("deepslate") && (it.contains("_ore") || jo.get("type").getAsString().equals("minecraft:scattered_ore")))
                         .map(ResourceLocation::new)
-                        .toArray(ResourceLocation[]::new);
+                        .toList();
             return null;//なければnull
         }
     }

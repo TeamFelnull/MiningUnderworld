@@ -72,17 +72,7 @@ public class MUPackResource implements PackResources {
             if (order > max)//CrystalBlockの全blockstatesに対してテクスチャを与えるから、最大鉱石番号以上のも来る。
                 return imageToInputStreamSupplier(TRANSPARENT);//そんな奴は適当に透明なテクスチャで。ここnullだとforgeDataGenが起動しない
 
-            //鉱石番号内なら鉱石ごとに加工していく
-            try {//ImageIOがthrowするからtry
-                var image = ImageIO.read(new ByteArrayInputStream(TextureHolder.crystalTexture));//加工するテクスチャ
-                var oreLoc = OreHolder.idToOre.get(order);//鉱石のResourceLocation(文脈依存形)
-                var oreARGB = 0xBFBBBBBB/*不透明度約0.75の白めの色*/ + (int) (0x444444 * ((float) order) / max);//鉱石に特有の色を生成、TODO 鉱石に合った色を取得したい
-                IntStream.range(0, image.getWidth()).forEach(x -> IntStream.range(0, image.getHeight()).forEach(y ->//テクスチャ全体に
-                        image.setRGB(x, y, MUUtils.blend(oreARGB, image.getRGB(x, y)))));//鉱石特有色を下からブレンド
-                return imageToInputStreamSupplier(image);//加工済みのものを返す
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            return imageToInputStreamSupplier(TextureHolder.idToTexture.get(order));//番号内なら加工済みのものを返す
         }
 
         return null;//それ以外はnull!このリソパには含まれてなかったことを示す。

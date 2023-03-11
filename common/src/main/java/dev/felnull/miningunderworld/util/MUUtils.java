@@ -1,8 +1,11 @@
 package dev.felnull.miningunderworld.util;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.explatform.MUExpectPlatform;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -16,6 +19,12 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.function.BiConsumer;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -95,6 +104,10 @@ public final class MUUtils {
         return true;
     }
 
+    public static void forEachPixel(BufferedImage image, BiConsumer<Integer, Integer> func) {
+        IntStream.range(0, image.getWidth()).forEach(x -> IntStream.range(0, image.getHeight()).forEach(y -> func.accept(x, y)));
+    }
+
     /**
      * 二種のARGBをアルファブレンド
      *
@@ -106,13 +119,39 @@ public final class MUUtils {
         var alpha = (float) FastColor.ARGB32.alpha(baseARGB) / 0xFF;//追加される方の不透明度
         var beta = (float) FastColor.ARGB32.alpha(addingARGB) / 0xFF;//追加する方の不透明度
         var blendedAlpha = 1 - (1 - beta) * (1 - alpha);
-        var baseCoefficient = (1-beta) * alpha / blendedAlpha;
+        var baseCoefficient = (1 - beta) * alpha / blendedAlpha;
         var addingCoefficient = beta / blendedAlpha;
 
         return FastColor.ARGB32.color(
                 (int) Mth.clamp(blendedAlpha * 0xFF, 0, 0xFF),
-                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.red(baseARGB) +addingCoefficient * FastColor.ARGB32.red(addingARGB), 0, 0xFF),
-                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.green(baseARGB) +addingCoefficient * FastColor.ARGB32.green(addingARGB), 0, 0xFF),
-                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.blue(baseARGB) +addingCoefficient * FastColor.ARGB32.blue(addingARGB), 0, 0xFF));
+                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.red(baseARGB) + addingCoefficient * FastColor.ARGB32.red(addingARGB), 0, 0xFF),
+                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.green(baseARGB) + addingCoefficient * FastColor.ARGB32.green(addingARGB), 0, 0xFF),
+                (int) Mth.clamp(baseCoefficient * FastColor.ARGB32.blue(baseARGB) + addingCoefficient * FastColor.ARGB32.blue(addingARGB), 0, 0xFF));
+    }
+
+    public static BufferedImage getImage(Resource resource) {
+        try {
+            return getImage(resource.open().readAllBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static BufferedImage getImage(byte[] bytes) {
+        try {
+            return ImageIO.read(new ByteArrayInputStream(bytes));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static final Gson GSON = new Gson();
+
+    public static JsonObject getJson(Resource resource) {
+        try (var reader = resource.openAsReader()) {
+            return GSON.fromJson(reader, JsonObject.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

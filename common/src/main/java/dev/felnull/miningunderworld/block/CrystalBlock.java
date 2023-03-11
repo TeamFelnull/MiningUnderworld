@@ -11,6 +11,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -18,7 +19,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import java.util.List;
 
 //鉱石ごとに対応した色とドロップを持つクリスタル
-public class CrystalBlock extends Block {
+public class CrystalBlock extends HalfTransparentBlock {
 
     public final int ORE_ID;//鉱石番号。ブロック生成時に鉱石取得するのが面倒だったので、先に十分量のブロックを生成して、中身は後で考える。
     public static final int MAX_ID = 255;//最大鉱石番号。256個の鉱石までなら正常に処理できることを意味する。
