@@ -4,12 +4,18 @@ import dev.felnull.miningunderworld.particles.MUParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.MultifaceSpreader;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 public class TarStainsBlock extends MultifaceBlock {
     private final MultifaceSpreader spreader = new MultifaceSpreader(this);
@@ -80,5 +86,23 @@ public class TarStainsBlock extends MultifaceBlock {
         }
 
         level.addParticle(MUParticleTypes.DRIPPING_TAR.get(), x, y, z, 0.0, 0.0, 0.0);
+    }
+
+    @Override
+    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+        super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
+
+        if (this == MUBlocks.TAR_STAINS.get() && !level.isClientSide) {
+            BlockState smallStains = MUBlocks.SMALL_TAR_STAINS.get().defaultBlockState();
+
+            for (Direction direction : Direction.values()) {
+                var pro = getFaceProperty(direction);
+                smallStains = smallStains.setValue(pro, blockState.getValue(pro));
+            }
+
+            level.setBlock(blockPos, smallStains, 2);
+            level.gameEvent(GameEvent.BLOCK_DESTROY, blockPos, GameEvent.Context.of(blockState));
+            level.levelEvent(2001, blockPos, Block.getId(blockState));
+        }
     }
 }
