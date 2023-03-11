@@ -1,9 +1,8 @@
 package dev.felnull.miningunderworld.data;
 
 import com.mojang.datafixers.util.Pair;
-import dev.felnull.miningunderworld.block.CrystalBlock;
+import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.block.MUBlocks;
-import dev.felnull.miningunderworld.util.MUUtils;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.model.BlockStateAndModelProviderAccess;
 import dev.felnull.otyacraftengine.data.model.FileTexture;
@@ -14,14 +13,12 @@ import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.blockstates.Condition;
 import net.minecraft.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import java.util.function.Function;
-import java.util.stream.IntStream;
 
 public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProviderWrapper {
     public MUBlockStateAndModelProviderWrapper(PackOutput packOutput, CrossDataGeneratorAccess crossDataGeneratorAccess) {
@@ -50,18 +47,11 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
         providerAccess.simpleBlockItemModel(MUBlocks.MINING_TNT.get(), miningTNTModel);
         providerAccess.simpleBlockState(MUBlocks.MINING_TNT.get(), miningTNTModel);
 
-
-        //generate crystal blockstate & block model
-        var mpg = MultiPartGenerator.multiPart(MUBlocks.CRYSTAL.get());
-        IntStream.rangeClosed(0, CrystalBlock.MAX_ID).forEach(i -> {
-            var loc = MUUtils.modLoc("block/crystal_" + i);
-            providerAccess.cubeAllBlockModel(modLoc("crystal_" + i), loc);
-            mpg.with(Condition.condition().term(CrystalBlock.ORE_ID, i), Variant.variant().with(VariantProperties.MODEL, loc));
-        });/*TODO:アイテムモデル生成
-        providerAccess.addBlockStateGenerator(mpg);
-        IntStream.rangeClosed(0, CrystalBlock.MAX_ID).forEach(i -> providerAccess.itemModelProviderAccess().basicFlatItem(
-                        CrystalItem.withId(i),
-                        MUUtils.modLoc("block/crystal_" + i)));*/
+        MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).forEach(block -> {
+            var model = providerAccess.cubeAllBlockModel(block, FileTexture.ofUncheck(block.arch$registryName().withPrefix("block/")));
+            providerAccess.simpleBlockItemModel(block, model);
+            providerAccess.simpleBlockState(block, model);
+        });
     }
 
     private void soakedBlock(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation blockLoc, ResourceLocation soakedLoc) {

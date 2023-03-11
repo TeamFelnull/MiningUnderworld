@@ -5,14 +5,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
@@ -21,18 +20,12 @@ import java.util.List;
 //鉱石ごとに対応した色とドロップを持つクリスタル
 public class CrystalBlock extends Block {
 
-    //鉱石番号。ただのBlockはblockstatesでしか見た目を変えられず、それはコードでしか指定できない。だから既存鉱石数を十分にカバーできる数のblockstatesを持つ必要。
+    public final int ORE_ID;//鉱石番号。ブロック生成時に鉱石取得するのが面倒だったので、先に十分量のブロックを生成して、中身は後で考える。
     public static final int MAX_ID = 255;//最大鉱石番号。256個の鉱石までなら正常に処理できることを意味する。
-    public static final IntegerProperty ORE_ID = IntegerProperty.create("ore_id", 0, MAX_ID);//鉱石番号、0～255まで、256種のblockstatesを追加。
 
-    public CrystalBlock(Properties properties) {
+    public CrystalBlock(int i, Properties properties) {
         super(properties);
-        //registerDefaultState(stateDefinition.any().setValue(ORE_ID, 0));//デフォ値なくても大丈夫ぽい？
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ORE_ID);//ここで実際にblockstates追加
+        ORE_ID = i;
     }
 
     @Override
@@ -50,14 +43,14 @@ public class CrystalBlock extends Block {
 
         ItemStack stack = builder.getOptionalParameter(LootContextParams.TOOL);
         if (stack != null && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) != 0)
-            return List.of(new ItemStack(CrystalItem.withId(blockState)));//シルクタッチなら回収可
+            return super.getDrops(blockState, builder);//シルクタッチなら回収可
 
-        var ore = getOre(blockState);//oreなかったら空気になるみたい
-        return ore.getDrops(ore.defaultBlockState(), builder);//そのブロックをこのコンテキストで壊したものを返す
+        var ore = getOre();//鉱石取得、なかったら空気になるみたい
+        return ore.getDrops(ore.defaultBlockState(), builder);//対応する鉱石をこのコンテキストで壊したものを返す
     }
 
-    public static Block getOre(BlockState blockState) {
-        return BuiltInRegistries.BLOCK.get(OreHolder.idToOre.get(blockState.getValue(ORE_ID)));
+    public Block getOre() {
+        return getOre(ORE_ID);
     }
 
     public static Block getOre(int i) {
@@ -65,7 +58,28 @@ public class CrystalBlock extends Block {
     }
 
     @Override
+    public String getDescriptionId() {
+        return "block.miningunderworld.crystal";
+    }
+
+    @Override
     public MutableComponent getName() {
-        return Component.translatable(this.getDescriptionId(), getOre(defaultBlockState()).getName());//TODO blockstate毎の名前
+        return Component.translatable(getDescriptionId(), getOre().getName());
+    }
+
+    public class Item extends BlockItem {
+
+        public Item(Block block, Properties properties) {
+            super(block, properties);
+        }
+
+        @Override
+        public Component getName(ItemStack itemStack) {
+            return CrystalBlock.this.getName();
+        }
+
+        public CrystalBlock getCrystalBlock(){
+            return CrystalBlock.this;
+        }
     }
 }

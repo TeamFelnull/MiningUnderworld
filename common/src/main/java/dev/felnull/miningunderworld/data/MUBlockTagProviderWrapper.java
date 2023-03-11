@@ -1,5 +1,6 @@
 package dev.felnull.miningunderworld.data;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.provider.BlockTagProviderWrapper;
@@ -24,8 +25,10 @@ public class MUBlockTagProviderWrapper extends BlockTagProviderWrapper {
                 MUBlocks.SOAKED_TAR_DEEPSLATE.get(),
                 MUBlocks.SOAKED_LAVA_STONE.get(),
                 MUBlocks.SOAKED_LAVA_DEEPSLATE.get(),
-                MUBlocks.MINING_TNT.get(),
-                MUBlocks.CRYSTAL.get());
+                MUBlocks.MINING_TNT.get());
+
+        providerAccess.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+                MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).toArray(Block[]::new));
 
         providerAccess.tag(BlockTags.STONE_ORE_REPLACEABLES).add(
                 MUBlocks.SOAKED_TAR_STONE.get(),

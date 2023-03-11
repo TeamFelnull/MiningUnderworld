@@ -105,7 +105,7 @@ public class MUItems {
 
 
     private static RegistrySupplier<Item> register(String name, Function<Item.Properties, Item> item) {
-        return ITEMS.register(name, () -> item.apply(new Item.Properties().arch$tab(MUCreativeModeTab.MOD_TAB)));
+        return ITEMS.register(name, () -> item.apply(new Item.Properties()));
     }
 
     public static void init() {

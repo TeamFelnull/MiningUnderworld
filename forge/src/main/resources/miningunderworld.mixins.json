@@ -9,8 +9,7 @@
   ],
   "mixins": [
     "FluidTypeMixin",
-    "integration.curios.EquipmentAccessoryItemExtender",
-    "DeleteTextureDoesNotExistError"
+    "integration.curios.EquipmentAccessoryItemExtender"
   ],
   "injectors": {
     "defaultRequire": 1

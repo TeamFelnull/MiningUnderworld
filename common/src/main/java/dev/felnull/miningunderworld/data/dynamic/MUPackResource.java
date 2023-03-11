@@ -48,7 +48,7 @@ public class MUPackResource implements PackResources {
     @Override
     public void listResources(PackType packType, String namespace, String path, ResourceOutput resourceOutput) {
         if (path.equals("textures/block"))//ブロックテクスチャについて
-            IntStream.rangeClosed(0, CrystalBlock.MAX_ID)//CrystalBlockの全id分（全blockstates分）
+            IntStream.rangeClosed(0, CrystalBlock.MAX_ID)//全CrystalBlock分
                     .mapToObj(i -> MUUtils.modLoc("textures/block/crystal_" + i + ".png"))//テクスチャのResourceLocation作って
                     .forEach(loc -> resourceOutput.accept(loc, getResource(packType, loc)));//リソースとともに認識させる
     }
@@ -67,7 +67,7 @@ public class MUPackResource implements PackResources {
     public IoSupplier<InputStream> getResource(PackType packType, ResourceLocation loc) {
         if (loc.getPath().matches("textures/block/crystal_\\d*.png")) {//上で登録したものについて
             var order = Integer.parseInt(loc.getPath().replaceAll("textures/block/crystal_(\\d*).png", "$1"));//取得する鉱石の番号。0から始まる
-            var max = OreHolder.idToOre.size() - 1;//この起動構成での鉱石数-1。最大鉱石番号。
+            var max = OreHolder.idToOre.size() - 1;//この起動構成での鉱石数-1。鉱石番号
 
             if (order > max)//CrystalBlockの全blockstatesに対してテクスチャを与えるから、最大鉱石番号以上のも来る。
                 return imageToInputStreamSupplier(TRANSPARENT);//そんな奴は適当に透明なテクスチャで。ここnullだとforgeDataGenが起動しない

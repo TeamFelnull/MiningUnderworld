@@ -21,7 +21,7 @@ import java.util.concurrent.Executor;
 @Mixin(ReloadableResourceManager.class)
 public class PreReloadResourceGetter {//既存のリソースを使って独自テクスチャ作りたいから、リロード前にリソース取得
 
-    @Inject(method = "createReload", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/packs/resources/SimpleReloadInstance;create(Lnet/minecraft/server/packs/resources/ResourceManager;Ljava/util/List;Ljava/util/concurrent/Executor;Ljava/util/concurrent/Executor;Ljava/util/concurrent/CompletableFuture;Z)Lnet/minecraft/server/packs/resources/ReloadInstance;"))
+    @Inject(method = "createReload", at = @At("HEAD"))
     public void add(Executor executor, Executor executor2, CompletableFuture<Unit> completableFuture, List<PackResources> list, CallbackInfoReturnable<ReloadInstance> cir) {
         new OreHolder.Loader(new MultiPackResourceManager(PackType.SERVER_DATA, list));//dataから鉱石取得
         TextureHolder.load(new MultiPackResourceManager(PackType.CLIENT_RESOURCES, list));//assetsからテクスチャ取得
