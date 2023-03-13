@@ -75,11 +75,13 @@ public class MUBiomes {
 
     public static Biome crystalCave(BiomeGenerationSettings.Builder gen) {
         //地下の土みたいにクリスタル大量
-        gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.AMETHYST_CRYSTAL);//全宝石のクリスタル柱フィーチャー
+        MUPlacedFeatures.CRYSTALS.forEach(crystal ->
+                gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, crystal));//全宝石のクリスタル柱フィーチャー
         //砂漠感
 
         return defaultBiome(gen)
                 .temperature(1)
+                .downfall(1)
                 .build();
     }
 

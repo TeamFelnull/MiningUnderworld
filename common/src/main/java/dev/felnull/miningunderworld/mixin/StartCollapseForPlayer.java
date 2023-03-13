@@ -1,7 +1,6 @@
 package dev.felnull.miningunderworld.mixin;
 
 import dev.felnull.miningunderworld.block.CollapseStarter;
-import dev.felnull.miningunderworld.entity.PrevFallDistanceEntity;
 import dev.felnull.miningunderworld.network.MUPackets;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -24,6 +23,6 @@ public abstract class StartCollapseForPlayer extends LivingEntity {
     @Inject(method = "tick", at = @At("HEAD"))
     public void startCollapse(CallbackInfo ci) {
         if (CollapseStarter.shouldStartCollapse(this))
-            MUPackets.PLAYER_START_COLLAPSE.accept(getDeltaMovement().horizontalDistance(), ((PrevFallDistanceEntity) this).getPrevFallDistance());
+            MUPackets.PLAYER_START_COLLAPSE.accept(getDeltaMovement().horizontalDistance());
     }
 }

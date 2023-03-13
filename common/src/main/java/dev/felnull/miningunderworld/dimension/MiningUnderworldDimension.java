@@ -1,9 +1,5 @@
 package dev.felnull.miningunderworld.dimension;
 
-import com.mojang.serialization.Codec;
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
-import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.dimension.generation.MUCarvers;
 import dev.felnull.miningunderworld.dimension.generation.MUFeatures;
@@ -15,7 +11,6 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
@@ -64,7 +59,7 @@ public class MiningUnderworldDimension {
                 height,
                 BlockTags.INFINIBURN_OVERWORLD,
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS,//ディメンション固有のレンダー（？）
-                1.0F,
+                0.2525F,
                 new DimensionType.MonsterSettings(false, true, UniformInt.of(0, 7), 0));
     }
 
@@ -72,7 +67,7 @@ public class MiningUnderworldDimension {
         return new NoiseGeneratorSettings(
                 NoiseSettings.create(minY, height, 1, 1),
                 MUBlocks.TEST_BLOCK.get().defaultBlockState(),
-                Blocks.WATER.defaultBlockState(),
+                Blocks.AIR.defaultBlockState(),
                 MUNoiseRouter.create(context),
                 MUSurfaceRule.create(),
                 List.of(),

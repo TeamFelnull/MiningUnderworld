@@ -5,8 +5,7 @@ import dev.felnull.otyacraftengine.networking.PacketMessage;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-
-import java.util.function.Supplier;
+import net.minecraft.world.entity.player.Player;
 
 public abstract class BasePacket implements PacketMessage {
     @Override
@@ -19,7 +18,19 @@ public abstract class BasePacket implements PacketMessage {
 
     public abstract BasePacket decode(FriendlyByteBuf buf);
 
-    public abstract void handle(NetworkManager.PacketContext c);
+    public void handle(NetworkManager.PacketContext c) {
+        if (c.getPlayer() instanceof ServerPlayer sp)
+            c.queue(() -> handleOnServer(sp));
+        else
+            c.queue(() -> handleOnClient(c.getPlayer()));
+
+    }
+
+    public void handleOnServer(ServerPlayer sp) {
+    }
+
+    public void handleOnClient(Player p) {
+    }
 
     public ResourceLocation getLoc() {
         return MUPackets.PACKET_LOCATIONS.get(this.getClass());

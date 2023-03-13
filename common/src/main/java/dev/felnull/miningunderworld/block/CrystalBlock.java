@@ -1,16 +1,22 @@
 package dev.felnull.miningunderworld.block;
 
 import dev.felnull.miningunderworld.data.dynamic.OreHolder;
+import dev.felnull.miningunderworld.dimension.generation.CrystalFeature;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -50,6 +56,21 @@ public class CrystalBlock extends HalfTransparentBlock {
         return ore.getDrops(ore.defaultBlockState(), builder);//対応する鉱石をこのコンテキストで壊したものを返す
     }
 
+    @Override
+    public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
+        var biome = level.getBiome(pos).value();
+        if (random.nextFloat() < 0.01F * biome.getBaseTemperature() * biome.getDownfall())
+            if (Direction.stream().allMatch(d -> level.getBlockState(pos.relative(d)).getBlock() == this)) {
+                var origin = pos.offset(MUUtils.toI(MUUtils.randomBaseVector(random)));
+                if (Direction.stream().allMatch(d -> isAirOrMe(level.getBlockState(origin.relative(d)).getBlock())))
+                    CrystalFeature.addCrystal(level, origin, this.defaultBlockState());
+            }
+    }
+
+    private boolean isAirOrMe(Block block) {
+        return block == this || block == Blocks.AIR;
+    }
+
     public Block getOre() {
         return getOre(ORE_ID);
     }
@@ -79,7 +100,7 @@ public class CrystalBlock extends HalfTransparentBlock {
             return CrystalBlock.this.getName();
         }
 
-        public CrystalBlock getCrystalBlock(){
+        public CrystalBlock getCrystalBlock() {
             return CrystalBlock.this;
         }
     }

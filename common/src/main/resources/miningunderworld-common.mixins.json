@@ -14,9 +14,7 @@
     "DenseOres",
     "EnchantmentMenuArmorSlotsGetter",
     "EntityAccessor",
-    "EntityMixin",
     "FallingBlockEntityAccessor",
-    "FallingTileEntity",
     "FloatGoalMixin",
     "FlowingFluidMixin",
     "FluidMixin",
@@ -25,7 +23,6 @@
     "ItemStackMixin",
     "LevelMixin",
     "LivingEntityMixin",
-    "PrevFallDistanceGetter",
     "PrimedTntAccessor",
     "StartCollapseForEntity",
     "TntBlockMixin"

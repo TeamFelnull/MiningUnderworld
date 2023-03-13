@@ -47,10 +47,15 @@ public class MUBlocks {
     public static final List<RegistrySupplier<Block>> CRYSTALS = IntStream.rangeClosed(0, CrystalBlock.MAX_ID).mapToObj(i -> register(
                     "crystal_" + i,
                     () -> new CrystalBlock(i, BlockBehaviour.Properties.of(Material.AMETHYST, MaterialColor.NONE)
-                            .strength(1.5F)
+                            .strength(0.5F, 0F)
                             .sound(SoundType.AMETHYST)
                             .noOcclusion()
-                            .requiresCorrectToolForDrops()),
+                            .friction(1.145141919810F)//少し動いただけで加速しだす
+                            .isViewBlocking((a, b, c) -> false)
+                            .isValidSpawn((a, b, c, d) -> false)
+                            .lightLevel(a -> 15)
+                            .requiresCorrectToolForDrops()
+                            .randomTicks()),
                     it -> it.new Item(it, new Item.Properties())
             ))
             .toList();//Streamのままでは再利用できない。Listにしておいて、使うたび再度streamを開く必要

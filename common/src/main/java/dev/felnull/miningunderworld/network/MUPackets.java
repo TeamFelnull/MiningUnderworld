@@ -20,8 +20,8 @@ public class MUPackets {
     public static final Map<ResourceLocation, Supplier<? extends BasePacket>> MU_C2S = new HashMap<>();
     public static final Map<ResourceLocation, Supplier<? extends BasePacket>> MU_S2C = new HashMap<>();
 
-    public static BiConsumer<Double, Float> PLAYER_START_COLLAPSE =
-            sendToServer2(//パケットを初期化する引数をacceptするだけでサーバーに送れる形
+    public static Consumer<Double> PLAYER_START_COLLAPSE =
+            sendToServer1(//パケットを初期化する引数をacceptするだけでサーバーに送れる形
                     registerC2S(//C2Sで登録
                             PlayerStartCollapsePacket::new));//パケット本体。handleが実際の処理
 

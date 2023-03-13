@@ -1,13 +1,13 @@
 package dev.felnull.miningunderworld.dimension.generation;
 
 import com.mojang.datafixers.util.Pair;
+import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.util.MUUtils;
 import dev.felnull.otyacraftengine.util.OEDataGenUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -27,14 +27,15 @@ public class MUPlacedFeatures {
             MUFeatures.TEST_FEATURE,//生成物の型
             new TestFeature.Config(19),//型に入れる情報
             commonOrePlacement(19, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT));//生成物の配置方
-    public static final ResourceKey<PlacedFeature> AMETHYST_CRYSTAL = register("amethyst_crystal",
-            MUFeatures.CRYSTAL_FEATURE,
-            new CrystalFeature.Config(Blocks.AMETHYST_BLOCK.defaultBlockState()),
-            commonOrePlacement(19, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT));
+    public static final List<ResourceKey<PlacedFeature>> CRYSTALS = MUBlocks.CRYSTALS.stream().map(crystal ->
+            register(crystal.getId().getPath(),
+                    MUFeatures.CRYSTAL_FEATURE,
+                    new CrystalFeature.Config(crystal.get().defaultBlockState()),
+                    commonOrePlacement(200, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT))).toList();
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<PlacedFeature> register(String name, F feature, FC config, List<PlacementModifier> placement) {
         var placedFeature = ResourceKey.create(Registries.PLACED_FEATURE, MUUtils.modLoc(name));
-        if(OEDataGenUtils.isDataGenerating()) {//runData時のみの処理にしたいけど分らんからtrue                    <- OEDataGenUtils#isDataGenerating()でデータジェネレータで動かしてるか確認可能  ←ナス
+        if (OEDataGenUtils.isDataGenerating()) {
             var configuredFeature = ResourceKey.create(Registries.CONFIGURED_FEATURE, MUUtils.modLoc(name));
             DATAPACK_CACHE.put(Pair.of(configuredFeature, new ConfiguredFeature<>(feature, config)), Pair.of(placedFeature, placement));//データパック生成で使う形にしてキャッシュ
         }

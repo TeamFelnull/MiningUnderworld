@@ -8,7 +8,32 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 
 public class MUSurfaceRule {
 
+    //https://misode.github.io/worldgen/noise-settings/
     public static SurfaceRules.RuleSource create() {
+        var BEDROCK = stateRule(Blocks.BEDROCK);
+        var bedrockRules = SurfaceRules.sequence(
+                SurfaceRules.ifTrue(decreaseGradiently("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)),
+                        BEDROCK),
+                SurfaceRules.ifTrue(increaseGradiently("bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top()),
+                        BEDROCK));//上下５マスに徐々岩盤
+
+        var biomeRules =
+                SurfaceRules.sequence(
+                        SurfaceRules.ifTrue(SurfaceRules.isBiome(MUBiomes.CRYSTAL_CAVE),
+                                SurfaceRules.sequence(
+                                        SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
+                                                stateRule(Blocks.RED_SANDSTONE)),
+                                        SurfaceRules.ifTrue(SurfaceRules.DEEP_UNDER_FLOOR,
+                                                stateRule(Blocks.RED_SAND)),
+                                        SurfaceRules.ifTrue(SurfaceRules.VERY_DEEP_UNDER_FLOOR,
+                                                stateRule(Blocks.RED_SANDSTONE))))
+                );
+
+
+        return SurfaceRules.sequence(bedrockRules, biomeRules, stateRule(Blocks.DEEPSLATE));
+    }
+
+    public static void example() {
         //RuleSource:場所ごとのブロック指定、地形色付けのルール
         var stateRule = stateRule(Blocks.STONE);//どこでも石
         //ConditionSource:コンディション、場所指定
@@ -19,16 +44,6 @@ public class MUSurfaceRule {
                 SurfaceRules.ifTrue(ijou(36),
                         stateRule(Blocks.DEEPSLATE)),//そうでなくyが36以上なら安山岩
                 stateRule(MUBlocks.TEST_BLOCK.get()));//そうでもないならTEST_BLOCK
-
-        var BEDROCK = stateRule(Blocks.BEDROCK);
-        rules = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(jojoniNakunaru("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)),
-                        BEDROCK),
-                SurfaceRules.ifTrue(jojoniHueru("bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top()),
-                        BEDROCK),
-                stateRule(Blocks.DEEPSLATE));//上下５マスに徐々岩盤追加
-
-        return rules;
     }
 
     public static SurfaceRules.RuleSource stateRule(Block p_194811_) {
@@ -57,15 +72,15 @@ public class MUSurfaceRule {
         //「そこより上で最初に空気に触れるとこ」のy座標がy未満の場所
     }
 
-    public static SurfaceRules.ConditionSource jojoniNakunaru(String randomFactoryName, VerticalAnchor nakunaruStart, VerticalAnchor nakunaruEnd) {
-        return SurfaceRules.verticalGradient(randomFactoryName, nakunaruStart, nakunaruEnd);
-        //nakunaruStartより下は常にあって、nakunaruEndより上は常にない
+    public static SurfaceRules.ConditionSource decreaseGradiently(String randomFactoryName, VerticalAnchor startDecrease, VerticalAnchor endDecrease) {
+        return SurfaceRules.verticalGradient(randomFactoryName, startDecrease, endDecrease);
+        //startDecreaseより下は常にあって、endDecreaseより上は常にない
         //その間は存在確率が境界と直線でつながるようになる
     }
 
-    public static SurfaceRules.ConditionSource jojoniHueru(String randomFactoryName, VerticalAnchor hueruStart, VerticalAnchor hueruEnd) {
-        return SurfaceRules.not(jojoniNakunaru(randomFactoryName, hueruStart, hueruEnd));
-        //hueruStartより下は常になく、hueruEndより上は常にある
+    public static SurfaceRules.ConditionSource increaseGradiently(String randomFactoryName, VerticalAnchor startIncrease, VerticalAnchor endIncrease) {
+        return SurfaceRules.not(decreaseGradiently(randomFactoryName, startIncrease, endIncrease));
+        //startIncreaseより下は常になく、endIncreaseより上は常にある
         //その間は存在確率が境界と直線でつながるようになる
     }
 }
