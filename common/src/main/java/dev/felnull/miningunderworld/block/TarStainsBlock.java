@@ -17,6 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.stream.Stream;
+
 public class TarStainsBlock extends MultifaceBlock {
     private final MultifaceSpreader spreader = new MultifaceSpreader(this);
 
@@ -31,16 +33,14 @@ public class TarStainsBlock extends MultifaceBlock {
     }
 
 
-    public BlockState getAllAttachedFace(BlockGetter blockGetter, BlockPos blockPos) {
+    public BlockState getAllAttachedFace(BlockGetter blockGetter, BlockPos blockPos, Stream<Direction> directions) {
         var state = blockGetter.getBlockState(blockPos);
-        var ret = defaultBlockState();
+        BlockState[] ret = {defaultBlockState()};
 
-        for (Direction direction : Direction.values()) {
-            if (isValidStateForPlacement(blockGetter, state, blockPos, direction))
-                ret = ret.setValue(MultifaceBlock.getFaceProperty(direction), Boolean.TRUE);
-        }
+        directions.filter(dir -> isValidStateForPlacement(blockGetter, state, blockPos, dir))
+                .forEach(dir -> ret[0] = ret[0].setValue(MultifaceBlock.getFaceProperty(dir), Boolean.TRUE));
 
-        return ret != defaultBlockState() ? ret : Blocks.AIR.defaultBlockState();
+        return ret[0] != defaultBlockState() ? ret[0] : Blocks.AIR.defaultBlockState();
     }
 
     @Override

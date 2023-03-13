@@ -10,12 +10,11 @@ import dev.felnull.otyacraftengine.data.provider.BlockStateAndModelProviderWrapp
 import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.blockstates.Condition;
-import net.minecraft.data.models.blockstates.MultiPartGenerator;
-import net.minecraft.data.models.blockstates.Variant;
+import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 import java.util.function.Function;
@@ -38,6 +37,7 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
         multiface(providerAccess, MUBlocks.TAR_STAINS.get(), modLoc("block/solid_tar"));
         multiface(providerAccess, MUBlocks.SMALL_TAR_STAINS.get(), modLoc("block/small_tar_stains"));
         providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.SOLID_TAR.get());
+        semisolidTar(providerAccess);
 
         soakedBlock(providerAccess, MUBlocks.SOAKED_TAR_STONE.get(), new ResourceLocation("block/stone"), modLoc("block/soaked_tar"));
         soakedBlock(providerAccess, MUBlocks.SOAKED_TAR_DEEPSLATE.get(), new ResourceLocation("block/deepslate"), modLoc("block/soaked_tar"));
@@ -53,6 +53,27 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
             providerAccess.simpleBlockItemModel(block, model);
             providerAccess.simpleBlockState(block, model);
         });
+    }
+
+    private void semisolidTar(BlockStateAndModelProviderAccess providerAccess) {
+        var allCube = providerAccess.cubeAllBlockModel(modLoc("semisolid_tar_height16"), modLoc("block/solid_tar"));
+
+        providerAccess.addBlockStateGenerator(MultiVariantGenerator.multiVariant(MUBlocks.SEMISOLID_TAR.get())
+                .with(PropertyDispatch.property(BlockStateProperties.LAYERS)
+                        .generate(layer -> {
+                            Variant variant = Variant.variant();
+                            ResourceLocation loc;
+
+                            if (layer < 8) {
+                                loc = providerAccess.existingModel(ModelLocationUtils.getModelLocation(MUBlocks.SEMISOLID_TAR.get(), "_height" + layer * 2)).getLocation();
+                            } else {
+                                loc = allCube.getLocation();
+                            }
+
+                            return variant.with(VariantProperties.MODEL, loc);
+                        })));
+
+        providerAccess.simpleBlockItemModel(MUBlocks.SEMISOLID_TAR.get(), providerAccess.existingModel(modLoc("block/semisolid_tar_height2")));
     }
 
     private void soakedBlock(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation blockLoc, ResourceLocation soakedLoc) {

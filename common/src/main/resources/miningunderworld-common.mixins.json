@@ -15,6 +15,7 @@
     "EnchantmentMenuArmorSlotsGetter",
     "EntityAccessor",
     "FallingBlockEntityAccessor",
+    "FallingBlockEntityMixin",
     "FloatGoalMixin",
     "FlowingFluidMixin",
     "FluidMixin",
