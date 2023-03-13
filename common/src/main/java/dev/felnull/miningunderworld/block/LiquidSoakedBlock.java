@@ -39,39 +39,46 @@ public class LiquidSoakedBlock extends Block {
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        Direction direction = Direction.getRandom(randomSource);
-        if (direction != Direction.UP) {
-            BlockPos blockPos2 = blockPos.relative(direction);
-            BlockState blockState2 = level.getBlockState(blockPos2);
-            if (!blockState.canOcclude() || !blockState2.isFaceSturdy(level, blockPos2, direction.getOpposite())) {
-                double d = blockPos.getX();
-                double e = blockPos.getY();
-                double f = blockPos.getZ();
-                if (direction == Direction.DOWN) {
-                    e -= 0.05;
-                    d += randomSource.nextDouble();
-                    f += randomSource.nextDouble();
-                } else {
-                    e += randomSource.nextDouble() * 0.8;
-                    if (direction.getAxis() == Direction.Axis.X) {
-                        f += randomSource.nextDouble();
-                        if (direction == Direction.EAST) {
-                            ++d;
-                        } else {
-                            d += 0.05;
-                        }
-                    } else {
-                        d += randomSource.nextDouble();
-                        if (direction == Direction.SOUTH) {
-                            ++f;
-                        } else {
-                            f += 0.05;
-                        }
-                    }
-                }
-
-                level.addParticle(particleOptions.get(), d, e, f, 0.0, 0.0, 0.0);
-            }
+        for (Direction dir : Direction.values()) {
+            animateFace(dir, blockState, level, blockPos, randomSource);
         }
+    }
+
+    private void animateFace(Direction direction, BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
+        if (direction == Direction.UP) return;
+
+        BlockPos dirPos = blockPos.relative(direction);
+        BlockState dirState = level.getBlockState(dirPos);
+
+        if (blockState.canOcclude() && dirState.isFaceSturdy(level, dirPos, direction.getOpposite())) return;
+
+        double x = blockPos.getX();
+        double y = blockPos.getY();
+        double z = blockPos.getZ();
+
+        double r1 = randomSource.nextDouble() * 0.8;
+        double r2 = randomSource.nextDouble() * 0.8;
+
+        if (direction.getAxis() == Direction.Axis.X) {
+            double step = direction.getStepX();
+
+            x += Math.max(step, 0) + 0.05 * step;
+            y += r1 + 0.1;
+            z += r2 + 0.1;
+        } else if (direction.getAxis() == Direction.Axis.Y) {
+            double step = direction.getStepY();
+
+            x += r1 + 0.1;
+            y += Math.max(step, 0) + 0.05 * step;
+            z += r2 + 0.1;
+        } else if (direction.getAxis() == Direction.Axis.Z) {
+            double step = direction.getStepZ();
+
+            x += r1 + 0.1;
+            y += r2 + 0.1;
+            z += Math.max(step, 0) + 0.05 * step;
+        }
+
+        level.addParticle(particleOptions.get(), x, y, z, 0.0, 0.0, 0.0);
     }
 }

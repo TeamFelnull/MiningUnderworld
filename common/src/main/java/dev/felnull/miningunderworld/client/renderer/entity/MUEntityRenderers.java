@@ -8,5 +8,6 @@ public class MUEntityRenderers {
         EntityRendererRegistry.register(MUEntityTypes.MINING_TNT, MiningTntRenderer::new);
         EntityRendererRegistry.register(MUEntityTypes.CAVE_BAT, CaveBatRenderer::new);
         EntityRendererRegistry.register(MUEntityTypes.EXCRETA, ExcretaRenderer::new);
+        EntityRendererRegistry.register(MUEntityTypes.STRICT_FALLING_BLOCK, StrictFallingBlockRenderer::new);
     }
 }

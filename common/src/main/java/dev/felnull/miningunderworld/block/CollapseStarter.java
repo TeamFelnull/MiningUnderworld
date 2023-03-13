@@ -43,7 +43,7 @@ public interface CollapseStarter {
     //でも崩落に関与したブロックが一斉に崩落すると、うまく全てブロックのまま着地はせず一部アイテム化したから、一番下だけ崩落。
     //下がなくなれば確率の壁が減るから崩落しやすくなって、まあまあ一気に崩落感がある
     static void collapsing(Entity e, BlockPos pos, CollapseStarter starter) {
-        var bs  = e.level.getBlockState(pos);
+        var bs = e.level.getBlockState(pos);
         if (bs.canBeReplaced()/*&& !e.level.isOutsideBuildHeight(bp)*//*岩盤を突き抜けたら駄目だなと思ったけど爆破耐性も加味すればそうそう突き抜けることないからやめた*/)
             collapse(e, pos.above(), starter);
         else if (e.level.random.nextFloat() < collapseRate(e, bs, starter))
@@ -80,7 +80,7 @@ public interface CollapseStarter {
 
                 @Override
                 public void func() {
-                    if(!e.isRemoved())//次tickにエンティティがまだいたら(落下ダメで完全に死に終わってもまだ崩落が終わってないとき対策)
+                    if (!e.isRemoved())//次tickにエンティティがまだいたら(落下ダメで完全に死に終わってもまだ崩落が終わってないとき対策)
                         startCollapse(e, e.blockPosition().below(), prevWalkDist, Math.max(prevPrevFallDist - 2, 0));//落下距離は減衰させて前情報のままスタート
                 }
             });
@@ -91,5 +91,11 @@ public interface CollapseStarter {
 
         //崩落。FallingTileEntityにてTileの落下ブロックとしての挙動を修正
         FallingBlockEntity.fall(e.level, pos, e.level.getBlockState(pos));
+        System.out.println(Thread.currentThread());
+
+       /* var fallBlockEntity = FallingBlockEntity.fall(e.level, pos, e.level.getBlockState(pos));
+        var be = e.level.getBlockEntity(pos);
+        if (be != null)
+            fallBlockEntity.blockData = be.saveWithoutMetadata();*/
     }
 }

@@ -7,13 +7,15 @@
     "HumanoidArmorLayerMixin",
     "StartCollapseForPlayer",
     "client.AddClientDynamicPackResource",
-    "client.PreReloadResourceGetter",
-    "client.CameraNearPlaneAccessor"
+    "client.CameraNearPlaneAccessor",
+    "client.PreReloadResourceGetter"
   ],
   "mixins": [
     "DenseOres",
     "EnchantmentMenuArmorSlotsGetter",
     "EntityAccessor",
+    "EntityMixin",
+    "FallingBlockEntityAccessor",
     "FallingTileEntity",
     "FloatGoalMixin",
     "FlowingFluidMixin",

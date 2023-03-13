@@ -48,6 +48,7 @@ public class TarStainsBlock extends MultifaceBlock {
         super.animateTick(blockState, level, blockPos, randomSource);
         if (this == MUBlocks.SMALL_TAR_STAINS.get()) return;
 
+
         for (Direction dir : Direction.values()) {
             animateFace(dir, blockState, level, blockPos, randomSource);
         }

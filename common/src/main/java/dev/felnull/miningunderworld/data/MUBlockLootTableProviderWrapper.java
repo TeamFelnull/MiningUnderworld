@@ -19,6 +19,9 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
         providerAccess.dropSelf(MUBlocks.TEST_BLOCK.get());
         providerAccess.dropSelf(MUBlocks.LIKELY_COLLAPSING_BLOCK.get());
         providerAccess.dropSelf(MUBlocks.MOST_LIKELY_COLLAPSING_BLOCK.get());
+        providerAccess.dropSelf(MUBlocks.SOLID_TAR.get());
+        providerAccess.dropSelf(MUBlocks.SEMISOLID_TAR.get());
+        providerAccess.dropSelf(MUBlocks.CONDENSED_TAR.get());
 
         providerAccess.dropWhenSilkTouch(MUBlocks.LOOT_POT.get());
         providerAccess.dropWhenSilkTouch(MUBlocks.GOLDEN_LOOT_POT.get());

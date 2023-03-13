@@ -35,8 +35,9 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
         fluidModelAndState(providerAccess, MUBlocks.TEST_FLUID.get(), modLoc("block/test_block"));
         fluidModelAndState(providerAccess, MUBlocks.TAR.get(), modLoc("block/tar_still"));
 
-        multiface(providerAccess, MUBlocks.TAR_STAINS.get());
-        multiface(providerAccess, MUBlocks.SMALL_TAR_STAINS.get());
+        multiface(providerAccess, MUBlocks.TAR_STAINS.get(), modLoc("block/solid_tar"));
+        multiface(providerAccess, MUBlocks.SMALL_TAR_STAINS.get(), modLoc("block/small_tar_stains"));
+        providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.SOLID_TAR.get());
 
         soakedBlock(providerAccess, MUBlocks.SOAKED_TAR_STONE.get(), new ResourceLocation("block/stone"), modLoc("block/soaked_tar"));
         soakedBlock(providerAccess, MUBlocks.SOAKED_TAR_DEEPSLATE.get(), new ResourceLocation("block/deepslate"), modLoc("block/soaked_tar"));
@@ -74,10 +75,8 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
         providerAccess.simpleBlockState(block, providerAccess.particleOnlyModel(block, particle));
     }
 
-    private void multiface(BlockStateAndModelProviderAccess providerAccess, Block block) {
-        var loc = ModelLocationUtils.getModelLocation(block);
-
-        providerAccess.itemModelProviderAccess().basicFlatItem(block.asItem(), loc);
+    private void multiface(BlockStateAndModelProviderAccess providerAccess, Block block, ResourceLocation textureLocation) {
+        providerAccess.itemModelProviderAccess().basicFlatItem(block.asItem(), textureLocation);
 
         MultiPartGenerator multiPartGenerator = MultiPartGenerator.multiPart(block);
 
@@ -88,6 +87,8 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
                 }
             });
         });
+
+        var loc = ModelLocationUtils.getModelLocation(block);
 
         for (Pair<BooleanProperty, Function<ResourceLocation, Variant>> propertyLoc : BlockModelGenerators.MULTIFACE_GENERATOR) {
             BooleanProperty booleanProperty = propertyLoc.getFirst();

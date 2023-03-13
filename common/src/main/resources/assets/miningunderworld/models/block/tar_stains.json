@@ -2,20 +2,20 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"particle": "miningunderworld:block/tar_stains",
-		"glow_lichen": "miningunderworld:block/tar_stains"
+		"particle": "miningunderworld:block/solid_tar",
+		"tar_stains": "miningunderworld:block/solid_tar"
 	},
 	"elements": [
 		{
 			"from": [0, 0, 0],
 			"to": [16, 16, 0.1],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#glow_lichen"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#glow_lichen"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#glow_lichen"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#glow_lichen"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#glow_lichen"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#glow_lichen"}
+				"north": {"uv": [0, 0, 16, 16], "texture": "#tar_stains"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#tar_stains"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#tar_stains"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#tar_stains"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#tar_stains"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#tar_stains"}
 			}
 		}
 	]
