@@ -18,7 +18,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HalfTransparentBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
@@ -30,8 +34,17 @@ public class CrystalBlock extends HalfTransparentBlock {
     public final int ORE_ID;//鉱石番号。ブロック生成時に鉱石取得するのが面倒だったので、先に十分量のブロックを生成して、中身は後で考える。
     public static final int MAX_ID = 255;//最大鉱石番号。256個の鉱石までなら正常に処理できることを意味する。
 
-    public CrystalBlock(int i, Properties properties) {
-        super(properties);
+    public CrystalBlock(int i) {
+        super(BlockBehaviour.Properties.of(Material.AMETHYST, MaterialColor.NONE)
+                .strength(0.5F, 0F)
+                .sound(SoundType.AMETHYST)
+                .noOcclusion()
+                .friction(1.145141919810F)//少し動いただけで加速しだす
+                .isViewBlocking((a, b, c) -> false)
+                .isValidSpawn((a, b, c, d) -> false)
+                .lightLevel(a -> 15)
+                .requiresCorrectToolForDrops()
+                .randomTicks());
         ORE_ID = i;
     }
 
@@ -63,7 +76,7 @@ public class CrystalBlock extends HalfTransparentBlock {
             if (Direction.stream().allMatch(d -> level.getBlockState(pos.relative(d)).getBlock() == this)) {
                 var origin = pos.offset(MUUtils.toI(MUUtils.randomBaseVector(random)));
                 if (Direction.stream().allMatch(d -> isAirOrMe(level.getBlockState(origin.relative(d)).getBlock())))
-                    CrystalFeature.addCrystal(level, origin, this.defaultBlockState());
+                    CrystalFeature.addCrystal(level, origin, this.defaultBlockState(), false);
             }
     }
 
@@ -91,8 +104,8 @@ public class CrystalBlock extends HalfTransparentBlock {
 
     public class Item extends BlockItem {
 
-        public Item(Block block, Properties properties) {
-            super(block, properties);
+        public Item(Block block) {
+            super(block, new Item.Properties());
         }
 
         @Override

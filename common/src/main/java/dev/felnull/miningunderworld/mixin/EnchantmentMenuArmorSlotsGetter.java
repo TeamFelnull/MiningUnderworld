@@ -1,6 +1,6 @@
 package dev.felnull.miningunderworld.mixin;
 
-import dev.felnull.miningunderworld.Temp;
+import dev.felnull.miningunderworld.MixinTemp;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -34,6 +34,6 @@ public abstract class EnchantmentMenuArmorSlotsGetter extends AbstractContainerM
 
     @Inject(method = "getEnchantmentList", at = @At("HEAD"))
     public void provideArmorSlots(ItemStack itemStack, int i, int j, CallbackInfoReturnable<List<EnchantmentInstance>> cir){
-        Temp.armorSlotsNow.set(armorSlots);//mixin間をつなぐには他クラスのstaticフィールドを使えばいい→ModifyEnchantmentValue
+        MixinTemp.armorSlotsNow.set(armorSlots);//mixin間をつなぐには他クラスのstaticフィールドを使えばいい→ModifyEnchantmentValue
     }
 }

@@ -30,6 +30,10 @@ public class MUBlockTagProviderWrapper extends BlockTagProviderWrapper {
         providerAccess.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).toArray(Block[]::new));
 
+        providerAccess.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
+                MUBlocks.BLUE_SAND.get(),
+                MUBlocks.WHITE_SAND.get());
+
         providerAccess.tag(BlockTags.STONE_ORE_REPLACEABLES).add(
                 MUBlocks.SOAKED_TAR_STONE.get(),
                 MUBlocks.SOAKED_LAVA_STONE.get());

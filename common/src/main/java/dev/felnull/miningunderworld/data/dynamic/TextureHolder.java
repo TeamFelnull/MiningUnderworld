@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class TextureHolder {
     public static Map<Integer, BufferedImage> idToTexture = new HashMap<>();//鉱石番号から鉱石特有のテクスチャ
+    public static Map<Integer, Integer> idToColor = new HashMap<>();//鉱石番号から鉱石特有の色
 
     //テクスチャを読み込みテクスチャを生成する
     public static void load(ResourceManager resourceManager) {
@@ -41,7 +42,7 @@ public class TextureHolder {
 
             //不透明度は約0.75で固定
             oreColor.set(0xBF000000 + (oreColor.get() & 0x00FFFFFF));
-
+            idToColor.put(i, oreColor.get());
             var baseCrystalTexture = MUUtils.getImage(baseCrystalResource);//基テクスチャ
             MUUtils.forEachPixel(baseCrystalTexture, (x, y) ->
                     baseCrystalTexture.setRGB(x, y, MUUtils.blend(oreColor.get(), baseCrystalTexture.getRGB(x, y))));//に下から鉱石特有色を重ねる

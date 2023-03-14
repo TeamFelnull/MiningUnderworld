@@ -27,6 +27,8 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
     @Override
     public void generateStatesAndModels(BlockStateAndModelProviderAccess providerAccess) {
         providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.TEST_BLOCK.get());
+        providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.BLUE_SAND.get());
+        providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.WHITE_SAND.get());
 
         existingModelAndState(providerAccess, MUBlocks.LOOT_POT.get(), modLoc("block/loot_pot"));
         existingModelAndState(providerAccess, MUBlocks.GOLDEN_LOOT_POT.get(), modLoc("block/golden_loot_pot"));
@@ -53,6 +55,10 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
             providerAccess.simpleBlockItemModel(block, model);
             providerAccess.simpleBlockState(block, model);
         });
+
+        var nazoModel = providerAccess.existingModel(modLoc("block/nazo"));
+        providerAccess.simpleBlockState(MUBlocks.NAZO.get(),nazoModel);
+        providerAccess.simpleBlockItemModel(MUBlocks.NAZO.get(),nazoModel);
     }
 
     private void semisolidTar(BlockStateAndModelProviderAccess providerAccess) {

@@ -26,7 +26,9 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
 
         providerAccess.dropWhenSilkTouch(MUBlocks.LOOT_POT.get());
         providerAccess.dropWhenSilkTouch(MUBlocks.GOLDEN_LOOT_POT.get());
-        MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).forEach(providerAccess::dropWhenSilkTouch);//ドロップなし
+        MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).forEach(providerAccess::dropWhenSilkTouch);
+        providerAccess.dropWhenSilkTouch(MUBlocks.BLUE_SAND.get());
+        providerAccess.dropWhenSilkTouch(MUBlocks.WHITE_SAND.get());
 
         providerAccess.add(MUBlocks.TAR_STAINS.get(), BlockLootSubProvider.noDrop());
         providerAccess.add(MUBlocks.SMALL_TAR_STAINS.get(), BlockLootSubProvider.noDrop());
@@ -36,6 +38,8 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
         providerAccess.dropOther(MUBlocks.SOAKED_LAVA_STONE.get(), Blocks.STONE);
         providerAccess.dropOther(MUBlocks.SOAKED_LAVA_DEEPSLATE.get(), Blocks.DEEPSLATE);
         providerAccess.dropSelf(MUBlocks.MINING_TNT.get());
+
+        providerAccess.dropSelf(MUBlocks.NAZO.get());
     }
 
     @Override

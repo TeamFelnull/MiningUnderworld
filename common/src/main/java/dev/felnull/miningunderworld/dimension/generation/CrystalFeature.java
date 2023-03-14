@@ -3,6 +3,7 @@ package dev.felnull.miningunderworld.dimension.generation;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.felnull.miningunderworld.block.CrystalBlock;
+import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.data.dynamic.OreHolder;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.BlockPos;
@@ -38,7 +39,7 @@ public class CrystalFeature extends Feature<CrystalFeature.Config> {
                     line.add(origin.offset(MUUtils.toI(baseVector.scale(i)))));
 
             if (isTouchingWall(level, line)) {
-                line.forEach(pos -> addCrystal(level, pos, config.crystal));
+                line.forEach(pos -> addCrystal(level, pos, config.crystal, true));
                 return true;
             }
         }
@@ -46,9 +47,21 @@ public class CrystalFeature extends Feature<CrystalFeature.Config> {
         return false;
     }
 
-    public static void addCrystal(ServerLevelAccessor level, BlockPos pos, BlockState block) {
+    public static void addCrystal(ServerLevelAccessor level, BlockPos pos, BlockState block, boolean replaceRootBlock) {
         level.setBlock(pos, block, 3);
-        Direction.stream().forEach(d -> level.setBlock(pos.relative(d), block, 3));
+        Direction.stream().map(pos::relative).forEach(nPos -> {
+            level.setBlock(nPos, block, 3);
+            if (replaceRootBlock)
+                Direction.stream().map(nPos::relative).forEach(nnPos -> {
+                    if (!(level.isEmptyBlock(nnPos) || level.getBlockState(nnPos).getBlock() instanceof CrystalBlock)) {
+                        level.setBlock(nnPos, MUBlocks.WHITE_SAND.get().defaultBlockState(), 0);
+                        Direction.stream().map(nnPos::relative).forEach(nnnPos -> {
+                            if (!(level.isEmptyBlock(nnnPos) || level.getBlockState(nnnPos).getBlock() instanceof CrystalBlock))
+                                level.setBlock(nnnPos, MUBlocks.WHITE_SAND.get().defaultBlockState(), 0);
+                        });
+                    }
+                });
+        });
     }
 
     public static boolean isTouchingWall(WorldGenLevel level, ArrayList<BlockPos> line) {

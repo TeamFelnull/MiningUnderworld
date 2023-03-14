@@ -1,0 +1,19 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "nazo": "miningunderworld:block/crystal_base"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#nazo", "cullface": "down" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#nazo" },
+        "north": { "uv": [ 0, 14, 16, 16 ], "texture": "#nazo", "cullface": "north" },
+        "south": { "uv": [ 0, 14, 16, 16 ], "texture": "#nazo", "cullface": "south" },
+        "west":  { "uv": [ 0, 14, 16, 16 ], "texture": "#nazo", "cullface": "west" },
+        "east":  { "uv": [ 0, 14, 16, 16 ], "texture": "#nazo", "tintindex": 0, "cullface": "east" }
+      }
+    }
+  ]
+}

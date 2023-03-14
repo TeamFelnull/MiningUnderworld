@@ -12,6 +12,7 @@ public class MiningUnderworldClient {
         MUEntityRenderers.init();
         MUModelLayers.init();
         MUClientParticleProviders.init();
+        MUBlockColors.init();
     }
 
     public static void init() {
