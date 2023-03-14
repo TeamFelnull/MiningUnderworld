@@ -92,6 +92,7 @@ public class MUItems {
     //中間素材
     public static final RegistrySupplier<Item> RING = register("ring");
     public static final RegistrySupplier<Item> JEWELRYS_STAR = register("jewelrys_star", p -> new Item(p.rarity(Rarity.RARE)));
+    public static final RegistrySupplier<Item> TAR_CHUNK = register("tar_chunk");
 
     //液体入りバケツ
     public static final RegistrySupplier<Item> TEST_FLUID_BUCKET = register("test_fluid_bucket", p -> new ArchitecturyBucketItem(MUFluids.TEST_FLUID, p.craftRemainder(Items.BUCKET).stacksTo(1)));

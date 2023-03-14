@@ -2,6 +2,7 @@ package dev.felnull.miningunderworld.data;
 
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.block.MUBlocks;
+import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.provider.BlockLootTableProviderWrapper;
 import net.minecraft.data.PackOutput;
@@ -20,7 +21,7 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
         providerAccess.dropSelf(MUBlocks.LIKELY_COLLAPSING_BLOCK.get());
         providerAccess.dropSelf(MUBlocks.MOST_LIKELY_COLLAPSING_BLOCK.get());
         providerAccess.dropSelf(MUBlocks.SOLID_TAR.get());
-        providerAccess.dropSelf(MUBlocks.SEMISOLID_TAR.get());
+        providerAccess.dropOther(MUBlocks.SEMISOLID_TAR.get(), MUItems.TAR_CHUNK.get());
         providerAccess.dropSelf(MUBlocks.CONDENSED_TAR.get());
 
         providerAccess.dropWhenSilkTouch(MUBlocks.LOOT_POT.get());

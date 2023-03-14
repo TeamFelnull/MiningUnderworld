@@ -412,5 +412,13 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .pattern("TST")
                 .unlockedBy(providerAccess.getHasName(Items.IRON_PICKAXE), providerAccess.has(Items.IRON_PICKAXE))
                 .save(exporter);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, MUBlocks.SOLID_TAR.get())
+                .define('T', MUItems.TAR_CHUNK.get())
+                .pattern("TT")
+                .pattern("TT")
+                .unlockedBy(providerAccess.getHasName(MUItems.TAR_CHUNK.get()), providerAccess.has(MUItems.TAR_CHUNK.get()))
+                .save(exporter);
+
     }
 }
