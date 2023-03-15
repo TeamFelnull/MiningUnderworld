@@ -26,7 +26,8 @@
     "LivingEntityMixin",
     "PrimedTntAccessor",
     "StartCollapseForEntity",
-    "TntBlockMixin"
+    "TntBlockMixin",
+    "SuppressErrorInTestEnsuring"
   ],
   "injectors": {
     "defaultRequire": 1

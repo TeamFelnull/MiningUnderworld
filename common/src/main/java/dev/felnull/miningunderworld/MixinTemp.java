@@ -12,6 +12,7 @@ public class MixinTemp {
 
     //mixin内にpublic staticを置けないから、mixinのためにpublic static使うには外部クラスが必要
     public static ThreadLocal<List<ItemStack>> armorSlotsNow = new ThreadLocal<>();//一応複数スレッドで同時にエンチャ選択されたとき用にスレッドごとのstatic変数を提供
+    public static ThreadLocal<Boolean> testEnsuring = ThreadLocal.withInitial(() -> false);
 
     //forgeとfabricでRedirect先が違ったから共通部分をここに移動
     public static int modifyEnchantmentValue(int enchantmentValue){

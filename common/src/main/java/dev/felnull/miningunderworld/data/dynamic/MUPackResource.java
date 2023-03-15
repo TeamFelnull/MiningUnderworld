@@ -1,8 +1,10 @@
 package dev.felnull.miningunderworld.data.dynamic;
 
 import dev.felnull.miningunderworld.MiningUnderworld;
+import dev.felnull.miningunderworld.block.CrystalBlock;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.util.MUUtils;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
@@ -25,6 +27,8 @@ public class MUPackResource implements PackResources {
 
     String VANILLA = "minecraft";
 
+    //こいつらはただの文字列としてもregexとしても使うから、.だけだと駄目なように見える。
+    //でも拡張子の前なんて.しか来ないからOK
     String JSON = ".json";
     String PNG = ".png";
 
@@ -142,12 +146,8 @@ public class MUPackResource implements PackResources {
                         }
                         """.replace("114514", MUUtils.subPrefixAndSuffix(loc, BLOCK_LOOT_TABLE + "/", JSON).toString()));
         } else if (loc.getPath().matches(BLOCK_TEXTURE + "/" + CRYSTAL + PNG)) {
-            var oreLocStr = MUUtils.subPrefixAndSuffix(loc, BLOCK_TEXTURE + "/" + "ore_crystal_", PNG).getPath();
-            var namespace = oreLocStr.substring(0, oreLocStr.indexOf("_"));
-            var path = oreLocStr.substring(oreLocStr.indexOf("_") + 1);
-            var oreLoc = new ResourceLocation(namespace, path);//鉱石のResourceLocation再構築
-
-            return toIOSup(TextureHolder.oreToTexture.get(oreLoc));
+            var crystal = (CrystalBlock) BuiltInRegistries.BLOCK.get(MUUtils.subPrefixAndSuffix(loc, BLOCK_TEXTURE + "/", PNG));
+            return toIOSup(TextureHolder.oreToTexture.get(crystal.ORE_LOC));
         } else if (loc.getPath().matches(BLOCK_MODEL + "/" + CRYSTAL + JSON))
             return toIOSup("""
                     {

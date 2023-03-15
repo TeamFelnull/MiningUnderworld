@@ -32,6 +32,10 @@ public class MUNoiseRouter {
                         DensityFunctions.add(
                                 cave_cheese,
                                 DensityFunctions.constant(.3)));//チーズの空気部分減らす
+        var bedrockLayers = DensityFunctions.max(
+                DensityFunctions.add(getDensity(densities, "overworld/depth"), DensityFunctions.constant(-.7)),
+                DensityFunctions.add(getDensity(densities, "y"), DensityFunctions.constant(-315)));
+        cave = DensityFunctions.max(cave, bedrockLayers);//岩盤層を追加
 
         //各引数の動作は謎だらけ
         return new NoiseRouter(
