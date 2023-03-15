@@ -3,10 +3,8 @@ package dev.felnull.miningunderworld;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.utils.Env;
 import dev.architectury.utils.EnvExecutor;
-import dev.felnull.miningunderworld.block.CrystalBlock;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.client.MiningUnderworldClient;
-import dev.felnull.miningunderworld.data.dynamic.OreHolder;
 import dev.felnull.miningunderworld.dimension.MiningUnderworldDimension;
 import dev.felnull.miningunderworld.entity.MUEntityTypes;
 import dev.felnull.miningunderworld.fluid.MUFluids;
@@ -27,7 +25,7 @@ public class MiningUnderworld {
             new ResourceLocation(MiningUnderworld.MODID, MiningUnderworld.MODID),
             builder -> builder
                     .icon(() -> new ItemStack(Items.APPLE))
-                    .displayItems((flag , output, op) -> {
+                    .displayItems((flag, output, op) -> {
                         MUItems.ITEMS.forEach(i -> output.accept(i.get()));
                         MUBlocks.BLOCK_ITEMS.forEach(b -> output.accept(b.get()));
                     }));

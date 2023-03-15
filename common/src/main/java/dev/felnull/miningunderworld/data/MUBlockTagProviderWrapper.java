@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.data;
 
-import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.provider.BlockTagProviderWrapper;

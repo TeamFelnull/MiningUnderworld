@@ -26,7 +26,7 @@ public class ServerHandler {
         DEPOSED_TICK_FUNCS.clear();
     }
 
-    public static void addTickFunc(TickFunc func){
+    public static void addTickFunc(TickFunc func) {
         SCHEDULED_TICK_FUNCS.add(func);
     }
 
@@ -48,7 +48,7 @@ public class ServerHandler {
         public abstract void func();
     }
 
-    public static abstract class NextTickFunc extends TickFunc{
+    public static abstract class NextTickFunc extends TickFunc {
         private boolean hasProcessed;
 
         @Override

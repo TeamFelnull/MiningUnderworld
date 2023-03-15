@@ -28,12 +28,12 @@ public abstract class EnchantmentMenuArmorSlotsGetter extends AbstractContainerM
 
     //より一般的な方のinit
     @Inject(method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/inventory/ContainerLevelAccess;)V", at = @At("TAIL"))
-    private void storeArmorSlots(int i, Inventory inventory, ContainerLevelAccess containerLevelAccess, CallbackInfo ci){
+    private void storeArmorSlots(int i, Inventory inventory, ContainerLevelAccess containerLevelAccess, CallbackInfo ci) {
         this.armorSlots = inventory.armor;
     }
 
     @Inject(method = "getEnchantmentList", at = @At("HEAD"))
-    public void provideArmorSlots(ItemStack itemStack, int i, int j, CallbackInfoReturnable<List<EnchantmentInstance>> cir){
+    public void provideArmorSlots(ItemStack itemStack, int i, int j, CallbackInfoReturnable<List<EnchantmentInstance>> cir) {
         MixinTemp.armorSlotsNow.set(armorSlots);//mixin間をつなぐには他クラスのstaticフィールドを使えばいい→ModifyEnchantmentValue
     }
 }

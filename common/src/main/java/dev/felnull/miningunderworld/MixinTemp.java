@@ -15,8 +15,8 @@ public class MixinTemp {
     public static ThreadLocal<Boolean> testEnsuring = ThreadLocal.withInitial(() -> false);
 
     //forgeとfabricでRedirect先が違ったから共通部分をここに移動
-    public static int modifyEnchantmentValue(int enchantmentValue){
-        if(MixinTemp.armorSlotsNow.get() == null)//null→アーマーが取得されなかった→エンチャ台以外からselectEnchantmentが呼ばれた
+    public static int modifyEnchantmentValue(int enchantmentValue) {
+        if (MixinTemp.armorSlotsNow.get() == null)//null→アーマーが取得されなかった→エンチャ台以外からselectEnchantmentが呼ばれた
             return enchantmentValue;
         var isFullArmor = MixinTemp.armorSlotsNow.get().stream().allMatch(item ->
                 item.getItem() instanceof ArmorItem armor && armor.getMaterial() == MUArmorMaterials.LAPIS_LAZULI);

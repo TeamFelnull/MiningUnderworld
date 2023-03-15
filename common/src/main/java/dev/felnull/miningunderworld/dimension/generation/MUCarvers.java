@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.dimension.generation;
 
-import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -10,7 +9,6 @@ import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.TrapezoidFloat;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.CarverDebugSettings;
@@ -27,7 +25,7 @@ public class MUCarvers {
 
     public static RegistrySetBuilder addToBuilder(RegistrySetBuilder builder) {//データパック自動生成に登録
         return builder.add(Registries.CONFIGURED_CARVER, context -> {
-           context.register(COLLAPSING_CANYON, WorldCarver.CANYON.configured(new CanyonCarverConfiguration(
+            context.register(COLLAPSING_CANYON, WorldCarver.CANYON.configured(new CanyonCarverConfiguration(
                     0.5F,//生成確率
                     UniformHeight.of(VerticalAnchor.bottom(), VerticalAnchor.top()),//生成範囲きっと
                     ConstantFloat.of(10.0F),//ランダムで決まる大きさの倍率？
@@ -41,7 +39,7 @@ public class MUCarvers {
                             3,
                             UniformFloat.of(0.75F, 1.0F),
                             1.0F,
-                            0.0F)))) ;
+                            0.0F))));
         });
     }
 }

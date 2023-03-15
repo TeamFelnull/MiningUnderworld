@@ -45,6 +45,6 @@ public class EquipmentAccessoryIntegration extends BaseIntegration {
     }
 
     public boolean equip(Player player, ItemStack stack) {
-        return MUEquipmentAccessoryExpectPlatform.equip(player,stack);
+        return MUEquipmentAccessoryExpectPlatform.equip(player, stack);
     }
 }

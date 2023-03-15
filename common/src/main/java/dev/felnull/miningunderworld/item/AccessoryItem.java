@@ -43,21 +43,21 @@ public class AccessoryItem extends Item {
     }
 
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> list, TooltipFlag tooltipFlag) {
-        list.add(Component.translatable( "item." + MiningUnderworld.MODID + ".accessory.desc", specialEffect.getDisplayName()));
+        list.add(Component.translatable("item." + MiningUnderworld.MODID + ".accessory.desc", specialEffect.getDisplayName()));
     }
 
     public enum Type {
         RING,
         SOUL;
 
-        public MobEffectInstance getAlwaysEffectInstance(MobEffect effect){
+        public MobEffectInstance getAlwaysEffectInstance(MobEffect effect) {
             return switch (this) {
                 case RING -> new MobEffectInstance(effect, 20, 3);
                 case SOUL -> new MobEffectInstance(effect, 500, 1);
             };
         }
 
-        public MobEffectInstance getSpecialEffectInstance(MobEffect effect){
+        public MobEffectInstance getSpecialEffectInstance(MobEffect effect) {
             return switch (this) {
                 case RING -> new MobEffectInstance(effect, 500, 1);
                 case SOUL -> new MobEffectInstance(effect, 200, 1);

@@ -71,7 +71,7 @@ public interface CollapseStarter {
         //高い確率で崩落したなら次も高い確率で崩落処理
         if (e.level.random.nextFloat() < collapseRate(e, e.level.getBlockState(pos), starter, walkDist))
             ServerHandler.addTickFunc(new ServerHandler.NextTickFunc() {//次tickに崩落処理
-                float fallDist = getFallDist(e);
+                final float fallDist = getFallDist(e);
 
                 @Override
                 public void func() {

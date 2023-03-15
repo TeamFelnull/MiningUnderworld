@@ -6,14 +6,8 @@ import dev.felnull.miningunderworld.MixinTemp;
 import dev.felnull.miningunderworld.block.CrystalBlock;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.util.MUUtils;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.SectionPos;
-import net.minecraft.core.Vec3i;
-import net.minecraft.server.level.WorldGenRegion;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -25,7 +19,6 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class CrystalFeature extends Feature<CrystalFeature.Config> {
 
@@ -80,8 +73,8 @@ public class CrystalFeature extends Feature<CrystalFeature.Config> {
         });
     }
 
-    public static void setBlockExceptBedrockLayer(ServerLevelAccessor level, BlockPos pos, BlockState block){
-        if(level.getBlockState(pos).getBlock() != Blocks.BEDROCK)
+    public static void setBlockExceptBedrockLayer(ServerLevelAccessor level, BlockPos pos, BlockState block) {
+        if (level.getBlockState(pos).getBlock() != Blocks.BEDROCK)
             level.setBlock(pos, block, 2);
     }
 

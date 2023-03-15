@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.data;
 
-import dev.felnull.miningunderworld.dimension.MUBiomes;
 import dev.felnull.miningunderworld.dimension.MiningUnderworldDimension;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.provider.RegistriesDatapackProviderWrapper;

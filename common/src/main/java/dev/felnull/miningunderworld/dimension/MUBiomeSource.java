@@ -66,10 +66,11 @@ public class MUBiomeSource extends BiomeSource {
         else
             return biomes.getOrThrow(Biomes.NETHER_WASTES);//それ以外はネザー
     }
+
     public static final DeferredRegister<Codec<? extends BiomeSource>> BIOME_SOURCES = DeferredRegister.create(MiningUnderworld.MODID, Registries.BIOME_SOURCE);
     public static final RegistrySupplier<Codec<? extends BiomeSource>> MU_BIOME = BIOME_SOURCES.register("mu_biome", () -> MUBiomeSource.MU_CODEC);
 
-    public static void init(){
+    public static void init() {
         BIOME_SOURCES.register();
     }
 }

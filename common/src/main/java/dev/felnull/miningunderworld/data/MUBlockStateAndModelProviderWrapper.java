@@ -1,11 +1,9 @@
 package dev.felnull.miningunderworld.data;
 
 import com.mojang.datafixers.util.Pair;
-import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.model.BlockStateAndModelProviderAccess;
-import dev.felnull.otyacraftengine.data.model.FileTexture;
 import dev.felnull.otyacraftengine.data.provider.BlockStateAndModelProviderWrapper;
 import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
