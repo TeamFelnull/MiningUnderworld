@@ -29,14 +29,10 @@ public class MiningUnderworld {
                     .icon(() -> new ItemStack(Items.APPLE))
                     .displayItems((flag , output, op) -> {
                         MUItems.ITEMS.forEach(i -> output.accept(i.get()));
-                        MUBlocks.BLOCK_ITEMS.forEach(b -> {
-                            if(!(b.get() instanceof CrystalBlock.Item crystal && crystal.getCrystalBlock().ORE_ID >= OreHolder.idToOre.size()))
-                                output.accept(b.get());
-                        });
+                        MUBlocks.BLOCK_ITEMS.forEach(b -> output.accept(b.get()));
                     }));
 
     public static void init() {
-        OreHolder.getInstance().initServer();
         MUPackets.initServer();
         MUFluids.init();
         MUItems.init();

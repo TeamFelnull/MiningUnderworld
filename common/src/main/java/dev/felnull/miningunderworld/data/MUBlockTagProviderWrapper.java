@@ -27,9 +27,6 @@ public class MUBlockTagProviderWrapper extends BlockTagProviderWrapper {
                 MUBlocks.SOAKED_LAVA_DEEPSLATE.get(),
                 MUBlocks.MINING_TNT.get());
 
-        providerAccess.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-                MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).toArray(Block[]::new));
-
         providerAccess.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 MUBlocks.BLUE_SAND.get(),
                 MUBlocks.WHITE_SAND.get());

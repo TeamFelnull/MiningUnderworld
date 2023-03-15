@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.felnull.miningunderworld.block.CrystalBlock;
 import dev.felnull.miningunderworld.block.MUBlocks;
-import dev.felnull.miningunderworld.data.dynamic.OreHolder;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,18 +29,17 @@ public class CrystalFeature extends Feature<CrystalFeature.Config> {
         var origin = context.origin();
         var config = context.config();
 
-        if (config.crystal.getBlock() instanceof CrystalBlock crystal && crystal.ORE_ID < OreHolder.idToOre.size()) {
-            var baseVector = MUUtils.randomBaseVector(level.getRandom());
-            var length = level.getRandom().nextInt(4, 16);
+        //ランダムな方向と大きさを持つBlockPosの直線を生成
+        var baseVector = MUUtils.randomBaseVector(level.getRandom());
+        var length = level.getRandom().nextInt(4, 16);
+        var line = new ArrayList<BlockPos>();
+        IntStream.rangeClosed(0, length).forEach(i ->
+                line.add(origin.offset(MUUtils.toI(baseVector.scale(i)))));
 
-            var line = new ArrayList<BlockPos>();
-            IntStream.rangeClosed(0, length).forEach(i ->
-                    line.add(origin.offset(MUUtils.toI(baseVector.scale(i)))));
-
-            if (isTouchingWall(level, line)) {
-                line.forEach(pos -> addCrystal(level, pos, config.crystal, true));
-                return true;
-            }
+        //どっちかの端のみ壁についてたら実際に生成
+        if (isTouchingWall(level, line)) {
+            line.forEach(pos -> addCrystal(level, pos, config.crystal, true));
+            return true;
         }
 
         return false;

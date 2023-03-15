@@ -4,6 +4,7 @@ import dev.architectury.core.block.ArchitecturyLiquidBlock;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
+import dev.felnull.miningunderworld.data.dynamic.OreHolder;
 import dev.felnull.miningunderworld.fluid.MUFluids;
 import dev.felnull.miningunderworld.particles.MUParticleTypes;
 import net.minecraft.core.particles.ParticleTypes;
@@ -23,7 +24,6 @@ import net.minecraft.world.level.material.MaterialColor;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.IntStream;
 
 public interface MUBlocks {
 
@@ -44,10 +44,10 @@ public interface MUBlocks {
     RegistrySupplier<Block> SOAKED_LAVA_DEEPSLATE = register("soaked_lava_deepslate", () -> new LiquidSoakedBlock(() -> Fluids.LAVA, () -> ParticleTypes.DRIPPING_LAVA, BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
 
     //クリスタル
-    List<RegistrySupplier<Block>> CRYSTALS = IntStream.rangeClosed(0, CrystalBlock.MAX_ID)
-            .mapToObj(i -> register("crystal_" + i, () -> new CrystalBlock(i), crystal -> crystal.new Item(crystal)))
+    List<RegistrySupplier<Block>> CRYSTALS = OreHolder.oreLocs.stream()
+            .map(ore -> register("ore_crystal_" + ore.getNamespace() + "_" + ore.getPath(), () -> new CrystalBlock(ore), crystal -> crystal.new Item()))
             .toList();//Streamのままでは再利用できない。Listにしておいて、使うたび再度streamを開く必要
-    RegistrySupplier<Block> BLUE_SAND = register("blue_sand", () -> new CrystalSand(0.1F, 0xffa0a0ff, MaterialColor.COLOR_LIGHT_BLUE));
+    RegistrySupplier<Block> BLUE_SAND = register("blue_sand", () -> new CrystalSand(0.3F, 0xffa0a0ff, MaterialColor.COLOR_LIGHT_BLUE));
     RegistrySupplier<Block> WHITE_SAND = register("white_sand", () -> new CrystalSand(1F, 0xffe7d5ff, MaterialColor.COLOR_MAGENTA));
 
     //液体
@@ -61,7 +61,7 @@ public interface MUBlocks {
     RegistrySupplier<Block> LIKELY_COLLAPSING_BLOCK = register("likely_collapsing_block", () -> new CollapsingBlock(1 / 2F, 1, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
     RegistrySupplier<Block> MOST_LIKELY_COLLAPSING_BLOCK = register("most_likely_collapsing_block", () -> new CollapsingBlock(1F, 2, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
     RegistrySupplier<Block> MINING_TNT = register("mining_tnt", () -> new MiningTntBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.STONE).strength(0.1F).sound(SoundType.STONE)));
-    RegistrySupplier<Block> NAZO = register("nazo", () -> new HABlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.STONE).strength(0.1F).sound(SoundType.STONE)));
+    //RegistrySupplier<Block> NAZO = register("nazo", () -> new HABlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.STONE).strength(0.1F).sound(SoundType.STONE)));
 
     private static <B extends Block> RegistrySupplier<B> registerBlockOnly(String name, Supplier<B> block) {
         return BLOCKS.register(name, block);

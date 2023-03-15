@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.mixin.client;
 
-import dev.felnull.miningunderworld.data.dynamic.OreHolder;
 import dev.felnull.miningunderworld.data.dynamic.TextureHolder;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
@@ -23,7 +22,6 @@ public class PreReloadResourceGetter {//既存のリソースを使って独自�
 
     @Inject(method = "createReload", at = @At("HEAD"))
     public void add(Executor executor, Executor executor2, CompletableFuture<Unit> completableFuture, List<PackResources> list, CallbackInfoReturnable<ReloadInstance> cir) {
-        new OreHolder.Loader(new MultiPackResourceManager(PackType.SERVER_DATA, list));//dataから鉱石取得
         TextureHolder.load(new MultiPackResourceManager(PackType.CLIENT_RESOURCES, list));//assetsからテクスチャ取得
     }
 }

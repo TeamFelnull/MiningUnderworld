@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.block;
 
-import dev.felnull.miningunderworld.data.dynamic.OreHolder;
 import dev.felnull.miningunderworld.dimension.generation.CrystalFeature;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.BlockPos;
@@ -8,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.BlockItem;
@@ -31,10 +31,9 @@ import java.util.List;
 //鉱石ごとに対応した色とドロップを持つクリスタル
 public class CrystalBlock extends HalfTransparentBlock {
 
-    public final int ORE_ID;//鉱石番号。ブロック生成時に鉱石取得するのが面倒だったので、先に十分量のブロックを生成して、中身は後で考える。
-    public static final int MAX_ID = 255;//最大鉱石番号。256個の鉱石までなら正常に処理できることを意味する。
+    public final ResourceLocation ORE_LOC;
 
-    public CrystalBlock(int i) {
+    public CrystalBlock(ResourceLocation loc) {
         super(BlockBehaviour.Properties.of(Material.AMETHYST, MaterialColor.NONE)
                 .strength(0.5F, 0F)
                 .sound(SoundType.AMETHYST)
@@ -45,7 +44,7 @@ public class CrystalBlock extends HalfTransparentBlock {
                 .lightLevel(a -> 15)
                 .requiresCorrectToolForDrops()
                 .randomTicks());
-        ORE_ID = i;
+        ORE_LOC = loc;
     }
 
     @Override
@@ -85,11 +84,11 @@ public class CrystalBlock extends HalfTransparentBlock {
     }
 
     public Block getOre() {
-        return getOre(ORE_ID);
+        return getOre(ORE_LOC);
     }
 
-    public static Block getOre(int i) {
-        return BuiltInRegistries.BLOCK.get(OreHolder.idToOre.get(i));
+    public static Block getOre(ResourceLocation loc) {
+        return BuiltInRegistries.BLOCK.get(loc);
     }
 
     @Override
@@ -104,17 +103,13 @@ public class CrystalBlock extends HalfTransparentBlock {
 
     public class Item extends BlockItem {
 
-        public Item(Block block) {
-            super(block, new Item.Properties());
+        public Item() {
+            super(CrystalBlock.this, new Item.Properties());
         }
 
         @Override
         public Component getName(ItemStack itemStack) {
             return CrystalBlock.this.getName();
-        }
-
-        public CrystalBlock getCrystalBlock() {
-            return CrystalBlock.this;
         }
     }
 }

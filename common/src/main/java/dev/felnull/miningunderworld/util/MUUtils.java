@@ -26,6 +26,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.function.BiConsumer;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -166,5 +168,18 @@ public final class MUUtils {
 
     public static Vec3i toI(Vec3 v) {
         return new Vec3i(v.x, v.y, v.z);
+    }
+
+    public static <T> T getRandomlyFrom(Collection<T> c, RandomSource rand) {
+        var list = new ArrayList<>(c);
+        return list.get((int) (rand.nextFloat() * list.size()));//0<nextFloat<1のため配列の範囲外エラーは起きない
+    }
+
+    public static ResourceLocation addPrefixAndSuffix(ResourceLocation loc, String prefix, String suffix) {
+        return loc.withPath(prefix + loc.getPath() + suffix);
+    }
+
+    public static ResourceLocation subPrefixAndSuffix(ResourceLocation loc, String prefix, String suffix) {
+        return loc.withPath(loc.getPath().replaceAll(prefix + "(.*)" + suffix, "$1"));
     }
 }

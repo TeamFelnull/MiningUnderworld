@@ -1,6 +1,7 @@
 package dev.felnull.miningunderworld.block;
 
 import dev.felnull.miningunderworld.data.dynamic.OreHolder;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -40,7 +41,8 @@ public class CrystalSand extends SandBlock {
         return List.of();
     }
 
-    public static Block getRandomOre(RandomSource random) {
-        return CrystalBlock.getOre((int) (random.nextFloat() * OreHolder.idToOre.size()));//0<nextFloat<1のため配列の範囲外エラーは起きない
+    public static Block getRandomOre(RandomSource rand) {
+        var oreLoc = MUUtils.getRandomlyFrom(OreHolder.oreLocs, rand);
+        return CrystalBlock.getOre(oreLoc);
     }
 }

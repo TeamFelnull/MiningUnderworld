@@ -6,7 +6,7 @@
   "client": [
     "HumanoidArmorLayerMixin",
     "StartCollapseForPlayer",
-    "client.AddClientDynamicPackResource",
+    "client.AddDynamicPackResource",
     "client.CameraNearPlaneAccessor",
     "client.PreReloadResourceGetter"
   ],

@@ -1,7 +1,7 @@
 package dev.felnull.miningunderworld.data.dynamic;
 
 import dev.felnull.miningunderworld.MiningUnderworld;
-import dev.felnull.miningunderworld.block.CrystalBlock;
+import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackResources;
@@ -16,12 +16,31 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.IntStream;
 
 public class MUPackResource implements PackResources {
+
+    String VANILLA = "minecraft";
+
+    String JSON = ".json";
+    String PNG = ".png";
+
+    String BLOCK_TAG = "tags/blocks";
+    String PICKAXE_MINEABLE = "mineable/pickaxe";
+    String LOOT_TABLE = "loot_tables";
+    String BLOCK_LOOT_TABLE = "loot_tables/blocks";
+    String BLOCK_TEXTURE = "textures/block";
+    String MODEL = "models";
+    String BLOCK_MODEL = "models/block";
+    String BLOCK = "block";
+    String ITEM_MODEL = "models/item";
+    String BLOCKSTATES = "blockstates";
+
+    String CRYSTAL = "ore_crystal_.*";
+
 
     /**
      * このリソースパックが対応可能な情報の大まかな種類を返す。
@@ -29,28 +48,41 @@ public class MUPackResource implements PackResources {
      */
     @Override
     public Set<String> getNamespaces(PackType packType) {
-        if (packType == PackType.CLIENT_RESOURCES) {//assetsなら
-            var names = new HashSet<String>();
-            names.add(MiningUnderworld.MODID);//このMODのMODIDのみ受け付ける
-            return names;
-        }
-        return Collections.emptySet();//それ以外は何も受け付けない
+        return new HashSet<>(packType == PackType.SERVER_DATA ? List.of(MiningUnderworld.MODID, VANILLA) : List.of(MiningUnderworld.MODID));
     }
 
     /**
      * このリソースパックが持つ全てのリソースを認識させる。
      *
-     * @param packType       getNamespacesのフィルターを掻い潜ってきたPackType。PackTypeごとに認識させるリソースがある場合は使う。
-     * @param namespace      同じくフィルター済みのNameSpace。Namespaceごとに認識させるリソースがある場合は使う。
+     * @param packType       getNamespacesのフィルターを掻い潜ってきたPackType。PackTypeごとに認識させるリソースがある際に使う。
+     * @param namespace      同じくフィルター済みのNameSpace。Namespaceごとに認識させるリソースがある場合に使う。
      * @param path           Path。ResourceLocationの右側。ここではリソースの種類。種類ごとにリソース認識処理を書く。
      * @param resourceOutput これのacceptを呼べば認識させられる。
      */
     @Override
     public void listResources(PackType packType, String namespace, String path, ResourceOutput resourceOutput) {
-        if (path.equals("textures/block"))//ブロックテクスチャについて
-            IntStream.rangeClosed(0, CrystalBlock.MAX_ID)//全CrystalBlock分
-                    .mapToObj(i -> MUUtils.modLoc("textures/block/crystal_" + i + ".png"))//テクスチャのResourceLocation作って
-                    .forEach(loc -> resourceOutput.accept(loc, getResource(packType, loc)));//リソースとともに認識させる
+        if (packType == PackType.SERVER_DATA) {
+            if (namespace.equals(VANILLA)) {
+                if (path.equals(BLOCK_TAG)) {
+                    var loc = new ResourceLocation(BLOCK_TAG + "/" + PICKAXE_MINEABLE + JSON);
+                    resourceOutput.accept(loc, getResource(packType, loc));
+                }
+            } else if (path.equals(LOOT_TABLE))
+                recognizeCrystals(resourceOutput, packType, BLOCK_LOOT_TABLE + "/", JSON);
+        } else if (path.equals(BLOCK_TEXTURE))
+            recognizeCrystals(resourceOutput, packType, BLOCK_TEXTURE + "/", PNG);
+        else if (path.equals(MODEL)) {
+            recognizeCrystals(resourceOutput, packType, BLOCK_MODEL + "/", JSON);
+            recognizeCrystals(resourceOutput, packType, ITEM_MODEL + "/", JSON);
+        } else if (path.equals(BLOCKSTATES))
+            recognizeCrystals(resourceOutput, packType, BLOCKSTATES + "/", JSON);
+
+    }
+
+    public void recognizeCrystals(ResourceOutput resourceOutput, PackType packType, String prefix, String suffix) {
+        MUBlocks.CRYSTALS.stream()
+                .map(rs -> MUUtils.addPrefixAndSuffix(rs.getId(), prefix, suffix))
+                .forEach(loc -> resourceOutput.accept(loc, getResource(packType, loc)));
     }
 
     /**
@@ -65,20 +97,85 @@ public class MUPackResource implements PackResources {
     @Nullable
     @Override
     public IoSupplier<InputStream> getResource(PackType packType, ResourceLocation loc) {
-        if (loc.getPath().matches("textures/block/crystal_\\d*.png")) {//上で登録したものについて
-            var order = Integer.parseInt(loc.getPath().replaceAll("textures/block/crystal_(\\d*).png", "$1"));//取得する鉱石の番号。0から始まる
-            var max = OreHolder.idToOre.size() - 1;//この起動構成での鉱石数-1。鉱石番号
+        if (packType == PackType.SERVER_DATA) {
+            if (loc.getNamespace().equals(VANILLA)) {
+                if (loc.getPath().equals(BLOCK_TAG + "/" + PICKAXE_MINEABLE + JSON))
+                    return toIOSup("""
+                            {
+                             "replace":false,
+                             "values":[
+                             1919
+                             ]
+                            }
+                            """.replace("1919", String.join(",", MUBlocks.CRYSTALS.stream().map(it -> "\"" + it.getId() + "\"").toArray(String[]::new))));
+            } else if (loc.getPath().matches(BLOCK_LOOT_TABLE + "/" + CRYSTAL + JSON))
+                return toIOSup("""
+                        {
+                          "type": "minecraft:block",
+                          "pools": [
+                            {
+                              "bonus_rolls": 0.0,
+                              "conditions": [
+                                {
+                                  "condition": "minecraft:match_tool",
+                                  "predicate": {
+                                    "enchantments": [
+                                      {
+                                        "enchantment": "minecraft:silk_touch",
+                                        "levels": {
+                                          "min": 1
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "entries": [
+                                {
+                                  "type": "minecraft:item",
+                                  "name": "114514"
+                                }
+                              ],
+                              "rolls": 1.0
+                            }
+                          ]
+                        }
+                        """.replace("114514", MUUtils.subPrefixAndSuffix(loc, BLOCK_LOOT_TABLE + "/", JSON).toString()));
+        } else if (loc.getPath().matches(BLOCK_TEXTURE + "/" + CRYSTAL + PNG)) {
+            var oreLocStr = MUUtils.subPrefixAndSuffix(loc, BLOCK_TEXTURE + "/" + "ore_crystal_", PNG).getPath();
+            var namespace = oreLocStr.substring(0, oreLocStr.indexOf("_"));
+            var path = oreLocStr.substring(oreLocStr.indexOf("_") + 1);
+            var oreLoc = new ResourceLocation(namespace, path);//鉱石のResourceLocation再構築
 
-            if (order > max)//CrystalBlockの全blockstatesに対してテクスチャを与えるから、最大鉱石番号以上のも来る。
-                return imageToInputStreamSupplier(TRANSPARENT);//そんな奴は適当に透明なテクスチャで。ここnullだとforgeDataGenが起動しない
+            return toIOSup(TextureHolder.oreToTexture.get(oreLoc));
+        } else if (loc.getPath().matches(BLOCK_MODEL + "/" + CRYSTAL + JSON))
+            return toIOSup("""
+                    {
+                      "parent": "minecraft:block/cube_all",
+                      "textures": {
+                        "all": "1234"
+                      }
+                    }
+                    """.replace("1234", MUUtils.subPrefixAndSuffix(loc, MODEL + "/", JSON).toString()));
+        else if (loc.getPath().matches(ITEM_MODEL + "/" + CRYSTAL + JSON))
+            return toIOSup("""
+                    {
+                      "parent": "194"
+                    }
+                    """.replace("194", MUUtils.subPrefixAndSuffix(loc, ITEM_MODEL + "/", JSON).withPrefix(BLOCK + "/").toString()));
+        else if (loc.getPath().matches(BLOCKSTATES + "/" + CRYSTAL + JSON))
+            return toIOSup("""
+                    {
+                      "variants": {
+                        "": {
+                          "model": "1234"
+                        }
+                      }
+                    }
+                    """.replace("1234", MUUtils.subPrefixAndSuffix(loc, BLOCKSTATES + "/", JSON).withPrefix(BLOCK + "/").toString()));
 
-            return imageToInputStreamSupplier(TextureHolder.idToTexture.get(order));//番号内なら加工済みのものを返す
-        }
-
-        return null;//それ以外はnull!このリソパには含まれてなかったことを示す。
+        return null;//このリソパには含まれてなかった
     }
-
-    public static BufferedImage TRANSPARENT = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);//16x16透明テクスチャ
 
     /**
      * 画像をマイクラの欲しがる形に変形。
@@ -87,7 +184,7 @@ public class MUPackResource implements PackResources {
      * @param image 画像
      * @return リソースのインプットストリームのサプライヤ
      */
-    public static IoSupplier<InputStream> imageToInputStreamSupplier(BufferedImage image) {
+    public static IoSupplier<InputStream> toIOSup(BufferedImage image) {
         try {//ImageIO君の為
             var bo = new ByteArrayOutputStream();
             ImageIO.write(image, "png", bo);
@@ -95,6 +192,10 @@ public class MUPackResource implements PackResources {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static IoSupplier<InputStream> toIOSup(String str) {
+        return () -> new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
     }
 
     @Nullable

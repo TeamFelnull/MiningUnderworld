@@ -49,16 +49,10 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
         var miningTNTModel = providerAccess.cubeBottomTopBlockModel(MUBlocks.MINING_TNT.get(), modLoc("block/mining_tnt_bottom"), modLoc("block/mining_tnt_side"), modLoc("block/mining_tnt_top"));
         providerAccess.simpleBlockItemModel(MUBlocks.MINING_TNT.get(), miningTNTModel);
         providerAccess.simpleBlockState(MUBlocks.MINING_TNT.get(), miningTNTModel);
-
-        MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).forEach(block -> {
-            var model = providerAccess.cubeAllBlockModel(block, FileTexture.ofUncheck(block.arch$registryName().withPrefix("block/")));
-            providerAccess.simpleBlockItemModel(block, model);
-            providerAccess.simpleBlockState(block, model);
-        });
-
+/*
         var nazoModel = providerAccess.existingModel(modLoc("block/nazo"));
         providerAccess.simpleBlockState(MUBlocks.NAZO.get(),nazoModel);
-        providerAccess.simpleBlockItemModel(MUBlocks.NAZO.get(),nazoModel);
+        providerAccess.simpleBlockItemModel(MUBlocks.NAZO.get(),nazoModel);*/
     }
 
     private void semisolidTar(BlockStateAndModelProviderAccess providerAccess) {
