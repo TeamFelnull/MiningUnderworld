@@ -98,6 +98,7 @@ public interface MUItems {
     RegistrySupplier<Item> RING = register("ring");
     RegistrySupplier<Item> JEWELRYS_STAR = register("jewelrys_star", p -> new Item(p.rarity(Rarity.RARE)));
     RegistrySupplier<Item> TAR_CHUNK = register("tar_chunk");
+    RegistrySupplier<Item> BLUE_CLAY_BALL = register("blue_clay_ball", SnowballItem::new);
 
     //液体入りバケツ
     RegistrySupplier<Item> TEST_FLUID_BUCKET = register("test_fluid_bucket", p -> new ArchitecturyBucketItem(MUFluids.TEST_FLUID, p.craftRemainder(Items.BUCKET).stacksTo(1)));

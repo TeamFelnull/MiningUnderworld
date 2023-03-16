@@ -28,7 +28,8 @@ public class MUBlockTagProviderWrapper extends BlockTagProviderWrapper {
 
         providerAccess.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 MUBlocks.BLUE_SAND.get(),
-                MUBlocks.WHITE_SAND.get());
+                MUBlocks.WHITE_SAND.get(),
+                MUBlocks.BLUE_CLAY.get());
 
         providerAccess.tag(BlockTags.STONE_ORE_REPLACEABLES).add(
                 MUBlocks.SOAKED_TAR_STONE.get(),

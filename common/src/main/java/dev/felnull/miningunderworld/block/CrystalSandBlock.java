@@ -18,11 +18,11 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import java.util.List;
 
-public class CrystalSand extends SandBlock {
+public class CrystalSandBlock extends SandBlock {
 
     public final float dropProb;
 
-    public CrystalSand(float dropProb, int dustColor, MaterialColor color) {
+    public CrystalSandBlock(float dropProb, int dustColor, MaterialColor color) {
         super(dustColor, BlockBehaviour.Properties.of(Material.SAND, color).strength(0.5F).sound(SoundType.SAND));
         this.dropProb = dropProb;
     }

@@ -87,7 +87,6 @@ public class MUPackResource implements PackResources {
             recognizeCrystals(resourceOutput, packType, ITEM_MODEL + "/", JSON);
         } else if (path.equals(BLOCKSTATES))
             recognizeCrystals(resourceOutput, packType, BLOCKSTATES + "/", JSON);
-
     }
 
     public void recognizeCrystals(ResourceOutput resourceOutput, PackType packType, String prefix, String suffix) {
@@ -146,13 +145,9 @@ public class MUPackResource implements PackResources {
                           ]
                         }
                         """.replace("114514", MUUtils.subPrefixAndSuffix(loc, BLOCK_LOOT_TABLE + "/", JSON).toString()));
-            else if (loc.getPath().matches(BIOME + "/" + "(?!.*_base).*" + JSON)) {
-                var a = DataHolder.muBiomes.get(loc);
-                var b = MUPlacedFeatures.DUMMY.location();
-                var c = a
-                        .replace("\"" + b + "\"", DataHolder.joinedOres);//ダミーを差し替え
-                return toIOSup(c);
-            }
+            else if (loc.getPath().matches(BIOME + "/" + "(?!.*_base).*" + JSON))
+                return toIOSup(DataHolder.muBiomes.get(loc)
+                        .replace("\"" + MUPlacedFeatures.DUMMY.location() + "\"", DataHolder.joinedOres));//ダミーを差し替え
         } else if (loc.getPath().matches(BLOCK_TEXTURE + "/" + CRYSTAL + PNG)) {
             var crystal = (CrystalBlock) BuiltInRegistries.BLOCK.get(MUUtils.subPrefixAndSuffix(loc, BLOCK_TEXTURE + "/", PNG));
             return toIOSup(TextureHolder.oreToTexture.get(crystal.ORE_LOC));
@@ -182,7 +177,10 @@ public class MUPackResource implements PackResources {
                     }
                     """.replace("1234", MUUtils.subPrefixAndSuffix(loc, BLOCKSTATES + "/", JSON).withPrefix(BLOCK + "/").toString()));
 
-        return null;//このリソパには含まれてなかった
+        return null;
+        //このnullの意味
+        //getResourceが直接呼ばれた場合：このリソパには含まれてなかった（別のリソパにあればそっちから取得される）
+        //listResourcesで認識させるために呼ばれた場合：そのリソースは存在しない（別のリソパにも存在しないとされる、存在状況が上書きされる）
     }
 
     /**

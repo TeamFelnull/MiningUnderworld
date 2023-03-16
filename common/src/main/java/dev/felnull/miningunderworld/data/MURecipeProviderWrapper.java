@@ -7,11 +7,9 @@ import dev.felnull.otyacraftengine.data.CrossDataGeneratorAccess;
 import dev.felnull.otyacraftengine.data.provider.RecipeProviderWrapper;
 import dev.felnull.otyacraftengine.tag.PlatformItemTags;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SpecialRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.Consumer;
@@ -420,5 +418,19 @@ public class MURecipeProviderWrapper extends RecipeProviderWrapper {
                 .unlockedBy(providerAccess.getHasName(MUItems.TAR_CHUNK.get()), providerAccess.has(MUItems.TAR_CHUNK.get()))
                 .save(exporter);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MUBlocks.BLUE_CLAY.get())
+                .define('C', MUItems.BLUE_CLAY_BALL.get())
+                .pattern("CC")
+                .pattern("CC")
+                .unlockedBy(providerAccess.getHasName(MUItems.BLUE_CLAY_BALL.get()), providerAccess.has(MUItems.BLUE_CLAY_BALL.get()))
+                .save(exporter);
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(MUBlocks.BLUE_CLAY.get()), RecipeCategory.BUILDING_BLOCKS, Blocks.TERRACOTTA.asItem(), 0.35F, 200)
+                .unlockedBy(providerAccess.getHasName(MUBlocks.BLUE_CLAY.get()), providerAccess.has(MUBlocks.BLUE_CLAY.get()))
+                .save(exporter);
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(MUItems.BLUE_CLAY_BALL.get()), RecipeCategory.MISC, Items.BRICK, 0.3F, 200)
+                .unlockedBy(providerAccess.getHasName(MUItems.BLUE_CLAY_BALL.get()), providerAccess.has(MUItems.BLUE_CLAY_BALL.get()))
+                .save(exporter);
     }
 }

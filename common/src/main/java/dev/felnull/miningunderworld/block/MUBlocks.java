@@ -47,8 +47,9 @@ public interface MUBlocks {
     List<RegistrySupplier<Block>> CRYSTALS = DataHolder.oreLocs.stream()
             .map(ore -> register("ore_crystal_" + ore.getNamespace() + "_" + ore.getPath(), () -> new CrystalBlock(ore), crystal -> crystal.new Item()))
             .toList();//Streamのままでは再利用できない。Listにしておいて、使うたび再度streamを開く必要
-    RegistrySupplier<Block> BLUE_SAND = register("blue_sand", () -> new CrystalSand(0.3F, 0xffa0a0ff, MaterialColor.TERRACOTTA_LIGHT_BLUE));
-    RegistrySupplier<Block> WHITE_SAND = register("white_sand", () -> new CrystalSand(1F, 0xffe7d5ff, MaterialColor.TERRACOTTA_MAGENTA));
+    RegistrySupplier<Block> BLUE_SAND = register("blue_sand", () -> new CrystalSandBlock(0.3F, 0xffa0a0ff, MaterialColor.TERRACOTTA_LIGHT_BLUE));
+    RegistrySupplier<Block> BLUE_CLAY = register("blue_clay", CrystalClayBlock::new);
+    RegistrySupplier<Block> WHITE_SAND = register("white_sand", () -> new CrystalSandBlock(1F, 0xffe7d5ff, MaterialColor.TERRACOTTA_MAGENTA));
 
     //液体
     RegistrySupplier<LiquidBlock> TEST_FLUID = registerBlockOnly("test_fluid", () -> new ArchitecturyLiquidBlock(MUFluids.TEST_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER).noCollission().strength(100.0F).noLootTable()));

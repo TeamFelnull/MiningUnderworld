@@ -26,6 +26,7 @@ public class MUBlockStateAndModelProviderWrapper extends BlockStateAndModelProvi
     public void generateStatesAndModels(BlockStateAndModelProviderAccess providerAccess) {
         providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.TEST_BLOCK.get());
         providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.BLUE_SAND.get());
+        providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.BLUE_CLAY.get());
         providerAccess.simpleCubeBlockStateModelAndItemModel(MUBlocks.WHITE_SAND.get());
 
         existingModelAndState(providerAccess, MUBlocks.LOOT_POT.get(), modLoc("block/loot_pot"));

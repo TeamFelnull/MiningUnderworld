@@ -22,11 +22,10 @@ public class MUSurfaceRule {
                         SurfaceRules.ifTrue(SurfaceRules.isBiome(MUBiomes.CRYSTAL_CAVE),
                                 SurfaceRules.sequence(
                                         SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
-                                                stateRule(Blocks.RED_SANDSTONE)),
+                                                stateRule(MUBlocks.BLUE_CLAY.get())),
                                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR,
                                                 stateRule(MUBlocks.BLUE_SAND.get())),
-                                        SurfaceRules.ifTrue(SurfaceRules.VERY_DEEP_UNDER_FLOOR,
-                                                stateRule(Blocks.RED_SANDSTONE))))
+                                        stateRule(MUBlocks.BLUE_CLAY.get())))
                 );
 
 
