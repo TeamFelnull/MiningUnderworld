@@ -51,6 +51,7 @@ public interface MUItems {
     RegistrySupplier<Item> AMETHYST_AXE = register("amethyst_axe", p -> new AxeItem(MUTiers.AMETHYST, 6.0F, -3.1F, p));
     RegistrySupplier<Item> AMETHYST_SHOVEL = register("amethyst_shovel", p -> new ShovelItem(MUTiers.AMETHYST, 1.5F, -3.0F, p));
     RegistrySupplier<Item> AMETHYST_HOE = register("amethyst_hoe", p -> new HoeItem(MUTiers.AMETHYST, 1, -3.0F, p));
+
     //レッドストーン
     RegistrySupplier<Item> REDSTONE_INGOT = register("redstone_ingot");
     RegistrySupplier<Item> REDSTONE_HELMET = register("redstone_helmet", p -> new ArmorItem(MUArmorMaterials.REDSTONE, EquipmentSlot.HEAD, p));
@@ -62,6 +63,7 @@ public interface MUItems {
     RegistrySupplier<Item> REDSTONE_AXE = register("redstone_axe", p -> new AxeItem(MUTiers.REDSTONE, 6.0F, -3.1F, p));
     RegistrySupplier<Item> REDSTONE_SHOVEL = register("redstone_shovel", p -> new ShovelItem(MUTiers.REDSTONE, 1.5F, -3.0F, p));
     RegistrySupplier<Item> REDSTONE_HOE = register("redstone_hoe", p -> new HoeItem(MUTiers.REDSTONE, 1, -3.0F, p));
+
     //ラピスラズリ
     RegistrySupplier<Item> LAPIS_LAZULI_INGOT = register("lapis_lazuli_ingot");
     RegistrySupplier<Item> LAPIS_LAZULI_HELMET = register("lapis_lazuli_helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));
@@ -73,6 +75,7 @@ public interface MUItems {
     RegistrySupplier<Item> LAPIS_LAZULI_AXE = register("lapis_lazuli_axe", p -> new AxeItem(MUTiers.LAPIS_LAZULI, 6.0F, -3.1F, p));
     RegistrySupplier<Item> LAPIS_LAZULI_SHOVEL = register("lapis_lazuli_shovel", p -> new ShovelItem(MUTiers.LAPIS_LAZULI, 1.5F, -3.0F, p));
     RegistrySupplier<Item> LAPIS_LAZULI_HOE = register("lapis_lazuli_hoe", p -> new HoeItem(MUTiers.LAPIS_LAZULI, 1, -3.0F, p));
+
     //アクセサリー
     RegistrySupplier<Item> DIAMOND_RING = register("diamond_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
     RegistrySupplier<Item> EMERALD_RING = register("emerald_ring", p -> new AccessoryItem(MobEffects.HEAL, MobEffects.DIG_SPEED, AccessoryItem.Type.RING, p.stacksTo(1).rarity(Rarity.RARE)));
@@ -85,10 +88,12 @@ public interface MUItems {
     RegistrySupplier<Item> LAPIS_LAZULI_SOUL = register("lapis_lazuli_soul", p -> new AccessoryItem(MobEffects.HUNGER, MobEffects.LEVITATION, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
     RegistrySupplier<Item> AMETHYST_SOUL = register("amethyst_soul", p -> new AccessoryItem(MobEffects.HUNGER, MobEffects.LEVITATION, AccessoryItem.Type.SOUL, p.stacksTo(1).rarity(Rarity.RARE)));
     RegistrySupplier<Item> REDSTONE_BELT = register("redstone_belt", p -> new SimpleEquipmentAccessoryItem(AccessoryType.BELT, p.rarity(Rarity.RARE)));
+
     //特殊アイテム
     RegistrySupplier<Item> LIGHT_HELMET = register("light_helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));
     RegistrySupplier<Item> HELMET = register("helmet", p -> new ArmorItem(MUArmorMaterials.LAPIS_LAZULI, EquipmentSlot.HEAD, p));
     RegistrySupplier<Item> HEAD_LIGHT = register("head_light");
+
     //中間素材
     RegistrySupplier<Item> RING = register("ring");
     RegistrySupplier<Item> JEWELRYS_STAR = register("jewelrys_star", p -> new Item(p.rarity(Rarity.RARE)));
@@ -97,6 +102,7 @@ public interface MUItems {
     //液体入りバケツ
     RegistrySupplier<Item> TEST_FLUID_BUCKET = register("test_fluid_bucket", p -> new ArchitecturyBucketItem(MUFluids.TEST_FLUID, p.craftRemainder(Items.BUCKET).stacksTo(1)));
     RegistrySupplier<Item> TAR_BUCKET = register("tar_bucket", p -> new ArchitecturyBucketItem(MUFluids.TAR, p.craftRemainder(Items.BUCKET).stacksTo(1)));
+
     //スポーンエッグ
     RegistrySupplier<Item> CAVE_BAT_SPAWN_EGG = register("cave_bat_spawn_egg", p -> new ArchitecturySpawnEggItem(MUEntityTypes.CAVE_BAT, 0x525252, 0x3c3c3c, p));
 

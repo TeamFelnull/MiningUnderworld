@@ -121,17 +121,7 @@ public class MUPackResource implements PackResources {
                               "bonus_rolls": 0.0,
                               "conditions": [
                                 {
-                                  "condition": "minecraft:match_tool",
-                                  "predicate": {
-                                    "enchantments": [
-                                      {
-                                        "enchantment": "minecraft:silk_touch",
-                                        "levels": {
-                                          "min": 1
-                                        }
-                                      }
-                                    ]
-                                  }
+                                  "condition": "minecraft:survives_explosion"
                                 }
                               ],
                               "entries": [

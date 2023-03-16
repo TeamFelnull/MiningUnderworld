@@ -1,7 +1,6 @@
 package dev.felnull.miningunderworld.dimension.generation;
 
 import com.mojang.datafixers.util.Pair;
-import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.util.MUUtils;
 import dev.felnull.otyacraftengine.util.OEDataGenUtils;
 import net.minecraft.core.RegistrySetBuilder;
@@ -16,6 +15,7 @@ import net.minecraft.world.level.levelgen.placement.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 //Feature:生成物の型
 //ConfiguredFeature:生成物
@@ -27,11 +27,10 @@ public class MUPlacedFeatures {
             MUFeatures.TEST_FEATURE,//生成物の型
             new TestFeature.Config(19),//型に入れる情報
             commonOrePlacement(19, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT));//生成物の配置方
-    public static final List<ResourceKey<PlacedFeature>> CRYSTALS = MUBlocks.CRYSTALS.stream().map(crystal ->
-            register(crystal.getId().getPath(),
+    public static final List<ResourceKey<PlacedFeature>> MANY_CRYSTALS = IntStream.range(0, 19).mapToObj(i -> register("crystal_" + i,
                     MUFeatures.CRYSTAL_FEATURE,
-                    new CrystalFeature.Config(crystal.get().defaultBlockState()),
-                    commonOrePlacement(200, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT))).toList();
+                    FeatureConfiguration.NONE,//１チャンク当たり（おそらく）の設置数上限256個だけどそれ以上設置したいから複数作る
+                    commonOrePlacement(256, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT))).toList();
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<PlacedFeature> register(String name, F feature, FC config, List<PlacementModifier> placement) {
         var placedFeature = ResourceKey.create(Registries.PLACED_FEATURE, MUUtils.modLoc(name));

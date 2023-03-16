@@ -26,7 +26,7 @@ public class MUBlockLootTableProviderWrapper extends BlockLootTableProviderWrapp
 
         providerAccess.dropWhenSilkTouch(MUBlocks.LOOT_POT.get());
         providerAccess.dropWhenSilkTouch(MUBlocks.GOLDEN_LOOT_POT.get());
-        MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).forEach(providerAccess::dropWhenSilkTouch);//forgeのrunData時にエラーされないためだけに残す
+        MUBlocks.CRYSTALS.stream().map(RegistrySupplier::get).forEach(providerAccess::dropSelf);//forgeのrunData時にエラーされないためだけに残す
         providerAccess.dropWhenSilkTouch(MUBlocks.BLUE_SAND.get());
         providerAccess.dropWhenSilkTouch(MUBlocks.WHITE_SAND.get());
 

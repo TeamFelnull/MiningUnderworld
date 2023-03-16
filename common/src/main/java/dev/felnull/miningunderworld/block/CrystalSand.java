@@ -33,12 +33,13 @@ public class CrystalSand extends SandBlock {
         if (stack != null && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) != 0)
             return super.getDrops(blockState, builder);
 
-        if (builder.getLevel().random.nextFloat() < dropProb) {
+        int fortune = stack != null ? EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack) : 0;
+        if (builder.getLevel().random.nextFloat() < dropProb * (fortune + 1)) {
             var ore = getRandomOre(builder.getLevel().random);
             return ore.getDrops(ore.defaultBlockState(), builder);
         }
 
-        return List.of();
+        return super.getDrops(blockState, builder);
     }
 
     public static Block getRandomOre(RandomSource rand) {

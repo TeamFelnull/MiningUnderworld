@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.placement.CavePlacements;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -74,12 +75,18 @@ public class MUBiomes {
     }
 
     public static Biome crystalCave(BiomeGenerationSettings.Builder gen) {
-        //地下の土みたいにクリスタル大量
-        MUPlacedFeatures.CRYSTALS.forEach(crystal ->
+        var amb = defaultAmbient()
+                .skyColor(0x6f6fe3)
+                .fogColor(0x98a4ff)
+                .waterColor(0x00ddff)
+                .waterFogColor(0xa6e2ff);
+
+        MUPlacedFeatures.MANY_DENSE_ORES.forEach(crystal ->
                 gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, crystal));//全宝石のクリスタル柱フィーチャー
+        gen.addFeature(GenerationStep.Decoration.LAKES, MiscOverworldPlacements.SPRING_WATER);
         //砂漠感
 
-        return defaultBiome(gen)
+        return defaultBiome(amb, gen)
                 .temperature(1)
                 .downfall(1)
                 .build();

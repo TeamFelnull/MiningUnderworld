@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.felnull.miningunderworld.MixinTemp;
 import dev.felnull.miningunderworld.block.CrystalBlock;
+import dev.felnull.miningunderworld.block.CrystalSand;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.BlockPos;
@@ -15,22 +16,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
-public class CrystalFeature extends Feature<CrystalFeature.Config> {
+public class CrystalFeature extends Feature<NoneFeatureConfiguration> {
 
     public CrystalFeature() {
-        super(CrystalFeature.Config.CODEC);
+        super(NoneFeatureConfiguration.CODEC);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<CrystalFeature.Config> context) {
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var level = context.level();
         var origin = context.origin();
-        var config = context.config();
 
         //ランダムな方向と大きさを持つBlockPosの直線を生成
         //far chunkとかで無理ならまた生成、実際に置けるまで繰り返す
@@ -49,7 +51,9 @@ public class CrystalFeature extends Feature<CrystalFeature.Config> {
 
         //表面から生えるようにしたい
         if (isTouchingBlock(level, line)) {
-            line.forEach(pos -> addCrystal(level, pos, config.crystal, true));
+            //何を置くかはこの時点で決める（データパック生成時には知り得ない情報故）
+            var crystal = MUUtils.getRandomlyFrom(MUBlocks.CRYSTALS.stream().map(Supplier::get).toList(), level.getRandom()).defaultBlockState();
+            line.forEach(pos -> addCrystal(level, pos, crystal, true));
             return true;
         }
 
@@ -84,11 +88,5 @@ public class CrystalFeature extends Feature<CrystalFeature.Config> {
         var end = level.isEmptyBlock(line.get(line.size() - 1));
         var toStart = line.subList(0, line.size() - 2).stream().allMatch(level::isEmptyBlock);
         return (!start && toEnd) || (!end && toStart);
-    }
-
-    public record Config(BlockState crystal) implements FeatureConfiguration {
-        public static final Codec<CrystalFeature.Config> CODEC = RecordCodecBuilder.create((instance) ->
-                instance.group(BlockState.CODEC.fieldOf("crystal").forGetter(c -> c.crystal))
-                        .apply(instance, CrystalFeature.Config::new));
     }
 }
