@@ -1,7 +1,7 @@
 package dev.felnull.miningunderworld.fabric;
 
 import dev.felnull.miningunderworld.MiningUnderworld;
-import dev.felnull.miningunderworld.data.dynamic.OreHolder;
+import dev.felnull.miningunderworld.data.dynamic.DataHolder;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.resource.ModResourcePack;
 import net.fabricmc.fabric.impl.resource.loader.ModResourcePackUtil;
@@ -21,7 +21,7 @@ public class MiningUnderworldFabric implements ModInitializer {
         ModResourcePackUtil.appendModResourcePacks(modPacks, PackType.SERVER_DATA, null);//modのpack追加
         List<PackResources> packs = new ArrayList<>(modPacks);//ジェネリクスのキャスト
         packs.add(new ServerPacksSource().getVanillaPack());//バニラのpack追加
-        OreHolder.load(new MultiPackResourceManager(PackType.SERVER_DATA, packs));//dataから鉱石取得
+        DataHolder.load(new MultiPackResourceManager(PackType.SERVER_DATA, packs));//dataから鉱石取得
 
         MiningUnderworld.init();
     }

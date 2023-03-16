@@ -1,6 +1,6 @@
 package dev.felnull.miningunderworld.block;
 
-import dev.felnull.miningunderworld.data.dynamic.OreHolder;
+import dev.felnull.miningunderworld.data.dynamic.DataHolder;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
@@ -43,7 +43,7 @@ public class CrystalSand extends SandBlock {
     }
 
     public static Block getRandomOre(RandomSource rand) {
-        var oreLoc = MUUtils.getRandomlyFrom(OreHolder.oreLocs, rand);
+        var oreLoc = MUUtils.getRandomlyFrom(DataHolder.oreLocs, rand);
         return CrystalBlock.getOre(oreLoc);
     }
 }

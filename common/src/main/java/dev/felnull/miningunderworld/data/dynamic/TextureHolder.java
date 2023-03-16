@@ -21,7 +21,7 @@ public class TextureHolder {
         var baseCrystalResource = resourceManager.getResource(MUUtils.modLoc("textures/block/crystal_base.png")).get();
 
         //鉱石事に生成
-        OreHolder.oreLocs.forEach(ore -> {
+        DataHolder.oreLocs.forEach(ore -> {
             var oreModelResource = resourceManager.getResource(MUUtils.addPrefixAndSuffix(ore, "models/block/", ".json"));
             var oreColor = new AtomicInteger();//鉱石特有色を計算するという意思表示
 

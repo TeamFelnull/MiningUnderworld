@@ -4,7 +4,7 @@ import dev.architectury.core.block.ArchitecturyLiquidBlock;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
-import dev.felnull.miningunderworld.data.dynamic.OreHolder;
+import dev.felnull.miningunderworld.data.dynamic.DataHolder;
 import dev.felnull.miningunderworld.fluid.MUFluids;
 import dev.felnull.miningunderworld.particles.MUParticleTypes;
 import net.minecraft.core.particles.ParticleTypes;
@@ -44,7 +44,7 @@ public interface MUBlocks {
     RegistrySupplier<Block> SOAKED_LAVA_DEEPSLATE = register("soaked_lava_deepslate", () -> new LiquidSoakedBlock(() -> Fluids.LAVA, () -> ParticleTypes.DRIPPING_LAVA, BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)));
 
     //クリスタル
-    List<RegistrySupplier<Block>> CRYSTALS = OreHolder.oreLocs.stream()
+    List<RegistrySupplier<Block>> CRYSTALS = DataHolder.oreLocs.stream()
             .map(ore -> register("ore_crystal_" + ore.getNamespace() + "_" + ore.getPath(), () -> new CrystalBlock(ore), crystal -> crystal.new Item()))
             .toList();//Streamのままでは再利用できない。Listにしておいて、使うたび再度streamを開く必要
     RegistrySupplier<Block> BLUE_SAND = register("blue_sand", () -> new CrystalSand(0.3F, 0xffa0a0ff, MaterialColor.TERRACOTTA_LIGHT_BLUE));

@@ -31,6 +31,10 @@ public class MUPlacedFeatures {
                     MUFeatures.CRYSTAL_FEATURE,
                     FeatureConfiguration.NONE,//１チャンク当たり（おそらく）の設置数上限256個だけどそれ以上設置したいから複数作る
                     commonOrePlacement(256, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT))).toList();
+    public static final ResourceKey<PlacedFeature> DUMMY = register("dummy",
+            MUFeatures.TEST_FEATURE,
+            new TestFeature.Config(19),
+            commonOrePlacement(19, PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT));
 
     public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<PlacedFeature> register(String name, F feature, FC config, List<PlacementModifier> placement) {
         var placedFeature = ResourceKey.create(Registries.PLACED_FEATURE, MUUtils.modLoc(name));

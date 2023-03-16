@@ -1,8 +1,11 @@
 package dev.felnull.miningunderworld.data.dynamic;
 
+import dev.architectury.registry.registries.RegistrySupplier;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.block.CrystalBlock;
 import dev.felnull.miningunderworld.block.MUBlocks;
+import dev.felnull.miningunderworld.dimension.MUBiomes;
+import dev.felnull.miningunderworld.dimension.generation.MUPlacedFeatures;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,6 +46,7 @@ public class MUPackResource implements PackResources {
     String BLOCK = "block";
     String ITEM_MODEL = "models/item";
     String BLOCKSTATES = "blockstates";
+    String BIOME = "worldgen/biome";
 
     String CRYSTAL = "ore_crystal_.*";
 
@@ -73,6 +78,8 @@ public class MUPackResource implements PackResources {
                 }
             } else if (path.equals(LOOT_TABLE))
                 recognizeCrystals(resourceOutput, packType, BLOCK_LOOT_TABLE + "/", JSON);
+            else if (DataHolder.collectedBiomes && path.equals(BIOME))//biome取得する準備が整ってない段階では、resourceをnullで上書きしないよう止める
+                recognizeCollection(MUBiomes.biomeLocs(), resourceOutput, packType, BIOME + "/", JSON);
         } else if (path.equals(BLOCK_TEXTURE))
             recognizeCrystals(resourceOutput, packType, BLOCK_TEXTURE + "/", PNG);
         else if (path.equals(MODEL)) {
@@ -84,8 +91,12 @@ public class MUPackResource implements PackResources {
     }
 
     public void recognizeCrystals(ResourceOutput resourceOutput, PackType packType, String prefix, String suffix) {
-        MUBlocks.CRYSTALS.stream()
-                .map(rs -> MUUtils.addPrefixAndSuffix(rs.getId(), prefix, suffix))
+        recognizeCollection(MUBlocks.CRYSTALS.stream().map(RegistrySupplier::getId).toList(), resourceOutput, packType, prefix, suffix);
+    }
+
+    public void recognizeCollection(Collection<ResourceLocation> c, ResourceOutput resourceOutput, PackType packType, String prefix, String suffix) {
+        c.stream()
+                .map(loc -> MUUtils.addPrefixAndSuffix(loc, prefix, suffix))
                 .forEach(loc -> resourceOutput.accept(loc, getResource(packType, loc)));
     }
 
@@ -135,6 +146,13 @@ public class MUPackResource implements PackResources {
                           ]
                         }
                         """.replace("114514", MUUtils.subPrefixAndSuffix(loc, BLOCK_LOOT_TABLE + "/", JSON).toString()));
+            else if (loc.getPath().matches(BIOME + "/" + "(?!.*_base).*" + JSON)) {
+                var a = DataHolder.muBiomes.get(loc);
+                var b = MUPlacedFeatures.DUMMY.location();
+                var c = a
+                        .replace("\"" + b + "\"", DataHolder.joinedOres);//ダミーを差し替え
+                return toIOSup(c);
+            }
         } else if (loc.getPath().matches(BLOCK_TEXTURE + "/" + CRYSTAL + PNG)) {
             var crystal = (CrystalBlock) BuiltInRegistries.BLOCK.get(MUUtils.subPrefixAndSuffix(loc, BLOCK_TEXTURE + "/", PNG));
             return toIOSup(TextureHolder.oreToTexture.get(crystal.ORE_LOC));
@@ -210,7 +228,7 @@ public class MUPackResource implements PackResources {
 
     @Override
     public String packId() {//名前、ログでしか見れないけど
-        return "MiningUnderworld Auto Generated Textures";
+        return "MiningUnderworld Auto Generated Resources";
     }
 
     @Override

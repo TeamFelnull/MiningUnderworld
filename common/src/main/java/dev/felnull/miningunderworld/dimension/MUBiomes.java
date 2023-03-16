@@ -10,12 +10,14 @@ import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -29,6 +31,10 @@ public class MUBiomes {
     public static final ResourceKey<Biome> COLLAPSING_CAVE = register("collapsing_cave", MUBiomes::collapsingCave);
     public static final ResourceKey<Biome> CRYSTAL_CAVE = register("crystal_cave", MUBiomes::crystalCave);
     public static final ResourceKey<Biome> TAR_TAINTED_CAVE = register("tar_tainted_cave", MUBiomes::tarTaintedCave);
+
+    public static List<ResourceLocation> biomeLocs() {
+        return MU_BIOMES.keySet().stream().map(ResourceKey::location).toList();
+    }
 
     public static ResourceKey<Biome> register(String name, Function<BiomeGenerationSettings.Builder, Biome> f) {
         var key = ResourceKey.create(Registries.BIOME, MUUtils.modLoc(name));
@@ -156,10 +162,9 @@ public class MUBiomes {
     }
 
     public static BiomeGenerationSettings.Builder defaultGeneration(BiomeGenerationSettings.Builder gen) {
-        BiomeDefaultFeatures.addDefaultOres(gen);//鉱石追加
-        BiomeDefaultFeatures.addExtraEmeralds(gen);//エメラルドも追加
         return gen
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TEST_FEATURE)//独自生成物追加
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MUPlacedFeatures.DUMMY)//後で全modの鉱石に差し替えるためのダミー
                 .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)//洞窟
                 .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);//洞窟２;;
     }

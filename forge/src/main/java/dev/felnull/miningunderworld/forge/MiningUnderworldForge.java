@@ -3,7 +3,7 @@ package dev.felnull.miningunderworld.forge;
 import com.google.common.collect.ImmutableList;
 import dev.architectury.platform.forge.EventBuses;
 import dev.felnull.miningunderworld.MiningUnderworld;
-import dev.felnull.miningunderworld.data.dynamic.OreHolder;
+import dev.felnull.miningunderworld.data.dynamic.DataHolder;
 import dev.felnull.miningunderworld.integration.EquipmentAccessoryIntegration;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
@@ -32,7 +32,7 @@ public class MiningUnderworldForge {
                         .map(ResourcePackLoader::createPackForMod)
                         .toList());//modのpack追加
         packs.add(new ServerPacksSource().getVanillaPack());//バニラのpack追加
-        OreHolder.load(new MultiPackResourceManager(PackType.SERVER_DATA, packs));//dataから鉱石取得
+        DataHolder.load(new MultiPackResourceManager(PackType.SERVER_DATA, packs));//dataから鉱石取得
 
         MiningUnderworld.init();
         eventBus.addListener(this::enqueue);

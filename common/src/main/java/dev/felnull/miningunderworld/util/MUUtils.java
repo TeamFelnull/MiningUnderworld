@@ -160,6 +160,14 @@ public final class MUUtils {
         }
     }
 
+    public static String getStr(Resource resource) {
+        try {
+            return new String(resource.open().readAllBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static Vec3 randomBaseVector(RandomSource random) {
         var theta = random.nextFloat() * Math.PI;
         var phi = random.nextFloat() * 2 * Math.PI;
