@@ -81,7 +81,7 @@ public class MUBiomes {
                 .waterColor(0x00ddff)
                 .waterFogColor(0xa6e2ff);
 
-        MUPlacedFeatures.MANY_DENSE_ORES.forEach(crystal ->
+        MUPlacedFeatures.MANY_CRYSTALS.forEach(crystal ->
                 gen.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, crystal));//全宝石のクリスタル柱フィーチャー
         gen.addFeature(GenerationStep.Decoration.LAKES, MiscOverworldPlacements.SPRING_WATER);
         //砂漠感
