@@ -49,8 +49,7 @@ public interface CollapseStarter {
 
     //崩落確率
     static float collapseRate(Entity e, BlockState bs, CollapseStarter starter, double walkDist) {
-        //ブロックごとの基本値、strength1.5以下で１以上
-        float collapseRate = 1.5F * 2 / Math.max(bs.getBlock().defaultDestroyTime() + bs.getBlock().getExplosionResistance(), 0.1F);
+        float collapseRate = baseCollapseRate(bs);
 
         //崩落開始奴による係数
         collapseRate *= starter.getCollapseCoefficient();
@@ -65,6 +64,11 @@ public interface CollapseStarter {
         return collapseRate;
     }
 
+    //ブロックごとの基本値、strength1.5以下で１以上
+    static float baseCollapseRate(BlockState bs) {
+        return 1.5F * 2 / Math.max(bs.getBlock().defaultDestroyTime() + bs.getBlock().getExplosionResistance(), 0.1F);
+    }
+
     //実際に崩落
     //TODO:ベッドみたいな複数ブロックで一つなやつも正常に落としたい
     private static void collapse(Entity e, BlockPos pos, CollapseStarter starter, double walkDist) {
@@ -75,14 +79,14 @@ public interface CollapseStarter {
 
                 @Override
                 public void func() {
-                    if (!e.isRemoved()) {
+                    if (!e.isRemoved() && shouldStartCollapse(e)) {
                         fallDistances.put(e.getUUID(), Math.max(fallDist - 1, 0));//高い確率の原因となる落下距離は減衰
                         startCollapse(e, e.blockPosition().below(), walkDist);//移動情報そのままスタート（でなきゃプレイヤーの移動が無条件で０として扱われる）
                     }
                 }
             });
 
-        StrictFallingBlockEntity.strictFall(e.level, pos, e.level.getBlockState(pos));//今回の崩落
+        StrictFallingBlockEntity.strictFall(e.level, pos);//今回の崩落
     }
 
     Map<UUID, Float> fallDistances = new HashMap<>();

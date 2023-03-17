@@ -24,7 +24,9 @@ public class MUBlockTagProviderWrapper extends BlockTagProviderWrapper {
                 MUBlocks.SOAKED_TAR_DEEPSLATE.get(),
                 MUBlocks.SOAKED_LAVA_STONE.get(),
                 MUBlocks.SOAKED_LAVA_DEEPSLATE.get(),
-                MUBlocks.MINING_TNT.get());
+                MUBlocks.MINING_TNT.get(),
+                MUBlocks.UNSTABLE_STANCE.get(),
+                MUBlocks.COLLAPSING_STANCE.get());
 
         providerAccess.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 MUBlocks.BLUE_SAND.get(),

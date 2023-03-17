@@ -68,12 +68,11 @@ public class MUBiomes {
     }
 
     public static Biome collapsingCave(BiomeGenerationSettings.Builder gen) {
-        //天上は砂利多め
+        //天上は砂利多め→SurfaceRule
         gen.addCarver(GenerationStep.Carving.AIR, MUCarvers.COLLAPSING_CANYON);//崖多め
-        //複数種類のモロ感足場
+        gen.addFeature(GenerationStep.Decoration.RAW_GENERATION, MUPlacedFeatures.COLLAPSING_CAVE_FLOOR);//複数種類のモロ感足場
 
-
-        //破壊すると確率で周りのブロック崩落、確率で連鎖
+        //破壊すると確率で周りのブロック崩落、確率で連鎖→ServerHandler
 
         return defaultBiome(gen)
                 .temperature(-0.5F)

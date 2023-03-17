@@ -1,8 +1,20 @@
 package dev.felnull.miningunderworld.server.handler;
 
+import dev.architectury.event.EventResult;
+import dev.architectury.event.events.common.BlockEvent;
 import dev.architectury.event.events.common.TickEvent;
+import dev.architectury.utils.value.IntValue;
+import dev.felnull.miningunderworld.block.CollapseStarter;
+import dev.felnull.miningunderworld.dimension.MUBiomes;
+import dev.felnull.miningunderworld.entity.StrictFallingBlockEntity;
 import dev.felnull.miningunderworld.world.DynamicSignalLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +26,26 @@ public class ServerHandler {
 
     public static void init() {
         TickEvent.SERVER_LEVEL_POST.register(ServerHandler::onServerLevelPostTick);
+        BlockEvent.BREAK.register(ServerHandler::collapse);
+    }
+
+    private static EventResult collapse(Level level, BlockPos pos, BlockState blockState, ServerPlayer serverPlayer, @Nullable IntValue intValue) {
+        if (level.getBiome(pos).is(MUBiomes.COLLAPSING_CAVE))
+            collapseNeighbors(level, pos);
+        return EventResult.pass();
+    }
+
+    public static void collapseNeighbors(Level level, BlockPos pos) {
+        Direction.stream()
+                .map(pos::relative)
+                .forEach(nPos -> {
+                    if (!level.getBlockState(nPos).canBeReplaced()//自分が落ちれるもので
+                            && level.getBlockState(nPos.relative(Direction.DOWN)).canBeReplaced()//落ちれて
+                            && level.random.nextFloat() < CollapseStarter.baseCollapseRate(level.getBlockState(nPos))) {//確率に勝てたら
+                        StrictFallingBlockEntity.strictFall(level, nPos);
+                        collapseNeighbors(level, nPos);
+                    }
+                });
     }
 
     private static void onServerLevelPostTick(ServerLevel level) {

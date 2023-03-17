@@ -26,7 +26,7 @@ public class MUCarvers {
     public static RegistrySetBuilder addToBuilder(RegistrySetBuilder builder) {//データパック自動生成に登録
         return builder.add(Registries.CONFIGURED_CARVER, context -> {
             context.register(COLLAPSING_CANYON, WorldCarver.CANYON.configured(new CanyonCarverConfiguration(
-                    0.5F,//生成確率
+                    1F,//チャンクごとの生成確率
                     UniformHeight.of(VerticalAnchor.bottom(), VerticalAnchor.top()),//生成範囲きっと
                     ConstantFloat.of(10.0F),//ランダムで決まる大きさの倍率？
                     VerticalAnchor.aboveBottom(8),//溶岩になるとこ

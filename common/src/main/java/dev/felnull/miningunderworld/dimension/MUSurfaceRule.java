@@ -3,6 +3,7 @@ package dev.felnull.miningunderworld.dimension;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 
@@ -17,17 +18,18 @@ public class MUSurfaceRule {
                 SurfaceRules.ifTrue(increaseGradiently("bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top()),
                         BEDROCK));//上下５マスに徐々岩盤
 
-        var biomeRules =
-                SurfaceRules.sequence(
-                        SurfaceRules.ifTrue(SurfaceRules.isBiome(MUBiomes.CRYSTAL_CAVE),
-                                SurfaceRules.sequence(
-                                        SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
-                                                stateRule(MUBlocks.BLUE_CLAY.get())),
-                                        SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR,
-                                                stateRule(MUBlocks.BLUE_SAND.get())),
-                                        stateRule(MUBlocks.BLUE_CLAY.get())))
-                );
-
+        var biomeRules = SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(MUBiomes.CRYSTAL_CAVE),
+                        SurfaceRules.sequence(
+                                SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
+                                        stateRule(MUBlocks.BLUE_CLAY.get())),
+                                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR,
+                                        stateRule(MUBlocks.BLUE_SAND.get())),
+                                stateRule(MUBlocks.BLUE_CLAY.get()))),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(MUBiomes.COLLAPSING_CAVE),
+                        SurfaceRules.ifTrue(SurfaceRules.ON_CEILING,
+                                stateRule(Blocks.GRAVEL)))
+        );
 
         return SurfaceRules.sequence(bedrockRules, biomeRules, stateRule(Blocks.DEEPSLATE));
     }
@@ -81,5 +83,9 @@ public class MUSurfaceRule {
         return SurfaceRules.not(decreaseGradiently(randomFactoryName, startIncrease, endIncrease));
         //startIncreaseより下は常になく、endIncreaseより上は常にある
         //その間は存在確率が境界と直線でつながるようになる
+    }
+
+    private static SurfaceRules.ConditionSource surfaceNoiseAbove(double p_194809_) {
+        return SurfaceRules.noiseCondition(Noises.SURFACE, p_194809_ / 8.25D, Double.MAX_VALUE);
     }
 }

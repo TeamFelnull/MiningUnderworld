@@ -59,8 +59,8 @@ public interface MUBlocks {
     RegistrySupplier<Block> TEST_BLOCK = register("test_block", () -> new Block(BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
     RegistrySupplier<Block> LOOT_POT = register("loot_pot", () -> new LootPotBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE).strength(0.5F).sound(SoundType.GLASS), false));
     RegistrySupplier<Block> GOLDEN_LOOT_POT = register("golden_loot_pot", () -> new LootPotBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.GOLD).strength(0.5F).sound(SoundType.METAL), true), it -> new BlockItem(it, new Item.Properties().rarity(Rarity.RARE)));
-    RegistrySupplier<Block> LIKELY_COLLAPSING_BLOCK = register("likely_collapsing_block", () -> new CollapsingBlock(1 / 2F, 1, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
-    RegistrySupplier<Block> MOST_LIKELY_COLLAPSING_BLOCK = register("most_likely_collapsing_block", () -> new CollapsingBlock(1F, 2, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
+    RegistrySupplier<Block> UNSTABLE_STANCE = register("unstable_stance", () -> new CollapsingBlock(1F, 1F, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
+    RegistrySupplier<Block> COLLAPSING_STANCE = register("collapsing_stance", () -> new CollapsingBlock(0.25F, 4F, BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL)));
     RegistrySupplier<Block> MINING_TNT = register("mining_tnt", () -> new MiningTntBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.STONE).strength(0.1F).sound(SoundType.STONE)));
     //RegistrySupplier<Block> NAZO = register("nazo", () -> new HABlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.STONE).strength(0.1F).sound(SoundType.STONE)));
 

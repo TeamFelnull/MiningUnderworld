@@ -26,7 +26,8 @@ import javax.annotation.Nullable;
 //ブロックエンティティのドロップ処理をちゃんとした落下ブロック
 public class StrictFallingBlockEntity extends FallingBlockEntity {
 
-    public static void strictFall(Level level, BlockPos blockPos, BlockState blockState) {
+    public static void strictFall(Level level, BlockPos blockPos) {
+        var blockState = level.getBlockState(blockPos);
         var entity = new StrictFallingBlockEntity(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5,
                 blockState.hasProperty(BlockStateProperties.WATERLOGGED) ? blockState.setValue(BlockStateProperties.WATERLOGGED, false) : blockState);
         level.setBlock(blockPos, blockState.getFluidState().createLegacyBlock(), 3);

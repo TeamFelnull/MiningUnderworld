@@ -34,7 +34,6 @@ public class DataHolder {
                     if (overworldOres.contains(new ResourceLocation(MUUtils.getJson(resource).get("feature").getAsString())))
                         orePlacedFeatures.add(MUUtils.subPrefixAndSuffix(location, "worldgen/placed_feature/", ".json"));//オーバーワールドに生成される鉱石追加
                 });
-        orePlacedFeatures.forEach(System.out::println);
 
         //ここでは加工する前のbiomeを取得したく、生成時には加工後のものを取得したい
         //この処理の前後でバイオーム取得先を変えるため、collectedBiomesでMUPackResourceのバイオーム取得部分を制御

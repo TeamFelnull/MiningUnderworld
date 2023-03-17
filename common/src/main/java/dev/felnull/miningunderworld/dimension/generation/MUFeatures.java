@@ -10,7 +10,8 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 public class MUFeatures {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(MiningUnderworld.MODID, Registries.FEATURE);
     public static final Feature<TestFeature.Config> TEST_FEATURE = register("test", new TestFeature());
-    public static final Feature<NoneFeatureConfiguration> CRYSTAL_FEATURE = register("crystal", new CrystalFeature());
+    public static final Feature<NoneFeatureConfiguration> CRYSTAL = register("crystal", new CrystalFeature());
+    public static final Feature<NoneFeatureConfiguration> COLLAPSING_CAVE_FLOOR = register("collapsing_cave_floor", new CollapsingCaveFloorFeature());
 
     public static <T extends FeatureConfiguration> Feature<T> register(String name, Feature<T> feature) {
         FEATURES.register(name, () -> feature);
