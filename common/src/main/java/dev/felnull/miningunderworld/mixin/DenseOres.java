@@ -1,6 +1,6 @@
 package dev.felnull.miningunderworld.mixin;
 
-import dev.felnull.miningunderworld.dimension.MUBiomeSource;
+import dev.felnull.miningunderworld.world.dimension.MUBiomeSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.feature.Feature;

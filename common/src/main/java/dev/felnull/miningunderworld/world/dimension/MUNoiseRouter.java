@@ -1,4 +1,4 @@
-package dev.felnull.miningunderworld.dimension;
+package dev.felnull.miningunderworld.world.dimension;
 
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;

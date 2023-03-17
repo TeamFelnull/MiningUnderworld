@@ -1,4 +1,4 @@
-package dev.felnull.miningunderworld.dimension.generation;
+package dev.felnull.miningunderworld.world.dimension.generation;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

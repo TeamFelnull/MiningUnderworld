@@ -1,6 +1,6 @@
 package dev.felnull.miningunderworld.block;
 
-import dev.felnull.miningunderworld.dimension.generation.CrystalFeature;
+import dev.felnull.miningunderworld.world.dimension.generation.CrystalFeature;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -1,4 +1,4 @@
-package dev.felnull.miningunderworld.dimension;
+package dev.felnull.miningunderworld.world.dimension;
 
 import dev.felnull.miningunderworld.block.MUBlocks;
 import net.minecraft.world.level.block.Block;

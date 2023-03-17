@@ -1,13 +1,12 @@
-package dev.felnull.miningunderworld.server.handler;
+package dev.felnull.miningunderworld.world;
 
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.BlockEvent;
 import dev.architectury.event.events.common.TickEvent;
 import dev.architectury.utils.value.IntValue;
 import dev.felnull.miningunderworld.block.CollapseStarter;
-import dev.felnull.miningunderworld.dimension.MUBiomes;
+import dev.felnull.miningunderworld.world.dimension.MUBiomes;
 import dev.felnull.miningunderworld.entity.StrictFallingBlockEntity;
-import dev.felnull.miningunderworld.world.DynamicSignalLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

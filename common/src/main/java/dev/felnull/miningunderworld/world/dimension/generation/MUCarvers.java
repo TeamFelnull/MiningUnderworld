@@ -1,4 +1,4 @@
-package dev.felnull.miningunderworld.dimension.generation;
+package dev.felnull.miningunderworld.world.dimension.generation;
 
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;

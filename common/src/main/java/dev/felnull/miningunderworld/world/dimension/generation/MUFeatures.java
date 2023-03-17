@@ -1,4 +1,4 @@
-package dev.felnull.miningunderworld.dimension.generation;
+package dev.felnull.miningunderworld.world.dimension.generation;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.felnull.miningunderworld.MiningUnderworld;

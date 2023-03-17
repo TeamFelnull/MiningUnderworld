@@ -1,4 +1,4 @@
-package dev.felnull.miningunderworld.dimension;
+package dev.felnull.miningunderworld.world.dimension;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;

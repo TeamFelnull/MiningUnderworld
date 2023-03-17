@@ -1,7 +1,7 @@
 package dev.felnull.miningunderworld.block;
 
 import dev.felnull.miningunderworld.entity.StrictFallingBlockEntity;
-import dev.felnull.miningunderworld.server.handler.ServerHandler;
+import dev.felnull.miningunderworld.world.ServerHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

@@ -1,4 +1,4 @@
-package dev.felnull.miningunderworld.handler;
+package dev.felnull.miningunderworld.world;
 
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.EntityEvent;
@@ -7,7 +7,6 @@ import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.item.WeatheringItem;
 import dev.felnull.miningunderworld.util.MUAccessoryUtils;
 import dev.felnull.miningunderworld.util.MUUtils;
-import dev.felnull.miningunderworld.world.DynamicSignal;
 import dev.felnull.otyacraftengine.event.MoreEntityEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;

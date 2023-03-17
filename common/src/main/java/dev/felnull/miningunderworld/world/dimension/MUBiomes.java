@@ -1,7 +1,7 @@
-package dev.felnull.miningunderworld.dimension;
+package dev.felnull.miningunderworld.world.dimension;
 
-import dev.felnull.miningunderworld.dimension.generation.MUCarvers;
-import dev.felnull.miningunderworld.dimension.generation.MUPlacedFeatures;
+import dev.felnull.miningunderworld.world.dimension.generation.MUCarvers;
+import dev.felnull.miningunderworld.world.dimension.generation.MUPlacedFeatures;
 import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

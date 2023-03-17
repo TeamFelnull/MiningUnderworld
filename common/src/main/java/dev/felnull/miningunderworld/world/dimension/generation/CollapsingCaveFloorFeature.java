@@ -1,7 +1,7 @@
-package dev.felnull.miningunderworld.dimension.generation;
+package dev.felnull.miningunderworld.world.dimension.generation;
 
 import dev.felnull.miningunderworld.block.MUBlocks;
-import dev.felnull.miningunderworld.dimension.MiningUnderworldDimension;
+import dev.felnull.miningunderworld.world.dimension.MiningUnderworldDimension;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
