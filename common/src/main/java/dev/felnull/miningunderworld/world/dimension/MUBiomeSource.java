@@ -16,6 +16,8 @@ import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
 
+import java.util.stream.Stream;
+
 public class MUBiomeSource extends BiomeSource {
     public static final Codec<MUBiomeSource> MU_CODEC = RecordCodecBuilder.create(instance ->
             instance.group(RegistryOps.retrieveGetter(Registries.BIOME))
@@ -28,13 +30,18 @@ public class MUBiomeSource extends BiomeSource {
     }
 
     private MUBiomeSource(HolderGetter<Biome> biomes) {
-        super(MUBiomes.MU_BIOMES.keySet().stream().map(biomes::getOrThrow));
+        super();
         this.biomes = biomes;
     }
 
     @Override
     protected Codec<? extends BiomeSource> codec() {
         return MU_CODEC;
+    }
+
+    @Override
+    protected Stream<Holder<Biome>> collectPossibleBiomes() {
+        return MUBiomes.MU_BIOMES.keySet().stream().map(biomes::getOrThrow);
     }
 
     @Override

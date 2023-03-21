@@ -2,6 +2,7 @@ package dev.felnull.miningunderworld.client.util;
 
 import dev.felnull.miningunderworld.fluid.MUFluidTags;
 import dev.felnull.miningunderworld.mixin.client.CameraNearPlaneAccessor;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -28,11 +29,11 @@ public final class MUClientUtils {
         List<Vec3> list = Arrays.asList(((CameraNearPlaneAccessor) nearPlane).getForward(), nearPlane.getTopLeft(), nearPlane.getTopRight(), nearPlane.getBottomLeft(), nearPlane.getBottomRight());
 
         for (Vec3 panel : list) {
-            Vec3 pos = camera.getPosition().add(panel);
-            BlockPos blockPos = new BlockPos(pos);
-            FluidState state = mc.level.getFluidState(blockPos);
+            Vec3 doublePos = camera.getPosition().add(panel);
+            BlockPos pos = MUUtils.toPos(doublePos);
+            FluidState state = mc.level.getFluidState(pos);
             if (state.is(MUFluidTags.TAR)) {
-                if (pos.y <= (double) (state.getHeight(mc.level, blockPos) + (float) blockPos.getY())) {
+                if (doublePos.y <= (double) (state.getHeight(mc.level, pos) + (float) pos.getY())) {
                     return true;
                 }
             }

@@ -47,10 +47,10 @@ dependencies {
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
     modApi "dev.felnull:otyacraftengine-forge:${rootProject.oe_version}"
-    modApi "me.shedaniel.cloth:cloth-config-forge:9.0.94"
-    modApi "top.theillusivec4.curios:curios-forge:1.19.3-5.1.4.0"
+    modApi "me.shedaniel.cloth:cloth-config-forge:10.0.96"
+    modApi "top.theillusivec4.curios:curios-forge:1.19.4-5.1.4.2"
 
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-forge:10.0.578"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-forge:11.0.597"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }

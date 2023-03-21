@@ -1,6 +1,7 @@
 package dev.felnull.miningunderworld.recipe;
 
 import dev.felnull.miningunderworld.item.WeatheringItem;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +42,7 @@ public class WaxedWeatheringItemRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container) {
+    public ItemStack assemble(CraftingContainer container, RegistryAccess registryAccess) {
         ItemStack witem = ItemStack.EMPTY;
 
         for (int i = 0; i < container.getContainerSize(); ++i) {

@@ -9,6 +9,7 @@ import dev.felnull.miningunderworld.util.MUAccessoryUtils;
 import dev.felnull.miningunderworld.util.MUUtils;
 import dev.felnull.otyacraftengine.event.MoreEntityEvent;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +22,7 @@ public class CommonHandler {
     private static EventResult onHurt(LivingEntity entity, DamageSource source, float amount) {
 
         //雷のダメージを受けたときに装備してる銅ツールの錆がはがれるように
-        if (source == DamageSource.LIGHTNING_BOLT) {
+        if (source.is(DamageTypes.LIGHTNING_BOLT)) {
             MUUtils.getAllHaveItem(entity)
                     .filter(stack -> stack.getItem() instanceof WeatheringItem && !WeatheringItem.isWaxed(stack))
                     .forEach(stack -> WeatheringItem.setWeatheringState(stack, WeatheringItem.WeatheringState.NONE));

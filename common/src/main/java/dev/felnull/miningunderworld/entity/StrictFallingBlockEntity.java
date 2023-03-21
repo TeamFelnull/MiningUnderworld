@@ -1,6 +1,7 @@
 package dev.felnull.miningunderworld.entity;
 
 import dev.felnull.miningunderworld.mixin.FallingBlockEntityAccessor;
+import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -51,7 +52,7 @@ public class StrictFallingBlockEntity extends FallingBlockEntity {
         this.yo = y;
         this.zo = z;
         this.setStartPos(this.blockPosition());
-        var tile = level.getBlockEntity(new BlockPos(x, y, z));
+        var tile = level.getBlockEntity(MUUtils.toPos(x, y, z));
         if (tile != null) {
             blockData = tile.saveWithFullMetadata();
             this.tileType = tile.getType();

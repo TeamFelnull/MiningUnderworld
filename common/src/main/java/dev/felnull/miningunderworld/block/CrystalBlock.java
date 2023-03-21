@@ -1,7 +1,7 @@
 package dev.felnull.miningunderworld.block;
 
-import dev.felnull.miningunderworld.world.dimension.generation.CrystalFeature;
 import dev.felnull.miningunderworld.util.MUUtils;
+import dev.felnull.miningunderworld.world.dimension.generation.CrystalFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -71,7 +71,7 @@ public class CrystalBlock extends HalfTransparentBlock {
     @Override
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
         var biome = level.getBiome(pos).value();
-        if (random.nextFloat() < 0.01F * biome.getBaseTemperature() * biome.getDownfall())
+        if (random.nextFloat() < 0.01F * biome.getBaseTemperature())//熱いと確率アップ
             if (Direction.stream().allMatch(d -> level.getBlockState(pos.relative(d)).getBlock() == this)) {
                 var origin = pos.offset(MUUtils.toI(MUUtils.randomBaseVector(random)));
                 if (Direction.stream().allMatch(d -> isAirOrMe(level.getBlockState(origin.relative(d)).getBlock())))

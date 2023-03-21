@@ -1,7 +1,6 @@
 package dev.felnull.miningunderworld.entity;
 
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -62,7 +61,7 @@ public class Excreta extends Projectile {
         super.onHitEntity(entityHitResult);
         Entity owner = this.getOwner();
         if (owner instanceof LivingEntity)
-            entityHitResult.getEntity().hurt(DamageSource.indirectMobAttack(this, (LivingEntity) owner).setProjectile(), 1.0F);
+            entityHitResult.getEntity().hurt(owner.damageSources().mobProjectile(this, (LivingEntity) owner), 1.0F);
     }
 
     @Override

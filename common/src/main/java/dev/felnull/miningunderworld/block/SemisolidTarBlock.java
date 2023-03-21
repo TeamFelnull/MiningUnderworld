@@ -8,7 +8,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.player.Player;
@@ -184,7 +183,7 @@ public class SemisolidTarBlock extends FallingBlock {
 
     @Override
     public void fallOn(Level level, BlockState blockState, BlockPos blockPos, Entity entity, float f) {
-        entity.causeFallDamage(f, 0.1F, DamageSource.FALL);
+        entity.causeFallDamage(f, 0.1F, entity.damageSources().fall());
         slide(level, blockState, blockPos, Mth.floor(f));
     }
 

@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.entity;
 
-import dev.felnull.miningunderworld.entity.damagesource.MUDamageSources;
 import dev.felnull.miningunderworld.mixin.PrimedTntAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;

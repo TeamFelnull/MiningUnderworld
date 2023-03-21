@@ -5,15 +5,15 @@ import dev.architectury.utils.Env;
 import dev.architectury.utils.EnvExecutor;
 import dev.felnull.miningunderworld.block.MUBlocks;
 import dev.felnull.miningunderworld.client.MiningUnderworldClient;
-import dev.felnull.miningunderworld.world.dimension.MiningUnderworldDimension;
 import dev.felnull.miningunderworld.entity.MUEntityTypes;
 import dev.felnull.miningunderworld.fluid.MUFluids;
-import dev.felnull.miningunderworld.world.CommonHandler;
 import dev.felnull.miningunderworld.item.MUItems;
 import dev.felnull.miningunderworld.network.MUPackets;
 import dev.felnull.miningunderworld.particles.MUParticleTypes;
 import dev.felnull.miningunderworld.recipe.MURecipeSerializers;
+import dev.felnull.miningunderworld.world.CommonHandler;
 import dev.felnull.miningunderworld.world.ServerHandler;
+import dev.felnull.miningunderworld.world.dimension.MiningUnderworldDimension;
 import dev.felnull.otyacraftengine.util.OEDataGenUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +25,7 @@ public class MiningUnderworld {
             new ResourceLocation(MiningUnderworld.MODID, MiningUnderworld.MODID),
             builder -> builder
                     .icon(() -> new ItemStack(Items.APPLE))
-                    .displayItems((flag, output, op) -> {
+                    .displayItems((itemDisplayParameters, output) -> {
                         MUItems.ITEMS.forEach(i -> output.accept(i.get()));
                         MUBlocks.BLOCK_ITEMS.forEach(b -> output.accept(b.get()));
                     }));

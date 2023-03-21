@@ -1,8 +1,8 @@
 package dev.felnull.miningunderworld.world.dimension;
 
+import dev.felnull.miningunderworld.util.MUUtils;
 import dev.felnull.miningunderworld.world.dimension.generation.MUCarvers;
 import dev.felnull.miningunderworld.world.dimension.generation.MUPlacedFeatures;
-import dev.felnull.miningunderworld.util.MUUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
@@ -26,7 +26,9 @@ import java.util.function.Function;
 //MobSpawnSettings:モブスポーン設定
 //BiomeGenerationSettings:バイオーム特有の地形生成。穴開けたり(Carver)生成物(Feature)追加
 public class MUBiomes {
+
     public static final Map<ResourceKey<Biome>, Function<BiomeGenerationSettings.Builder, Biome>> MU_BIOMES = new HashMap<>();
+
     public static final ResourceKey<Biome> DIRTY_CAVE = register("dirty_cave", MUBiomes::dirtyCave);
     public static final ResourceKey<Biome> COLLAPSING_CAVE = register("collapsing_cave", MUBiomes::collapsingCave);
     public static final ResourceKey<Biome> CRYSTAL_CAVE = register("crystal_cave", MUBiomes::crystalCave);
@@ -132,7 +134,6 @@ public class MUBiomes {
                 .specialEffects(ambient.build())
                 .mobSpawnSettings(spawn.build())
                 .generationSettings(gen.build())
-                .precipitation(Biome.Precipitation.NONE)//何も降らない
                 .downfall(0)//降水確率0
                 .temperatureAdjustment(Biome.TemperatureModifier.NONE)//ナニコレ
                 .temperature(0.5F);

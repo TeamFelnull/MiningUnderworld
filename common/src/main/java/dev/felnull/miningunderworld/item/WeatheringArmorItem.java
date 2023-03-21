@@ -16,10 +16,10 @@ import net.minecraft.world.level.Level;
 import java.util.function.Function;
 
 public class WeatheringArmorItem extends ArmorItem implements WeatheringItem, StackAttributeModifierItem {
-    private final Function<WeatheringState, Multimap<Attribute, AttributeModifier>> attributeCache = Util.memoize(state -> weatheringToolAttribute(state, slot, this.getDefaultAttributeModifiers(slot)));
+    private final Function<WeatheringState, Multimap<Attribute, AttributeModifier>> attributeCache = Util.memoize(state -> weatheringToolAttribute(state, type.getSlot(), this.getDefaultAttributeModifiers(type.getSlot())));
 
-    public WeatheringArmorItem(ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorMaterial, equipmentSlot, properties);
+    public WeatheringArmorItem(ArmorMaterial armorMaterial, ArmorItem.Type type, Properties properties) {
+        super(armorMaterial, type, properties);
         registerWeatheringItems();
     }
 
@@ -36,7 +36,7 @@ public class WeatheringArmorItem extends ArmorItem implements WeatheringItem, St
     @Override
     public Multimap<Attribute, AttributeModifier> getStackAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         WeatheringItem.WeatheringState state;
-        if (slot == this.slot && (state = WeatheringItem.getWeatheringState(stack)) != WeatheringState.NONE)
+        if (slot == this.type.getSlot() && (state = WeatheringItem.getWeatheringState(stack)) != WeatheringState.NONE)
             return attributeCache.apply(state);
 
         return this.getDefaultAttributeModifiers(slot);

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.miningunderworld.explatform.MUExpectPlatform;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
@@ -175,7 +176,15 @@ public final class MUUtils {
     }
 
     public static Vec3i toI(Vec3 v) {
-        return new Vec3i(v.x, v.y, v.z);
+        return new Vec3i((int) v.x, (int) v.y, (int) v.z);
+    }
+
+    public static BlockPos toPos(Vec3 v) {
+        return new BlockPos(toI(v));
+    }
+
+    public static BlockPos toPos(double x, double y, double z) {
+        return new BlockPos(toI(new Vec3(x, y, z)));
     }
 
     public static <T> T getRandomlyFrom(Collection<T> c, RandomSource rand) {
