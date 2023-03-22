@@ -1,5 +1,6 @@
 package dev.felnull.miningunderworld.item;
 
+import dev.felnull.miningunderworld.MiningUnderworld;
 import dev.felnull.otyacraftengine.tag.PlatformItemTags;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -98,7 +99,7 @@ public enum MUArmorMaterials implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return /*MiningUnderworld.MODID + ":" +*/ this.name;
+        return MiningUnderworld.MODID + ":" + this.name;
     }
 
     @Override

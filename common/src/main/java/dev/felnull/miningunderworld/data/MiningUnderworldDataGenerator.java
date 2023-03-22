@@ -9,6 +9,7 @@ public class MiningUnderworldDataGenerator {
         access.addProviderWrapper(MUBlockStateAndModelProviderWrapper::new);
         access.addProviderWrapper(MURecipeProviderWrapper::new);
         access.addProviderWrapper(MURegistriesDatapackProviderWrapper::new);
+        //access.addProviderWrapper(MUDamageTypeTagsProviderWrapper::new);
 
         var blockTagProviderWrapper = access.addProviderWrapper(MUBlockTagProviderWrapper::new);
         access.addProviderWrapper((DataProviderWrapper.LookupGeneratorAccessedFactory<DataProviderWrapper<?>>) (packOutput, lookup, generatorAccess) -> new MUItemTagProviderWrapper(packOutput, lookup, generatorAccess, blockTagProviderWrapper));
