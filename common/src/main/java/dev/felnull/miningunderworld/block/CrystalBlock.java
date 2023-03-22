@@ -1,6 +1,5 @@
 package dev.felnull.miningunderworld.block;
 
-import dev.felnull.miningunderworld.util.MUUtils;
 import dev.felnull.miningunderworld.world.dimension.generation.CrystalFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -71,16 +70,22 @@ public class CrystalBlock extends HalfTransparentBlock {
     @Override
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
         var biome = level.getBiome(pos).value();
-        if (random.nextFloat() < 0.01F * biome.getBaseTemperature())//熱いと確率アップ
-            if (Direction.stream().allMatch(d -> level.getBlockState(pos.relative(d)).getBlock() == this)) {
-                var origin = pos.offset(MUUtils.toI(MUUtils.randomBaseVector(random)));
-                if (Direction.stream().allMatch(d -> isAirOrMe(level.getBlockState(origin.relative(d)).getBlock())))
-                    CrystalFeature.addCrystal(level, origin, this.defaultBlockState(), false);
-            }
+        if (random.nextFloat() < 0.1F * biome.getBaseTemperature() && canDuplicate(level, pos)) {//熱いと確率アップ
+            var origin = pos.relative(Direction.getRandom(random));
+            if (enoughToPlace(level, origin))
+                CrystalFeature.addCrystal(level, origin, this.defaultBlockState(), false);
+        }
     }
 
-    private boolean isAirOrMe(Block block) {
-        return block == this || block == Blocks.AIR;
+    public boolean canDuplicate(ServerLevel level, BlockPos pos) {
+        return Direction.stream().allMatch(d -> level.getBlockState(pos.relative(d)).getBlock() == this);
+    }
+
+    public boolean enoughToPlace(ServerLevel level, BlockPos pos) {
+        return Direction.stream().allMatch(d -> {
+            var block = level.getBlockState(pos.relative(d)).getBlock();
+            return block == this || block == Blocks.AIR;
+        });
     }
 
     public Block getOre() {

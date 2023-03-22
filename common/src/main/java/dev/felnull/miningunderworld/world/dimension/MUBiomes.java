@@ -163,7 +163,6 @@ public class MUBiomes {
 
     public static BiomeGenerationSettings.Builder defaultGeneration(BiomeGenerationSettings.Builder gen) {
         return gen
-                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MUPlacedFeatures.TEST_FEATURE)//独自生成物追加
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MUPlacedFeatures.DUMMY)//後で全modの鉱石に差し替えるためのダミー
                 .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE)//洞窟
                 .addCarver(GenerationStep.Carving.AIR, Carvers.CAVE_EXTRA_UNDERGROUND);//洞窟２;;

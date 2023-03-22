@@ -59,7 +59,7 @@ public class MiningUnderworldDimension {
                 height,
                 BlockTags.INFINIBURN_OVERWORLD,
                 BuiltinDimensionTypes.OVERWORLD_EFFECTS,//ディメンション固有のレンダー（？）
-                0.2525F,
+                0,
                 new DimensionType.MonsterSettings(false, true, UniformInt.of(0, 7), 0));
     }
 

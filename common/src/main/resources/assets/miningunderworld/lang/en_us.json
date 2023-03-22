@@ -88,6 +88,8 @@
   "block.miningunderworld.blue_sand": "Blue Sand",
   "block.miningunderworld.blue_clay": "Blue Clay",
   "block.miningunderworld.white_sand": "White Sand",
+  "block.miningunderworld.unstable_stance": "Unstable Stance",
+  "block.miningunderworld.collapsing_stance": "Collapsing Stance",
   "_comment.e": "Entity",
   "entity.miningunderworld.mining_tnt": "Primed Mining TNT",
   "entity.miningunderworld.cave_bat": "Cave Bat",

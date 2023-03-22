@@ -88,6 +88,8 @@
   "block.miningunderworld.blue_sand": "青砂",
   "block.miningunderworld.blue_clay": "青粘土",
   "block.miningunderworld.white_sand": "白砂",
+  "block.miningunderworld.unstable_stance": "不安定な足場",
+  "block.miningunderworld.collapsing_stance": "崩落しかけの足場",
   "_comment.e": "Entity",
   "entity.miningunderworld.mining_tnt": "着火された採掘用TNT",
   "entity.miningunderworld.cave_bat": "洞窟コウモリ",

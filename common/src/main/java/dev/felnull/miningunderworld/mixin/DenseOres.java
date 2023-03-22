@@ -27,6 +27,6 @@ public class DenseOres {
 
     @ModifyArg(method = "getPositions", at = @At(value = "INVOKE", target = "Ljava/util/stream/IntStream;range(II)Ljava/util/stream/IntStream;"), index = 1)
     public int dense(int count) {
-        return shouldDense ? count * 16 : count;
+        return shouldDense ? count * 3 : count;
     }
 }
