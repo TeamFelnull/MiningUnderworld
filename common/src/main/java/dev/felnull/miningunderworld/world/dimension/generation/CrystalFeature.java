@@ -41,8 +41,8 @@ public class CrystalFeature extends Feature<NoneFeatureConfiguration> {
             baseVector = MUUtils.randomBaseVector(level.getRandom());
             length = level.getRandom().nextInt(4, 32);
             for (int i = 0; i <= length; i++)
-                line.add(origin.offset(MUUtils.toI(baseVector.scale(i))));
-        } while (!level.ensureCanWrite(origin.offset(MUUtils.toI(baseVector.scale(length + 6)))));//32/16 * 3 = 6先を見れば大体OK（これでエラー無い）
+                line.add(origin.offset(BlockPos.containing(baseVector.scale(i))));
+        } while (!level.ensureCanWrite(origin.offset(BlockPos.containing(baseVector.scale(length + 6)))));//32/16 * 3 = 6先を見れば大体OK（これでエラー無い）
         MixinTemp.testEnsuring.set(false);
 
         //表面から生えるようにしたい
