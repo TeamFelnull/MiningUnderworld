@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 
-public class MUFluidTags {
+public final class MUFluidTags {
     public static final TagKey<Fluid> TAR = bind("tar");
 
     private static TagKey<Fluid> bind(String id) {
